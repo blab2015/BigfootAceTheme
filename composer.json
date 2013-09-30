@@ -1,0 +1,21 @@
+{
+    "name": "bigfoot/ace-theme",
+    "type": "symfony-bundle",
+    "description": "Bigfoot ace admin theme",
+    "keywords": [],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guillaume Manen",
+            "email": "g.manen@c2is.fr"
+        }
+    ],
+    "require": {
+        "bigfoot/core-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "Bigfoot\\Theme\\AceThemeBundle": "" }
+    },
+    "target-dir": "Bigfoot/Theme/AceThemeBundle",
+    "minimum-stability": "dev"
+}
