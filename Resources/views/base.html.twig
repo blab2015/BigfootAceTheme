@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" class="{% block htmlClass %}{% endblock %}">
+<head>
+    <meta charset="utf-8">
+    <title>{{ bigfoot_theme_values.title | trans }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="{{ bigfoot_theme_values.provided_by | trans }}">
+
+    <script type="text/javascript">
+        var defaultPortfolioRoute = "{{ path('portfolio_dashboard') }}";
+        var currentLocale = "{{ app.request.locale }}";
+        {% if locales is defined and locales | length %}var locales = ["{{ locales | join('","') | raw }}"];{% endif %}
+        var basePath = "{{ app.request.basePath }}";
+        var tagsPath = "{{ path('admin_tag_get') }}";
+    </script>
+
+    {% block stylesheets %}
+        {% stylesheets
+            'admin/css/bootstrap.min.css'
+            'admin/css/font-awesome.min.css'
+            'admin/css/jquery-ui-1.10.3.custom.min.css'
+            'admin/css/chosen.css'
+            'admin/css/datepicker.css'
+            'admin/css/bootstrap-timepicker.css'
+            'admin/css/daterangepicker.css'
+            'admin/css/colorpicker.css'
+            'admin/css/ace-fonts.css'
+            'admin/css/ace.min.css'
+            'admin/css/ace-rtl.min.css'
+            'admin/css/ace-skins.min.css'
+            filter='cssrewrite'
+            output='compiled/admin/css/admin.css'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        <!--[if IE 7]>
+        <link rel="stylesheet" href="{{ 'admin/css/font-awesome-ie7.min.css' }}" />
+        <![endif]-->
+
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" href="{{ 'admin/css/ace-ie.min.css' }}" />
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+        <script src="{{ 'admin/js/html5shiv.js' }}"></script>
+        <script src="{{ 'admin/js/respond.min.js' }}"></script>
+        <![endif]-->
+    {% endblock stylesheets %}
+</head>
+
+<body class="{% block bodyClass %}{% endblock bodyClass %}">
+{% block body %}
+<div class="navbar navbar-default" id="navbar">
+    {% block toolbar %}
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <i class="icon-leaf"></i>
+                        {{ bigfoot_theme_values.title }}
+                    </small>
+                </a>
+            </div>
+
+            <div class="navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    {% if theme.toolbar.menu is defined and theme.toolbar.menu.items|length and app.security.token %}
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <i class="icon-user"></i>
+                            <span class="user-info">
+                                <small>{{ 'Welcome' | trans }},</small>
+                                {{ app.security.token.user.fullName }}
+                            </span>
+
+                            <i class="icon-caret-down"></i>
+                        </a>
+                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            {% for item in theme.toolbar.menu.items %}
+                                <li><a href="{{ path(item.route, item.parameters) }}"><i class="icon-{{ item.icon }}"></i> {{ item.label | trans }}</a></li>
+                            {%  endfor %}
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    {% endblock toolbar %}
+</div>
+{#
+<header>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            {% block header %}
+                <div class="span4">
+                    <div class="logo">
+                        <h1><a href="{{ path('admin_home') }}">{{ theme.header.title | trans }}</a></h1>
+                        <p class="meta">{{ theme.header.subtitle | trans }}</p>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+</header>
+#}
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+    {% block sidebar -%}
+        {%- set currentRoute = app.request.get('_route') -%}
+        <div class="sidebar" id="sidebar">
+            <ul class="nav nav-list">
+                {% for section in theme.sidebar.menu.items -%}
+                    {%- if section.childs|length -%}
+                <li{% if section.hasChildWithRoute(currentRoute) %} class="active open"{% endif %}>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-{{ section.icon | default('double-angle-right') }}"></i>
+                        <span class="menu-text">{{ section.label | trans }}</span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul class="submenu">
+                    {% for item in section.childs -%}
+                        {%- if item.childs|length -%}
+                        <li{% if item.hasChildWithRoute(currentRoute) %} class="active open"{% endif %}>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-{{ item.icon | default('double-angle-right') }}"></i>
+                                <span class="menu-text">{{ item.label | trans }}</span>
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+                            <ul class="submenu">
+                            {% for item in item.childs -%}
+                                <li{% if currentRoute == item.route %} class="active"{% endif %}>
+                                    <a href="{{ path(item.route) }}">
+                                        <i class="icon-{{ item.icon | default('double-angle-right') }}"></i>
+                                        {{ item.label | trans }}
+                                    </a>
+                                </li>
+                            {% endfor -%}
+                            </ul>
+                        {% elseif item.route -%}
+                        <li{% if currentRoute == item.route %} class="active"{% endif %}>
+                            <a href="{{ path(item.route) }}">
+                                <i class="icon-{{ item.icon | default('double-angle-right') }}"></i>
+                                {{ item.label | trans }}
+                            </a>
+                        </li>
+                        {% endif -%}
+                    {%- endfor -%}
+                    </ul>
+                </li>
+                    {%- elseif section.route %}
+                <li>
+                    <a href="{{ path(section.route) }}">
+                        <i class="icon-{{ section.icon | default('list-alt') }}"></i>
+                        <span class="menu-text">{{ section.label | trans }}</span>
+                    </a>
+                </li>
+                    {%- endif %}
+                {%- endfor %}
+            </ul>
+        </div>
+    {%- endblock sidebar %}
+
+        <div class="main-content">
+            {% block header %}
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="icon-home home-icon"></i>
+                        <a href="#">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Other Pages</a>
+                    </li>
+                    <li class="active">Blank Page</li>
+                </ul>
+            </div>
+            {% endblock header %}
+
+            <div class="page-content">
+                {% block page_header %}
+                <div class="page-header">
+                    <h1>
+                        {{ theme.page_header.title | default( bigfoot_theme_values.title ) | trans }}
+                        {% if theme.page_header.subtitle is defined %}
+                        <small>
+                            <i class="icon-double-angle-right"></i>
+                            {{ theme.page_header.subtitle | default('') | trans }}
+                        </small>
+                        {% endif %}
+                    </h1>
+                </div>
+                {% endblock %}
+                <div class="row">
+                    <div class="col-xs-12">
+                        {% block content %}
+                        {% endblock content %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+
+</div>
+{% endblock body %}
+{% block javascripts %}
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-2.0.3.min.js') }}'>"+"<"+"/script>");
+    </script>
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-1.10.2.min.js') }}>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if("ontouchend" in document) document.write("<script src='{{ asset('admin/js/jquery.mobile.custom.min.js') }}'>"+"<"+"/script>");
+    </script>
+
+    <!--[if lte IE 8]>
+    <script src="{{ asset('admin/js/excanvas.min.js') }}"></script>
+    <![endif]-->
+
+    {% javascripts
+        'admin/js/bootstrap.min.js'
+        'admin/js/typeahead-bs2.min.js'
+        'admin/js/jquery-ui-1.10.3.custom.min.js'
+        'admin/js/jquery.ui.touch-punch.min.js'
+        'admin/js/chosen.jquery.min.js'
+        'admin/js/fuelux/fuelux.spinner.min.js'
+        'admin/js/date-time/bootstrap-datepicker.min.js'
+        'admin/js/date-time/bootstrap-timepicker.min.js'
+        'admin/js/date-time/moment.min.js'
+        'admin/js/date-time/daterangepicker.min.js'
+        'admin/js/bootstrap-colorpicker.min.js'
+        'admin/js/jquery.knob.min.js'
+        'admin/js/jquery.autosize.min.js'
+        'admin/js/jquery.inputlimiter.1.3.1.min.js'
+        'admin/js/jquery.maskedinput.min.js'
+        'admin/js/bootstrap-tag.min.js'
+        'admin/js/bootbox.min.js'
+        'admin/js/ace-elements.min.js'
+        'admin/js/ace.min.js'
+        'admin/js/custom.js'
+        '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
+        output='compiled/admin/js/scripts.js' %}
+        <script language="javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts
+        "@BigfootCoreBundle/Resources/views/translation/locale_tabs.html.twig"
+        "@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig"
+        filter="twig_js"
+        output='compiled/admin/js/twigs.js' %}
+        <script language="javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script language="javascript" src="{{ asset('assets/vendor/ckeditor/ckeditor.js') }}"></script>
+{% endblock javascripts %}
+</body>
+</html>
