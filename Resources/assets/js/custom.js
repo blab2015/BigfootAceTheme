@@ -138,6 +138,12 @@ function setupTranslatableFields($translatableFields) {
     $toWrap.each(function() {
         $(this).parent().addClass($(this).attr('class') + ' no-padding-right no-padding-left');
         $(this).removeClass().addClass('form-control');
+
+        if ($(this).parent().hasClass('ckeditor')) {
+            $(this).parent().removeClass('ckeditor');
+            $(this).addClass('ckeditor');
+        }
+
         $(this).after($('<span class="input-group-addon"><img src="/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
         if ($(this).data('locale') != currentLocale) {
             $(this).closest('div.input-group').hide();

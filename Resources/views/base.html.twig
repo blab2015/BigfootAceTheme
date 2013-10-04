@@ -250,10 +250,12 @@
         'admin/js/jquery.inputlimiter.1.3.1.min.js'
         'admin/js/jquery.maskedinput.min.js'
         'admin/js/bootstrap-tag.min.js'
+        'admin/js/bootstrap-wysiwyg.min.js'
         'admin/js/bootbox.min.js'
         'admin/js/ace-elements.min.js'
         'admin/js/ace.min.js'
         'admin/js/custom.js'
+        'admin/js/jquery.portfolio.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         output='compiled/admin/js/scripts.js' %}
         <script language="javascript" src="{{ asset_url }}"></script>
@@ -265,7 +267,7 @@
         output='compiled/admin/js/twigs.js' %}
         <script language="javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <script language="javascript" src="{{ asset('assets/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script language="javascript" src="{{ asset('admin/vendor/ckeditor/ckeditor.js') }}"></script>
 {% endblock javascripts %}
 </body>
 </html>

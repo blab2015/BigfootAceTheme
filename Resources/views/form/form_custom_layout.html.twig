@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block textarea_widget %}
-    {% set widgetClass = 'form-control ' %}
+    {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
     {% if attr.class is defined %}
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
@@ -61,11 +61,15 @@
 
 {% block checkbox_widget %}
     {% spaceless %}
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-            </label>
-        </div>
+        {% set widgetClass = 'ace ace-switch ace-switch-7 ' %}
+        {% if attr.class is defined %}
+            {% set widgetClass = widgetClass ~ attr.class %}
+        {% endif %}
+        {% set attr = (attr | merge({class: widgetClass})) %}
+        <label>
+            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+            <span class="lbl"></span>
+        </label>
     {% endspaceless %}
 {% endblock checkbox_widget %}
 
