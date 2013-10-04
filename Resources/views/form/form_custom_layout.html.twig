@@ -98,24 +98,32 @@
 {% endblock %}
 
 {% block collection_widget %}
-    <label>{{ label }}</label>
-    {{ parent() }}
+    <label class="control-label col-sm-3">{{ label }}</label>
     {% if prototype is defined %}
+    <div class="col-xs-10 col-sm-5 ">
         <a href="#" class="addCollectionItem btn btn-link" data-collection-id="#{{ id }}" data-prototype-name="{{ prototype_name | default('__name__') }}">{{ 'Add' | trans }}</a>
+    </div>
     {% endif %}
+</div>
+<div class="form-group">
+    {{ parent() }}
 {% endblock %}
 
 {% block bigfoot_collection_item_widget %}
-    <div class="accordion sortable-collection-item">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <span class="accordion-toggle" data-toggle="collapse" data-target="#accordion-{{ id }}">
-                    {{ value.__toString() | default('new item') | trans }}
-                    <a href="#_" class="deleteCollectionItem btn btn-link pull-right">{{ 'Delete' | trans }}</a>
-                </span>
+    <div class="col-sm-3 "></div>
+    <div id="accordion-container-{{ id }}" class="sortable-collection-item accordion-style1 panel-group col-xs-10 col-sm-5 ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-container-{{ id }}" href="#accordion-{{ id }}">
+                        <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i>
+                        &nbsp;{{ value.__toString() | default('new item') | trans }}
+                        <a href="#_" class="deleteCollectionItem pull-right"><i class="icon-trash bigger-110"></i></a>
+                    </span>
+                </h4>
             </div>
-            <div id="accordion-{{ id }}" class="accordion-body collapse">
-                <div class="accordion-inner">
+            <div class="panel-collapse collapse in" id="accordion-{{ id }}">
+                <div class="panel-body">
                     {{ block('form_widget') }}
                 </div>
             </div>

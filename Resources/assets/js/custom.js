@@ -117,10 +117,10 @@ function strpos (haystack, needle, offset) {
 }
 
 function setupTranslatableFields($translatableFields) {
-    $translatableFields.hide();
+    $translatableFields.parent().hide();
     // Getting all translated fields to set their parent's data attributes (default locale fields aren't initialized by the translationsubscriber)
     $('input[type="text"], textarea', $translatableFields).each(function() {
-        var elementId = $(this).attr('id')
+        var elementId = $(this).attr('id');
         var parentElementId = elementId.substr(0, elementId.lastIndexOf('-')).replace('_translation', '');
 
         var $parentElement = $('#'+parentElementId);
@@ -136,17 +136,20 @@ function setupTranslatableFields($translatableFields) {
     var $toWrap = $('input[data-locale], textarea[data-locale]');
     $toWrap.wrap($wrapper);
     $toWrap.each(function() {
-        $(this).parent().addClass($(this).attr('class') + ' no-padding-right no-padding-left');
-        $(this).removeClass().addClass('form-control');
+        if (!$(this).data('flag')) {
+            $(this).parent().addClass($(this).attr('class') + ' no-padding-right no-padding-left');
+            $(this).removeClass().addClass('form-control');
 
-        if ($(this).parent().hasClass('ckeditor')) {
-            $(this).parent().removeClass('ckeditor');
-            $(this).addClass('ckeditor');
-        }
+            if ($(this).parent().hasClass('ckeditor')) {
+                $(this).parent().removeClass('ckeditor');
+                $(this).addClass('ckeditor');
+            }
 
-        $(this).after($('<span class="input-group-addon"><img src="/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
-        if ($(this).data('locale') != currentLocale) {
-            $(this).closest('div.input-group').hide();
+            $(this).after($('<span class="input-group-addon"><img src="/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
+            if ($(this).data('locale') != currentLocale) {
+                $(this).closest('div.input-group').hide();
+            }
+            $(this).data('flag', true);
         }
     });
 }
@@ -182,11 +185,11 @@ function addCollectionItem(id, name) {
     var reg = new RegExp(prototypeName, 'g');
     var form = prototype.replace(reg, collectionHolder.children().length);
     var $form = $(form);
-    $form.find('div.accordion-body').addClass('in');
 
     collectionHolder.append($form);
 
     setupSortableCollectionItem();
+    setupTranslatableFields($form.find('div.translatable-fields'));
 
     if (CKEDITOR != undefined) {
         var $textAreas = $form.find('textarea.ckeditor');
