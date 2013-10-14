@@ -29,7 +29,9 @@
             'admin/css/ace.min.css'
             'admin/css/ace-rtl.min.css'
             'admin/css/ace-skins.min.css'
-            filter='cssrewrite'
+            'admin/css/jquery.gritter.css'
+
+        filter='cssrewrite'
             output='compiled/admin/css/admin.css'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
@@ -58,7 +60,6 @@
             <div class="navbar-header pull-left">
                 <a href="#" class="navbar-brand">
                     <small>
-                        <i class="icon-leaf"></i>
                         {{ bigfoot_theme_values.title }}
                     </small>
                 </a>
@@ -166,6 +167,7 @@
     {%- endblock sidebar %}
 
         <div class="main-content">
+        {% block main_content %}
             {% block header %}
             <div class="breadcrumbs" id="breadcrumbs">
                 <ul class="breadcrumb">
@@ -203,6 +205,7 @@
                     </div>
                 </div>
             </div>
+            {% endblock %}
         </div>
     </div>
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -256,6 +259,8 @@
         'admin/js/ace.min.js'
         'admin/js/custom.js'
         'admin/js/jquery.portfolio.js'
+        'admin/js/jquery.gritter.min.js'
+        'admin/js/spin.min.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         output='compiled/admin/js/scripts.js' %}
         <script language="javascript" src="{{ asset_url }}"></script>
