@@ -1,0 +1,94 @@
+<div class="modal portfolio-popin" data-selected="{{ mediaIds | join(';') }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">{{ 'Portfolio' | trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs nav-justified">
+                    <li{% if selectedMedias %} class="active"{% endif %}><a href="#media" data-toggle="tab"><i class="icon-camera"></i> {{ 'Associated medias' | trans }}</a></li>
+                    <li{% if not selectedMedias %} class="active"{% endif %}><a href="#portfolio" data-toggle="tab"><i class="icon-picture"></i> {{ 'Portfolio' | trans }}</a></li>
+                    <li><a href="#upload" data-toggle="tab"><i class="icon-cloud-upload"></i> {{ 'Download new medias' | trans }}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane {% if selectedMedias %} active{% endif %}" id="media">
+                        <table id="list" class="table table-striped ">
+                            <tbody>
+                                {% for media in selectedMedias %}
+                                {% include 'BigfootMediaBundle:snippets:line.html.twig' with {'line': media, 'used': true} %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane{% if not selectedMedias %} active{% endif %}" id="portfolio">
+                        <div class="well">
+                            <form class="form-search portfolio-search-form" action="{{ path('portfolio_search') }}" method="post">
+                                <div class="row">
+                                    <div class="input-group">
+                                        {{ form_widget(form.table) }}
+                                        {{ form_widget(form.column) }}
+                                        {{ form_widget(form.search, {'attr': {'placeholder': 'Search term' | trans}}) }}
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn">
+                                                {{ "Filter" | trans }}
+                                                <i class="icon-search icon-on-right bigger-110"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                {{ form_rest(form) }}
+                            </form>
+                        </div>
+                        {% include 'BigfootMediaBundle:snippets:medias.html.twig' with {'allMedias': allMedias, 'mediaIds': mediaIds} %}
+                    </div>
+                    <div class="tab-pane" id="upload">
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="ace-file-input ace-file-multiple">
+                                    <input multiple="" type="file" id="id-input-file-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="portfolio-validate btn btn-lg btn-success" href="#"><i class="icon-ok"></i> {{ 'Submit' | trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#id-input-file-3').ace_file_input({
+        style:'well',
+        btn_choose:'{{ 'Drop files here or click to choose' | trans }}',
+        btn_change:null,
+        no_icon:'icon-cloud-upload',
+        droppable:true,
+        thumbnail:'small'//large | fit
+        //,icon_remove:null//set null, to hide remove/reset button
+        /**,before_change:function(files, dropped) {
+						//Check an example below
+						//or examples/file-upload.html
+						return true;
+					}*/
+        /**,before_remove : function() {
+						return true;
+					}*/
+        ,
+        preview_error : function(filename, error_code) {
+            //name of the file that failed
+            //error_code values
+            //1 = 'FILE_LOAD_FAILED',
+            //2 = 'IMAGE_LOAD_FAILED',
+            //3 = 'THUMBNAIL_FAILED'
+            //alert(error_code);
+        }
+
+    }).on('change', function(){
+                //console.log($(this).data('ace_input_files'));
+                //console.log($(this).data('ace_input_method'));
+            });
+</script>
