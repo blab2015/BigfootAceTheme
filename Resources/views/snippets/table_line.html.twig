@@ -1,0 +1,19 @@
+<tr class="portfolio-media-item{% if used == true %} used{% else %} unused{% endif %}" data-edit="formMedia{{ line.id }}" data-media-id="{{ line.id }}">
+    <td class="span1"><img class="crud-column-media" src="{{asset(line.file)}}"></td>
+    <td>{{ "Title" | trans }} : {{ line.getMetadata('title') }}</td>
+    <td>{{ "Height" | trans }} : {{ line.getMetadata('height') }}px</td>
+    <td>{{ "Width" | trans }} : {{ line.getMetadata('width') }}px</td>
+    <td>{{ "Size" | trans }} : {{ line.getMetadata('size') }}</td>
+    <td>{{ "Type" | trans }} : {{ line.type }}</td>
+    <td class="span1">
+        <a class="portfolio-toggle-edit on" href="{{ path('portfolio_edit', {id: line.id}) }}"><i class="icon-edit bigger-200"></i> Editer</a>
+        <a class="portfolio-toggle-edit off" href="{{ path('portfolio_edit', {id: line.id}) }}" style="display:none"><i class="icon-edit bigger-200"></i></a>
+    </td>
+    <td class="span1">
+        <a class="portfolio-toggle-use on" href="#"{% if used == false %} style="display:none"{% endif %}><i class="icon-check bigger-200"></i> Choisir</a>
+        <a class="portfolio-toggle-use off" href="#"{% if used == true %} style="display:none"{% endif %}><i class="icon-check-empty bigger-200"></i> Choisir</a>
+    </td>
+    <td class="span1">
+        <a class="portfolio-media-delete" href="{{ path('portfolio_delete', {id: line.id}) }}"><i class="icon-trash bigger-200"></i> Supprimer</a>
+    </td>
+</tr>

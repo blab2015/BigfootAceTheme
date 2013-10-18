@@ -174,6 +174,7 @@
         }
 
         base.useMedia = function(e) {
+
             base.preventDefault(e);
 
             var popin           = $(base.options['portfolioPopinClass']);
@@ -246,6 +247,7 @@
                 linkPopin.attr('href', urlArray.join('/'));
             }
 
+            $(".modal-backdrop").hide();
             $(base.options['portfolioPopinClass']).modal('hide');
 
             return false;

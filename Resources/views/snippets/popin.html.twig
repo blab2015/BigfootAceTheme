@@ -1,5 +1,5 @@
 <div class="modal portfolio-popin" data-selected="{{ mediaIds | join(';') }}">
-    <div class="modal-dialog">
+    <div class="modal-dialog large">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -16,7 +16,7 @@
                         <table id="list" class="table table-striped ">
                             <tbody>
                                 {% for media in selectedMedias %}
-                                {% include 'BigfootMediaBundle:snippets:line.html.twig' with {'line': media, 'used': true} %}
+                                {% include 'BigfootAceThemeBundle:snippets:table_line.html.twig' with {'line': media, 'used': true} %}
                                 {% endfor %}
                             </tbody>
                         </table>
@@ -40,13 +40,13 @@
                                 {{ form_rest(form) }}
                             </form>
                         </div>
-                        {% include 'BigfootMediaBundle:snippets:medias.html.twig' with {'allMedias': allMedias, 'mediaIds': mediaIds} %}
+                        {% include 'BigfootAceThemeBundle:snippets:table.html.twig' with {'allMedias': allMedias, 'mediaIds': mediaIds} %}
                     </div>
                     <div class="tab-pane" id="upload">
                         <div class="widget-body">
                             <div class="widget-main">
                                 <div class="ace-file-input ace-file-multiple">
-                                    <input multiple="" type="file" id="id-input-file-3">
+                                    <input multiple="" type="file" id="dragContainer">
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,10 @@
 </div>
 
 <script type="text/javascript">
-    $('#id-input-file-3').ace_file_input({
+    jQuery(function($) {
+        $(".chosen-select").chosen();
+    });
+    $('#dragContainer').ace_file_input({
         style:'well',
         btn_choose:'{{ 'Drop files here or click to choose' | trans }}',
         btn_change:null,
