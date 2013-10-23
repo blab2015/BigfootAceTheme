@@ -25,7 +25,16 @@
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        {% set dataContent = attr['data-content'] %}
+        {% set dataTitle = attr['data-title'] %}
+        {% set dataTrigger = attr['data-trigger'] %}
+        {% set dataPlacement = attr['data-placement'] %}
+    {% endif %}
     {{ parent() }}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+    {% endif %}
 {% endblock %}
 
 {% block textarea_widget %}
@@ -34,7 +43,16 @@
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        {% set dataContent = attr['data-content'] %}
+        {% set dataTitle = attr['data-title'] %}
+        {% set dataTrigger = attr['data-trigger'] %}
+        {% set dataPlacement = attr['data-placement'] %}
+    {% endif %}
     {{ parent() }}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+    {% endif %}
 {% endblock %}
 
 {% block choice_widget_expanded %}
@@ -56,7 +74,16 @@
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        {% set dataContent = attr['data-content'] %}
+        {% set dataTitle = attr['data-title'] %}
+        {% set dataTrigger = attr['data-trigger'] %}
+        {% set dataPlacement = attr['data-placement'] %}
+    {% endif %}
     {{ parent() }}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+    {% endif %}
 {% endblock choice_widget_collapsed %}
 
 {% block checkbox_widget %}

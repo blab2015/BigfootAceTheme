@@ -29,6 +29,8 @@ $(document).ready(function () {
 
 /* Setup */
 jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip({container:'body'});
+    $('[data-rel=popover]').popover({container:'body'});
     $(".chosen-select").chosen();
 });
 
