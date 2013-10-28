@@ -5,3 +5,6 @@
 .help-button {
     line-height: 19px;
 }
+
+.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 28px !important; width: 481px; display:block;margin:10px auto;}
+.ui-sortable-placeholder * { visibility: hidden; }
