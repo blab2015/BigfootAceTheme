@@ -1,0 +1,15 @@
+<tr class="well portfolio-edit-form-{{ id }}">
+    <td colspan="9">
+        <form action="{{ path('portfolio_edit', {id: id}) }}" class="portfolio-edit-form" method="post" {{ form_enctype(form) }}>
+            <div class="row-fluid">
+                <div class="span12">
+                    {{ form_widget(form) }}
+                </div>
+            </div>
+            {{ form_errors(form) }}
+            <hr/>
+            <button type="submit" class="btn pull-right" style="margin-bottom: -5px">{{ "Save" | trans }}</button><br/>
+            <div style="display:none">{{ form_rest(form) }}</div>
+        </form>
+    </td>
+</tr>

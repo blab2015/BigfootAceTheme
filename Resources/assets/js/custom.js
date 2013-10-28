@@ -29,6 +29,8 @@ $(document).ready(function () {
 
 /* Setup */
 jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip({container:'body'});
+    $('[data-rel=popover]').popover({container:'body'});
     $(".chosen-select").chosen();
 });
 
@@ -200,3 +202,29 @@ function addCollectionItem(id, name) {
         }
     }
 }
+
+//Chargement des departements en fonction des regions
+$(document).ready(function() {
+    var $regions = $('#seh_city_region');
+    var $departements = $('#seh_city_department');
+    var $path_url = $('#seh_city_region').attr('data-action');
+
+    $regions.on('change', function() {
+        var val = $(this).val();
+
+        if(val != '') {
+            $departements.empty();
+
+            $.ajax({
+                type: "POST",
+                url: $path_url,
+                data: 'idRegion='+ val,
+                success: function(resp) {
+                    $departements.html(resp);
+                    $departements.removeAttr('disabled');
+                    $departements.trigger("chosen:updated");
+                }
+            });
+        }
+    });
+});
