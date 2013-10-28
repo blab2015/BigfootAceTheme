@@ -35,7 +35,6 @@ jQuery(function($) {
     setTranslatableFields();
 
     $('.colorbox').colorbox({
-        href : newHref,
         width : 900,
         height : 600,
         onComplete : function()
