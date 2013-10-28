@@ -32,6 +32,18 @@ jQuery(function($) {
     $('[data-rel=tooltip]').tooltip({container:'body'});
     $('[data-rel=popover]').popover({container:'body'});
     $(".chosen-select").chosen();
+    setTranslatableFields();
+
+    $('.colorbox').colorbox({
+        href : newHref,
+        width : 900,
+        height : 600,
+        onComplete : function()
+        {
+            setTranslatableFields();
+            $(".chosen-select").chosen();
+        }
+    })
 });
 
 /* Portfolio */
@@ -42,7 +54,8 @@ $(function() {
 })
 
 /* Translatable fields */
-$(function() {
+function setTranslatableFields()
+{
     var $translatableFields = $('.translatable-fields');
     if ($translatableFields.length) {
         setupTranslatableFields($translatableFields);
@@ -66,7 +79,7 @@ $(function() {
             return false;
         });
     }
-});
+}
 
 /* Sortable */
 $(function() {
