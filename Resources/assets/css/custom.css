@@ -1,2 +1,7 @@
-/* Augmentation de la taille de la popin */
+/* Allows large popins */
 .large { width: 1000px }
+
+/* Fixes help buttons question mark displaying too low */
+.help-button {
+    line-height: 19px;
+}
