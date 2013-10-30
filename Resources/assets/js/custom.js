@@ -35,15 +35,29 @@ jQuery(function($) {
     setTranslatableFields();
 
     $('.colorbox').colorbox({
-        width : 900,
-        height : 600,
+        width : 1024,
+        height : 728,
         onComplete : function()
         {
-            setTranslatableFields();
-            $(".chosen-select").chosen();
+            setupColorboxScripts();
         }
     })
 });
+
+
+function setupColorboxScripts()
+{
+    $(".chosen-select").chosen();
+    setTranslatableFields();
+    if (CKEDITOR != undefined) {
+        var $textAreas = $('#colorbox').find('textarea.ckeditor');
+        if ($textAreas.length) {
+            $textAreas.each(function() {
+                CKEDITOR.replace($(this).attr('id'));
+            });
+        }
+    }
+}
 
 /* Portfolio */
 $(function() {
@@ -55,7 +69,13 @@ $(function() {
 /* Translatable fields */
 function setTranslatableFields()
 {
-    var $translatableFields = $('.translatable-fields');
+    if ($('#colorbox').length) {
+        var $translatableFields = $('#colorbox .translatable-fields');
+    }
+    else {
+        var $translatableFields = $('.translatable-fields');
+    }
+
     if ($translatableFields.length) {
         setupTranslatableFields($translatableFields);
 
@@ -150,6 +170,7 @@ function setupTranslatableFields($translatableFields) {
     var $toWrap = $('input[data-locale], textarea[data-locale]');
     $toWrap.wrap($wrapper);
     $toWrap.each(function() {
+
         if (!$(this).data('flag')) {
             $(this).parent().addClass($(this).attr('class') + ' no-padding-right no-padding-left');
             $(this).removeClass().addClass('form-control');
