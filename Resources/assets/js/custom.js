@@ -32,7 +32,32 @@ jQuery(function($) {
     $('[data-rel=tooltip]').tooltip({container:'body'});
     $('[data-rel=popover]').popover({container:'body'});
     $(".chosen-select").chosen();
+    setTranslatableFields();
+
+    $('.colorbox').colorbox({
+        width : 1024,
+        height : 728,
+        onComplete : function()
+        {
+            setupColorboxScripts();
+        }
+    })
 });
+
+
+function setupColorboxScripts()
+{
+    $(".chosen-select").chosen();
+    setTranslatableFields();
+    if (CKEDITOR != undefined) {
+        var $textAreas = $('#colorbox').find('textarea.ckeditor');
+        if ($textAreas.length) {
+            $textAreas.each(function() {
+                CKEDITOR.replace($(this).attr('id'));
+            });
+        }
+    }
+}
 
 /* Portfolio */
 $(function() {
@@ -42,8 +67,15 @@ $(function() {
 })
 
 /* Translatable fields */
-$(function() {
-    var $translatableFields = $('.translatable-fields');
+function setTranslatableFields()
+{
+    if ($('#colorbox').length) {
+        var $translatableFields = $('#colorbox .translatable-fields');
+    }
+    else {
+        var $translatableFields = $('.translatable-fields');
+    }
+
     if ($translatableFields.length) {
         setupTranslatableFields($translatableFields);
 
@@ -66,7 +98,7 @@ $(function() {
             return false;
         });
     }
-});
+}
 
 /* Sortable */
 $(function() {
@@ -138,6 +170,7 @@ function setupTranslatableFields($translatableFields) {
     var $toWrap = $('input[data-locale], textarea[data-locale]');
     $toWrap.wrap($wrapper);
     $toWrap.each(function() {
+
         if (!$(this).data('flag')) {
             $(this).parent().addClass($(this).attr('class') + ' no-padding-right no-padding-left');
             $(this).removeClass().addClass('form-control');
