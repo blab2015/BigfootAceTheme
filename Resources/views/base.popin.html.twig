@@ -1,0 +1,19 @@
+<div class="modal{% if modal_class is defined %} {{ modal_class }}{% endif %}"{% if modal_attr is defined and modal_attr is iterable %}{% for attr, value in modal_attr %} {{ attr }}="{{ value }}"{% endfor %}{% endif %}>
+    <div class="modal-dialog{% if modal_dialog_class is defined %} {{ modal_dialog_class }}{% endif %}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">{{ modal_title | trans }}</h4>
+            </div>
+            <div class="modal-body">
+                {% block modal_content %}
+                {% endblock modal_content %}
+            </div>
+            <div class="modal-footer">
+                {% block modal_footer %}
+                <a class="btn btn-lg btn-success" href="#"><i class="icon-ok"></i> {{ 'Submit' | trans }}</a>
+                {% endblock modal_footer %}
+            </div>
+        </div>
+    </div>
+</div>
