@@ -19,12 +19,15 @@
         {% stylesheets
             'admin/css/bootstrap.min.css'
             'admin/css/font-awesome.min.css'
+            'admin/css/jquery-ui-1.10.3.full.min.css'
             'admin/css/jquery-ui-1.10.3.custom.min.css'
             'admin/css/chosen.css'
             'admin/css/datepicker.css'
             'admin/css/bootstrap-timepicker.css'
             'admin/css/daterangepicker.css'
             'admin/css/colorpicker.css'
+            'admin/css/ace-fonts.css'
+            'admin/css/ui.jqgrid.css'
             'admin/css/ace-fonts.css'
             'admin/css/ace.min.css'
             'admin/css/ace-rtl.min.css'
@@ -51,6 +54,18 @@
         <script src="{{ 'admin/js/respond.min.js' }}"></script>
         <![endif]-->
     {% endblock stylesheets %}
+
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-2.0.3.min.js') }}'>"+"<"+"/script>");
+    </script>
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-1.10.2.min.js') }}>"+"<"+"/script>");
+    </script>
+    <![endif]-->
 </head>
 
 <body class="{% block bodyClass %}{% endblock bodyClass %}">
@@ -217,17 +232,6 @@
 </div>
 {% endblock body %}
 {% block javascripts %}
-    <!--[if !IE]> -->
-    <script type="text/javascript">
-        window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-2.0.3.min.js') }}'>"+"<"+"/script>");
-    </script>
-    <!-- <![endif]-->
-
-    <!--[if IE]>
-    <script type="text/javascript">
-        window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-1.10.2.min.js') }}>"+"<"+"/script>");
-    </script>
-    <![endif]-->
 
     <script type="text/javascript">
         if("ontouchend" in document) document.write("<script src='{{ asset('admin/js/jquery.mobile.custom.min.js') }}'>"+"<"+"/script>");
@@ -263,6 +267,9 @@
         'admin/js/jquery.portfolio.js'
         'admin/js/jquery.gritter.min.js'
         'admin/js/spin.min.js'
+        'admin/js/jqGrid/jquery.jqGrid.min.js'
+        'admin/js/jqGrid/custom.js'
+        'admin/js/jqGrid/i18n/grid.locale-en.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         output='compiled/admin/js/scripts.js' %}
         <script language="javascript" src="{{ asset_url }}"></script>
