@@ -32,6 +32,7 @@ jQuery(function($) {
     $('[data-rel=tooltip]').tooltip({container:'body'});
     $('[data-rel=popover]').popover({container:'body'});
     $(".chosen-select").chosen();
+    $.bigfoot.portfolio();
     setTranslatableFields();
 
     $('.colorbox').colorbox({
@@ -58,13 +59,6 @@ function setupColorboxScripts()
         }
     }
 }
-
-/* Portfolio */
-$(function() {
-    $('.field-media').each(function() {
-        $.bigfoot.portfolio(this);
-    });
-})
 
 /* Translatable fields */
 function setTranslatableFields()
@@ -139,8 +133,13 @@ function initSelects() {
         arrayTags = tags;
     }
     var $tagsSelect = $('input.bigfoot_tags_field');
-    //$tagsSelect.width('100%').select2({tags: arrayTags});
-    $('.select2-container').width('100%');
+
+    $tagsSelect.tag({
+        placeholder:$tagsSelect.attr('placeholder'),
+        source: arrayTags
+    });
+
+    $(".chosen-select").chosen();
 }
 
 /* Functions */

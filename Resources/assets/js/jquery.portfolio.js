@@ -46,11 +46,19 @@
 
             if (popinHref.indexOf('#') == 0) {
                 $(popinHref).modal('open');
-            }
-            else {
+
+                $(popinHref).on('hidden.bs.modal', function () {
+                    $(".modal-backdrop").hide();
+                    $(base.options['portfolioPopinClass']).modal('hide');
+                });
+            } else {
                 $.get(popinHref, function(data) {
                     $(base.options['portfolioPopinClass']).remove();
                     var $data = $(data);
+
+                    $data.on('shown', function () {
+                        $('.chosen-select', $data).chosen();
+                    })
 
                     // add data attribute field id on modal
                     $data.attr('data-field-id', popinOpenButton.parent('.field-media').children('input').attr('id'));
@@ -60,23 +68,44 @@
                     popinOpenButton.children('img').addClass('media-to-update');
 
                     // open modal
-                    $data.modal();
+                    $data.modal('show');
+
+                    $data.on('hidden.bs.modal', function () {
+                        $(".modal-backdrop").hide();
+                        $(base.options['portfolioPopinClass']).modal('hide');
+                    });
 
                     $("table tbody", $('#media')).sortable({
                         axis: 'y',
                         handle: 'img'
                     }).disableSelection();
 
-                    initSelects();
+                    $('#dragContainer', $data).ace_file_input({
+                        style:      'well',
+                        btn_choose: 'Drop files here or click to choose',
+                        btn_change: false,
+                        no_icon:    'icon-cloud-upload',
+                        droppable:  true,
+                        thumbnail:  false
+                        ,
+                        preview_error : function(filename, error_code) {
+                            //name of the file that failed
+                            //error_code values
+                            //1 = 'FILE_LOAD_FAILED',
+                            //2 = 'IMAGE_LOAD_FAILED',
+                            //3 = 'THUMBNAIL_FAILED'
+                            //alert(error_code);
+                        }
+
+                    }).on('change', function() {
+                        base.dragMedia($(this).data('ace_input_files'));
+                        $('a.remove').click();
+                    });
                 });
             }
         }
 
-        base.dragMedia = function(e) {
-            base.preventDefault(e);
-
-            var files = e.dataTransfer.files;
-
+        base.dragMedia = function(files) {
             $.each(files, function(index, file) {
                 var fileReader = new FileReader();
 
@@ -174,7 +203,6 @@
         }
 
         base.useMedia = function(e) {
-
             base.preventDefault(e);
 
             var popin           = $(base.options['portfolioPopinClass']);

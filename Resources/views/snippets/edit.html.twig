@@ -1,15 +1,18 @@
 <tr class="well portfolio-edit-form-{{ id }}">
     <td colspan="9">
-        <form action="{{ path('portfolio_edit', {id: id}) }}" class="portfolio-edit-form" method="post" {{ form_enctype(form) }}>
-            <div class="row-fluid">
-                <div class="span12">
-                    {{ form_widget(form) }}
+        <form action="{{ path('portfolio_edit', {id: id}) }}" class="portfolio-edit-form form-horizontal" method="post" {{ form_enctype(form) }}>
+            <div class="row">
+                <div class="col-sm-12 portfolio-media-edit">
+                    <div id="bigfoot_media_tags">{{ form_widget(form.tags) }}</div>
+                    {% for metadata in form.metadatas %}
+                        {{ form_widget(metadata) }}
+                    {% endfor %}
                 </div>
+                <div style="display: none">{{ form_rest(form) }}</div>
             </div>
             {{ form_errors(form) }}
             <hr/>
-            <button type="submit" class="btn pull-right" style="margin-bottom: -5px">{{ "Save" | trans }}</button><br/>
-            <div style="display:none">{{ form_rest(form) }}</div>
+            <button type="submit" class="btn btn-success pull-right">{{ "Save" | trans }}</button><br/>
         </form>
     </td>
 </tr>

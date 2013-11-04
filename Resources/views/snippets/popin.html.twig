@@ -1,4 +1,4 @@
-<div class="modal portfolio-popin" data-selected="{{ mediaIds | join(';') }}">
+<div class="bootbox modal fade in portfolio-popin" data-selected="{{ mediaIds | join(';') }}">
     <div class="modal-dialog large">
         <div class="modal-content">
             <div class="modal-header">
@@ -26,8 +26,6 @@
                             <form class="form-search portfolio-search-form" action="{{ path('portfolio_search') }}" method="post">
                                 <div class="row">
                                     <div class="input-group">
-                                        {{ form_widget(form.table) }}
-                                        {{ form_widget(form.column) }}
                                         {{ form_widget(form.search, {'attr': {'placeholder': 'Search term' | trans}}) }}
                                         <span class="input-group-btn">
                                             <button type="submit" class="btn">
@@ -37,19 +35,21 @@
                                         </span>
                                     </div>
                                 </div>
-                                {{ form_rest(form) }}
+                                <div style="display: none">
+                                    {{ form_rest(form) }}
+                                </div>
                             </form>
                         </div>
                         {% include 'BigfootAceThemeBundle:snippets:table.html.twig' with {'allMedias': allMedias, 'mediaIds': mediaIds} %}
                     </div>
                     <div class="tab-pane" id="upload">
-                        <div class="widget-body">
-                            <div class="widget-main">
-                                <div class="ace-file-input ace-file-multiple">
-                                    <input multiple="" type="file" id="dragContainer">
-                                </div>
-                            </div>
+                        <div class="ace-file-input ace-file-multiple">
+                            <input multiple="" type="file" id="dragContainer">
                         </div>
+                        <table id="droppedFiles" class="table table-striped">
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -59,39 +59,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    jQuery(function($) {
-        $(".chosen-select").chosen();
-    });
-    $('#dragContainer').ace_file_input({
-        style:'well',
-        btn_choose:'{{ 'Drop files here or click to choose' | trans }}',
-        btn_change:null,
-        no_icon:'icon-cloud-upload',
-        droppable:true,
-        thumbnail:'small'//large | fit
-        //,icon_remove:null//set null, to hide remove/reset button
-        /**,before_change:function(files, dropped) {
-						//Check an example below
-						//or examples/file-upload.html
-						return true;
-					}*/
-        /**,before_remove : function() {
-						return true;
-					}*/
-        ,
-        preview_error : function(filename, error_code) {
-            //name of the file that failed
-            //error_code values
-            //1 = 'FILE_LOAD_FAILED',
-            //2 = 'IMAGE_LOAD_FAILED',
-            //3 = 'THUMBNAIL_FAILED'
-            //alert(error_code);
-        }
-
-    }).on('change', function(){
-                //console.log($(this).data('ace_input_files'));
-                //console.log($(this).data('ace_input_method'));
-            });
-</script>
