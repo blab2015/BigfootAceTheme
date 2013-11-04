@@ -1,13 +1,6 @@
 {% extends 'BigfootAceThemeBundle::base.html.twig' %}
 
 {% block content %}
-    {% if theme.page_content.globalActions is defined and theme.page_content.globalActions|length %}
-        <div class="widget-icons">
-            {% for item in theme.page_content.globalActions.items %}
-                {% include 'BigfootCoreBundle:menu:item.html.twig' %}
-            {% endfor %}
-        </div>
-    {% endif %}
     <table id="grid-table"></table>
     <div id="grid-pager"></div>
 
@@ -15,15 +8,14 @@
 
         var $path_base = "/";//this will be used in gritter alerts containing images
 
-        var grid_data =
-                [
-                    {% for item in list_items %}
-                    {
-        {% for attr, field in list_fields %}
-        {{ field | replace({' ': '_'}) }}:"{{ attribute(item, attr) }}"{% if loop.last == false %},{% endif %}
-        {% endfor %}
-        }{% if loop.last == false %},{% endif %}
-        {% endfor %}
+        var grid_data = [
+            {%- for item in list_items %}
+            {
+                {%- for attr, field in list_fields %}
+                {{ field | replace({' ': '_'}) }}:"{{ attribute(item, attr) }}"{% if loop.last == false %},{% endif %}
+                {%- endfor %}
+            }{% if loop.last == false %},{% endif %}
+            {%- endfor %}
         ];
 
         jQuery(function($) {
@@ -40,7 +32,7 @@
                     {% for attr, field in list_fields %}
                     { name:'{{ field | trans | replace({' ': '_'}) }}', index:'{{ field | trans | replace({' ': '_'}) }}' },
                     {% endfor %}
-                    {name:'test', width:80, fixed:true, sortable:false, resize:false, formatter:linkformatter}
+                    {name:'actions', width:80, fixed:true, sortable:false, resize:false, formatter:linkformatter}
                 ],
 
                 viewrecords : true,
@@ -75,78 +67,92 @@
 
             //navButtons
             jQuery(grid_selector).jqGrid('navGrid',pager_selector,
-                    { 	//navbar options
-                        edit: false,
-                        add: false,
-                        del: false,
-                        search: true,
-                        searchicon : 'icon-search orange',
-                        refresh: true,
-                        refreshicon : 'icon-refresh green',
-                        view: false
-                    },
-                    {
-                        recreateForm: true,
-                        beforeShowForm : function(e) {
-                            var form = $(e[0]);
-                            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-                            style_edit_form(form);
-                        }
-                    },
-                    {
-                        //new record form
-                        closeAfterAdd: true,
-                        recreateForm: true,
-                        viewPagerButtons: false,
-                        beforeShowForm : function(e) {
-                            var form = $(e[0]);
-                            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-                            style_edit_form(form);
-                        }
-                    },
-                    {
-                        //delete record form
-                        recreateForm: true,
-                        beforeShowForm : function(e) {
-                            var form = $(e[0]);
-                            if(form.data('styled')) return false;
-
-                            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-                            style_delete_form(form);
-
-                            form.data('styled', true);
-                        },
-                        onClick : function(e) {
-                            alert(1);
-                        }
-                    },
-                    {
-                        //search form
-                        recreateForm: true,
-                        afterShowSearch: function(e){
-                            var form = $(e[0]);
-                            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
-                            style_search_form(form);
-                        },
-                        afterRedraw: function(){
-                            style_search_filters($(this));
-                        }
-                        ,
-                        multipleSearch: true,
-                        /**
-                         multipleGroup:true,
-                         showQuery: true
-                         */
-                    },
-                    {
-                        //view record form
-                        recreateForm: true,
-                        beforeShowForm: function(e){
-                            var form = $(e[0]);
-                            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
-                        }
+                { 	//navbar options
+                    edit: false,
+                    add: false,
+                    del: false,
+                    search: true,
+                    searchicon : 'icon-search orange',
+                    refresh: true,
+                    refreshicon : 'icon-refresh green',
+                    view: false
+                },
+                {
+                    recreateForm: true,
+                    beforeShowForm : function(e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                        style_edit_form(form);
                     }
+                },
+                {
+                    //new record form
+                    closeAfterAdd: true,
+                    recreateForm: true,
+                    viewPagerButtons: false,
+                    beforeShowForm : function(e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                        style_edit_form(form);
+                    }
+                },
+                {
+                    //delete record form
+                    recreateForm: true,
+                    beforeShowForm : function(e) {
+                        var form = $(e[0]);
+                        if(form.data('styled')) return false;
+
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                        style_delete_form(form);
+
+                        form.data('styled', true);
+                    },
+                    onClick : function(e) {
+                        alert(1);
+                    }
+                },
+                {
+                    //search form
+                    recreateForm: true,
+                    afterShowSearch: function(e){
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                        style_search_form(form);
+                    },
+                    afterRedraw: function(){
+                        style_search_filters($(this));
+                    }
+                    ,
+                    multipleSearch: true,
+                    /**
+                     multipleGroup:true,
+                     showQuery: true
+                     */
+                },
+                {
+                    //view record form
+                    recreateForm: true,
+                    beforeShowForm: function(e){
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                    }
+                }
             )
+
+            {% if theme.page_content.globalActions is defined and theme.page_content.globalActions|length %}
+            jQuery(grid_selector).jqGrid('navSeparatorAdd', pager_selector, {});
+            {% for item in theme.page_content.globalActions.items %}
+            jQuery(grid_selector).jqGrid('navButtonAdd', pager_selector, {
+                caption: '',
+                title: '{{ item.label | trans }}',
+                {% if item.icon %}buttonicon: 'icon-{{ item.icon }}',{% endif %}
+                onClickButton: function() {
+                    window.document.location.href = '{{ path(item.route, item.parameters) }}';
+                }
+            });
+            {% endfor %}
+            {% endif %}
         });
     </script>
 {% endblock content %}

@@ -215,6 +215,13 @@
                     </h1>
                 </div>
                 {% endblock %}
+                {% import 'BigfootAceThemeBundle:macros:flash.html.twig' as flash %}
+                {% block flash_messages %}
+                    {{ flash.messages('error') }}
+                    {{ flash.messages('success') }}
+                    {{ flash.messages('warning') }}
+                    {{ flash.messages('notice') }}
+                {% endblock flash_messages %}
                 <div class="row">
                     <div class="col-xs-12">
                         {% block content %}
