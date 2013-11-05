@@ -1,4 +1,9 @@
 {% twig_js name="nestableView" %}
-<div class="dd nestable">
-    {% include 'BigfootAceThemeBundle:navigation:list.html.twig' with {items: items} %}
+<div class="form-group">
+    <label class="control-label col-sm-3">Items</label>
+    <div class="col-sm-5">
+        <div class="dd nestable">
+            {% include 'BigfootAceThemeBundle:navigation:list.html.twig' with {items: items} %}
+        </div>
+    </div>
 </div>
