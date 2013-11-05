@@ -11,10 +11,10 @@
         var grid_data = [
             {%- for item in list_items %}
             {
-                id: '{{ item.id }}',
                 {%- for attr, field in list_fields %}
-                {{ field | replace({' ': '_'}) }}:"{{ attribute(item, attr) }}"{% if loop.last == false %},{% endif %}
+                {{ field | replace({' ': '_'}) }}:"{{ attribute(item, attr) }}",
                 {%- endfor %}
+                id: '{{ item.id }}'
             }{% if loop.last == false %},{% endif %}
             {%- endfor %}
         ];
@@ -134,7 +134,7 @@
                         form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
                     }
                 }
-            )
+            );
 
             {%- if theme.page_content.globalActions is defined and theme.page_content.globalActions|length %}
             jQuery(grid_selector).jqGrid('navSeparatorAdd', pager_selector, {});
