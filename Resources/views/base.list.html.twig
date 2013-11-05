@@ -11,6 +11,7 @@
         var grid_data = [
             {%- for item in list_items %}
             {
+                id: '{{ item.id }}',
                 {%- for attr, field in list_fields %}
                 {{ field | replace({' ': '_'}) }}:"{{ attribute(item, attr) }}"{% if loop.last == false %},{% endif %}
                 {%- endfor %}
@@ -24,9 +25,9 @@
 
             jQuery(grid_selector).jqGrid({
 
-                data: grid_data,
-                datatype: "local",
-                height: 400,
+                data:       grid_data,
+                datatype:   "local",
+                height:     400,
                 colNames:[{% for attr, field in list_fields %}'{{ field | trans }}'{% if loop.last == false %},{% endif %} {% endfor %}, '{{ 'Actions' | trans }}'],
                 colModel:[
                     {% for attr, field in list_fields %}
@@ -35,17 +36,17 @@
                     {name:'actions', width:80, fixed:true, sortable:false, resize:false, formatter:linkformatter}
                 ],
 
-                viewrecords : true,
-                rowNum:10,
-                rowList:[10,20,30],
-                pager : pager_selector,
-                altRows: true,
+                viewrecords:    true,
+                rowNum:         10,
+                rowList:        [10,20,30],
+                pager :         pager_selector,
+                altRows:        true,
 
-                multiboxonly: true,
+                multiboxonly:   true,
 
                 loadComplete : function() {
                     var table = this;
-                    setTimeout(function(){
+                    setTimeout(function() {
                         styleCheckbox(table);
 
                         updateActionIcons(table);
@@ -54,28 +55,27 @@
                     }, 0);
                 },
 
-                autowidth: true,
-                caption: "{{ list_title | trans }}"
-
+                autowidth:  true,
+                caption:    "{{ list_title | trans }}"
             });
 
-            function linkformatter(cellValue, options, rowdata){
+            function linkformatter(cellValue, options, rowdata) {
                 var route = "{{ path(list_edit_route, { "id": "PLACEHOLDER" }) }}";
-                route = route.replace("PLACEHOLDER", rowdata.ID);
+                route = route.replace("PLACEHOLDER", rowdata.id);
                 return '<a class="btn btn-link" href="'+route+'"><i class="icon-pencil"></i></a>';
             }
 
             //navButtons
             jQuery(grid_selector).jqGrid('navGrid',pager_selector,
                 { 	//navbar options
-                    edit: false,
-                    add: false,
-                    del: false,
-                    search: true,
-                    searchicon : 'icon-search orange',
-                    refresh: true,
-                    refreshicon : 'icon-refresh green',
-                    view: false
+                    edit:           false,
+                    add:            false,
+                    del:            false,
+                    search:         true,
+                    searchicon :    'icon-search orange',
+                    refresh:        true,
+                    refreshicon :   'icon-refresh green',
+                    view:           false
                 },
                 {
                     recreateForm: true,
@@ -87,8 +87,8 @@
                 },
                 {
                     //new record form
-                    closeAfterAdd: true,
-                    recreateForm: true,
+                    closeAfterAdd:  true,
+                    recreateForm:   true,
                     viewPagerButtons: false,
                     beforeShowForm : function(e) {
                         var form = $(e[0]);
@@ -115,7 +115,7 @@
                 {
                     //search form
                     recreateForm: true,
-                    afterShowSearch: function(e){
+                    afterShowSearch: function(e) {
                         var form = $(e[0]);
                         form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
                         style_search_form(form);
@@ -124,35 +124,31 @@
                         style_search_filters($(this));
                     }
                     ,
-                    multipleSearch: true,
-                    /**
-                     multipleGroup:true,
-                     showQuery: true
-                     */
+                    multipleSearch: true
                 },
                 {
                     //view record form
                     recreateForm: true,
-                    beforeShowForm: function(e){
+                    beforeShowForm: function(e) {
                         var form = $(e[0]);
                         form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
                     }
                 }
             )
 
-            {% if theme.page_content.globalActions is defined and theme.page_content.globalActions|length %}
+            {%- if theme.page_content.globalActions is defined and theme.page_content.globalActions|length %}
             jQuery(grid_selector).jqGrid('navSeparatorAdd', pager_selector, {});
-            {% for item in theme.page_content.globalActions.items %}
+            {%- for item in theme.page_content.globalActions.items %}
             jQuery(grid_selector).jqGrid('navButtonAdd', pager_selector, {
                 caption: '',
                 title: '{{ item.label | trans }}',
                 {% if item.icon %}buttonicon: 'icon-{{ item.icon }}',{% endif %}
                 onClickButton: function() {
-                    window.document.location.href = '{{ path(item.route, item.parameters) }}';
+                    window.location.href = '{{ path(item.route, item.parameters) }}';
                 }
             });
-            {% endfor %}
-            {% endif %}
+            {%- endfor %}
+            {%- endif %}
         });
     </script>
 {% endblock content %}
