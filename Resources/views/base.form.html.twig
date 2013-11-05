@@ -1,4 +1,4 @@
-{% extends not full_page is defined  ? "BigfootAceThemeBundle::base.html.twig" : "BigfootAceThemeBundle::empty.html.twig" %}
+{% extends isAjax | default(false)  ? "BigfootAceThemeBundle::empty.html.twig" : "BigfootAceThemeBundle::base.html.twig" %}
 
 {% block content %}
 <form action="{{ form_action }}" method="{{ form_method is defined and form_method in ['GET'] ? 'GET' : 'POST' }}" {{ form_enctype(form) }} class="form-horizontal">

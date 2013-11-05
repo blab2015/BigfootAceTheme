@@ -42,7 +42,20 @@ jQuery(function($) {
         {
             setupColorboxScripts();
         }
-    })
+    });
+
+    $('body').on('click', 'a.in-modal', function(e) {
+        e.preventDefault();
+
+        $.get($(this).attr('href'), function(data) {
+            var $data = $(data);
+
+            $data.on('shown', function () {
+                $('.chosen-select', $data).chosen();
+            })
+            $data.modal('show');
+        });
+    });
 });
 
 
@@ -264,7 +277,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("input.treeView").each(function() {
         var base  = $(this);
-        base.after(Twig.render(nestableView, {items: $.parseJSON(base.val()), output: $(this).attr('id')}));
+        base.after(Twig.render(nestableView, {items: $.parseJSON(base.val()), output: $(this).attr('id'), newUrl: $(this).data('new-url')}));
     });
     $('.dd.nestable').nestable().on('change', function(e) {
         var list   = e.length ? e : $(e.target),

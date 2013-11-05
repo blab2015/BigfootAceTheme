@@ -16,3 +16,7 @@
 .portfolio-media-edit > div {
     max-height: 25px;
 }
+
+.nestable-list {
+    padding-top: 8px;
+}
