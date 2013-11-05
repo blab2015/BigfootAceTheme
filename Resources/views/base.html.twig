@@ -279,6 +279,7 @@
         'admin/js/jqGrid/jquery.jqGrid.min.js'
         'admin/js/jqGrid/custom.js'
         'admin/js/jqGrid/i18n/grid.locale-en.js'
+        'admin/js/jquery.nestable.min.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         output='compiled/admin/js/scripts.js' %}
         <script language="javascript" src="{{ asset_url }}"></script>
@@ -286,6 +287,8 @@
     {% javascripts
         "@BigfootCoreBundle/Resources/views/translation/locale_tabs.html.twig"
         "@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig"
+        "@BigfootAceThemeBundle/Resources/views/navigation/nestable.html.twig"
+        "@BigfootAceThemeBundle/Resources/views/navigation/list.html.twig"
         filter="twig_js"
         output='compiled/admin/js/twigs.js' %}
         <script language="javascript" src="{{ asset_url }}"></script>

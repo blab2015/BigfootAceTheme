@@ -260,3 +260,12 @@ $(document).ready(function() {
         }
     });
 });
+
+$(document).ready(function() {
+    $("input.treeView").each(function() {
+        var base  = $(this);
+        base.after(Twig.render(nestableView, {items: $.parseJSON(base.val())}));
+    });
+    $('.dd.nestable').nestable();
+});
+
