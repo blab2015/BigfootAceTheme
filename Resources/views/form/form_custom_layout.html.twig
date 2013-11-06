@@ -199,3 +199,10 @@
         </div>
     </div>
 {% endblock %}
+
+{% block parameters_collection_widget %}
+    <label class="control-label col-sm-3">{{ label }}</label>
+    <div class="col-xs-10 col-sm-5 ">
+        {{ block('form_widget') }}
+    </div>
+{% endblock %}

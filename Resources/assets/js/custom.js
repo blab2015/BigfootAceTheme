@@ -48,12 +48,15 @@ jQuery(function($) {
         e.preventDefault();
 
         $.get($(this).attr('href'), function(data) {
-            var $data = $(data);
+            var modal = Twig.render(modaleTemplate, {
+                modal_content: data
+            });
 
-            $data.on('shown', function () {
-                $('.chosen-select', $data).chosen();
-            })
-            $data.modal('show');
+            var $modal = $(modal);
+            $modal.on('shown', function () {console.log($('.chosen-select', $modal).length);
+                $('.chosen-select', $modal).chosen();
+            });
+            $modal.modal('show');
         });
     });
 });

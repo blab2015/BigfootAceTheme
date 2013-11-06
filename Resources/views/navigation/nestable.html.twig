@@ -2,7 +2,7 @@
 <div class="form-group">
     <label class="control-label col-sm-3">{{ 'Items' }}</label>
     <div class="col-sm-5 nestable-list">
-        {% if newUrl %}<a href="{{ newUrl }}" class="in-modal"><i class="icon-plus bigger-125"></i></a>{% endif %}
+        {# {% if newUrl %}<a href="{{ newUrl }}" class="in-modal"><i class="icon-plus bigger-125"></i></a>{% endif %} #}
         <div class="dd nestable" data-output="{{ output }}">
             {% include 'BigfootAceThemeBundle:navigation:list.html.twig' with {items: items} %}
         </div>

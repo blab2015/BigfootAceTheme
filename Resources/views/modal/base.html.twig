@@ -1,0 +1,16 @@
+{% twig_js name="modaleTemplate" %}
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                {{ modal_content | raw }}
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-lg btn-success" href="#"><i class="icon-ok"></i> Submit</a>
+            </div>
+        </div>
+    </div>
+</div>
