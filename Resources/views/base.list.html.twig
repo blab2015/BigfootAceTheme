@@ -5,18 +5,15 @@
     <div id="grid-pager"></div>
 
     <script type="text/javascript">
-
-        var $path_base = "/";//this will be used in gritter alerts containing images
-
         var grid_data = [
-            {%- for item in list_items %}
+            {% for item in list_items -%}
             {
-                {%- for attr, field in list_fields %}
-                {{ field | replace({' ': '_'}) }}:"{{ attribute(item, attr) }}",
-                {%- endfor %}
+                {% for attr, field in list_fields -%}
+                {{ field | replace({' ': '_'}) }}:'{{ attribute(item, attr) | replace({"'": "\'"}) }}',
+                {% endfor -%}
                 id: '{{ item.id }}'
             }{% if loop.last == false %},{% endif %}
-            {%- endfor %}
+            {% endfor -%}
         ];
 
         jQuery(function($) {
@@ -27,12 +24,12 @@
 
                 data:       grid_data,
                 datatype:   "local",
-                height:     400,
+                height:     411,
                 colNames:[{% for attr, field in list_fields %}'{{ field | trans }}'{% if loop.last == false %},{% endif %} {% endfor %}, '{{ 'Actions' | trans }}'],
                 colModel:[
-                    {% for attr, field in list_fields %}
-                    { name:'{{ field | trans | replace({' ': '_'}) }}', index:'{{ field | trans | replace({' ': '_'}) }}' },
-                    {% endfor %}
+                    {% for attr, field in list_fields -%}
+                    { name:'{{ field | replace({' ': '_'}) }}', index:'{{ field | trans | replace({' ': '_'}) }}' },
+                    {% endfor -%}
                     {name:'actions', width:80, fixed:true, sortable:false, resize:false, formatter:linkformatter}
                 ],
 
@@ -136,9 +133,9 @@
                 }
             );
 
-            {%- if theme.page_content.globalActions is defined and theme.page_content.globalActions|length %}
+            {% if theme.page_content.globalActions is defined and theme.page_content.globalActions|length -%}
             jQuery(grid_selector).jqGrid('navSeparatorAdd', pager_selector, {});
-            {%- for item in theme.page_content.globalActions.items %}
+            {% for item in theme.page_content.globalActions.items -%}
             jQuery(grid_selector).jqGrid('navButtonAdd', pager_selector, {
                 caption: '',
                 title: '{{ item.label | trans }}',
@@ -147,8 +144,8 @@
                     window.location.href = '{{ path(item.route, item.parameters) }}';
                 }
             });
-            {%- endfor %}
-            {%- endif %}
+            {% endfor %}
+            {% endif -%}
         });
     </script>
 {% endblock content %}

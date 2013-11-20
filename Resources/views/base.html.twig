@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="{% block htmlClass %}{% endblock %}">
+<html lang="{{ app.request.locale }}" class="{% block htmlClass %}{% endblock %}">
 <head>
     <meta charset="utf-8">
     <title>{{ bigfoot_theme_values.title | trans }}</title>
