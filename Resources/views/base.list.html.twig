@@ -57,9 +57,17 @@
             });
 
             function linkformatter(cellValue, options, rowdata) {
-                var route = "{{ path(list_edit_route, { "id": "PLACEHOLDER" }) }}";
-                route = route.replace("PLACEHOLDER", rowdata.id);
-                return '<a class="btn btn-link" href="'+route+'"><i class="icon-pencil"></i></a>';
+                var actions = [
+                    {% for action in actions | default([]) -%}
+                    '<a class="btn btn-link" href="{{ action.href }}"><i class="icon-{{ action.icon }}"></i></a>',
+                    {% endfor -%}
+                ];
+                var actionsHtml = [];
+                for (i in actions) {
+                    action = actions[i].replace('__ID__', rowdata.id);
+                    actionsHtml.push(action);
+                }
+                return actionsHtml.join('');
             }
 
             //navButtons
