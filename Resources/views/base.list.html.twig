@@ -9,7 +9,7 @@
             {% for item in list_items -%}
             {
                 {% for attr, field in list_fields -%}
-                {{ field | replace({' ': '_'}) }}:'{{ attribute(item, attr) | replace({"'": "\'"}) }}',
+                {{ field | replace({' ': '_', "'":'_'}) }}:'{{ attribute(item, attr) | e('js') }}',
                 {% endfor -%}
                 id: '{{ item.id }}'
             }{% if loop.last == false %},{% endif %}
@@ -28,7 +28,7 @@
                 colNames:[{% for attr, field in list_fields %}'{{ field | trans }}'{% if loop.last == false %},{% endif %} {% endfor %}, '{{ 'Actions' | trans }}'],
                 colModel:[
                     {% for attr, field in list_fields -%}
-                    { name:'{{ field | replace({' ': '_'}) }}', index:'{{ field | trans | replace({' ': '_'}) }}' },
+                    { name:'{{ field | replace({' ': '_', "'":'_'}) }}', index:'{{ field | trans | replace({' ': '_', "'":'_'}) }}' },
                     {% endfor -%}
                     {name:'actions', width:80, fixed:true, sortable:false, resize:false, formatter:linkformatter}
                 ],
