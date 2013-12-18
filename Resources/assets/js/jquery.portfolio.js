@@ -20,7 +20,7 @@
         };
 
         base.listener = function() {
-            $('body').bind('click', base.options['portfolioPopinOpenClass'], base.openPortfolio);
+            $('body').on('click', base.options['portfolioPopinOpenClass'], base.openPortfolio);
             $('body').delegate(base.options['portfolioDragContainerId'], 'dragenter dragexit dragover', base.preventDefault);
             $('body').delegate(base.options['portfolioDragContainerId'], 'drop', base.dragMedia);
             $('body').delegate(base.options['portfolioToggleEditClass'], 'click', base.editFormMedia);
