@@ -1,0 +1,40 @@
+{% extends bigfoot_theme_bundle~'::base.html.twig' %}
+
+{% block bodyClass %}login-layout{% endblock bodyClass %}
+
+{% block body %}
+    <div class="main-container">
+        <div class="main-content">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="login-container">
+                        <div class="center">
+                            <h1>
+                                <span class="red">{{ 'Bigfoot'|trans }}</span>
+                                <span class="white">{{ 'administration interface'|trans }}</span>
+                            </h1>
+                        </div>
+
+                        <div class="space-6"></div>
+
+                        <div class="position-relative">
+                            {% block form %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        function show_box(id) {
+            jQuery('.widget-box.visible').removeClass('visible');
+            jQuery('#'+id).addClass('visible');
+        }
+    </script>
+{% endblock javascripts %}
