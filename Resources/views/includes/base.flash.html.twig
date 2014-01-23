@@ -17,7 +17,9 @@
 {% if actions is defined and actions %}
 <p>
     {% for action in actions %}
-    <a class="btn btn-sm btn-{{ action.type }}" href="{{ action.route }}">{{ action.label | trans }}</a>
+        {% if action %}
+            <a class="btn btn-sm btn-{{ action.type }}" href="{{ action.route }}">{{ action.label | trans }}</a>
+        {% endif %}
     {% endfor %}
 </p>
 {% endif %}
