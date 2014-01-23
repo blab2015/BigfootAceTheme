@@ -34,12 +34,12 @@
             'admin/css/ace-skins.min.css'
             'admin/css/jquery.gritter.css'
             'admin/css/colorbox.css'
-            'admin/css/custom.css'
 
         filter='cssrewrite'
             output='compiled/admin/css/admin.css'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
+        <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}" />
         {% endstylesheets %}
 
         <!--[if IE 7]>
@@ -284,9 +284,10 @@
         'bundles/bigfootnavigation/js/navigation.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         output='compiled/admin/js/scripts.js' %}
-        <script language="javascript" src="{{ asset_url }}"></script>
+        <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <script language="javascript" src="{{ app.request.basePath }}/admin/js/jqGrid/i18n/grid.locale-{{ app.request.locale }}.js"></script>
+    <script src="{{ app.request.basePath }}/admin/js/jqGrid/i18n/grid.locale-{{ app.request.locale }}.js"></script>
+    <script src="{{ asset('/admin/js/custom.js') }}"></script>
     {% javascripts
         "@BigfootCoreBundle/Resources/views/translation/locale_tabs.html.twig"
         "@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig"
@@ -295,9 +296,9 @@
         "@BigfootAceThemeBundle/Resources/views/modal/base.html.twig"
         filter="twig_js"
         output='compiled/admin/js/twigs.js' %}
-        <script language="javascript" src="{{ asset_url }}"></script>
+        <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <script language="javascript" src="{{ asset('admin/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('admin/vendor/ckeditor/ckeditor.js') }}"></script>
 {% endblock javascripts %}
 </body>
 </html>
