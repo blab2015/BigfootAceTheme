@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "bigfoot/core-bundle": "~1.0"
+        "bigfoot/core-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "Bigfoot\\Theme\\AceThemeBundle": "" }
@@ -20,7 +20,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "2.0.x-dev"
         }
     }
 }
