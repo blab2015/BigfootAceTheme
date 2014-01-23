@@ -211,6 +211,22 @@
                 <div class="row">
                     <div class="col-xs-12">
                         {% block content %}
+                            {% if dashboard is defined and dashboard|length > 0 %}
+                                {% set row_width = 0 %}
+                                <div class="row">
+                                {% for widget in dashboard %}
+                                    {% if (row_width + widget.width) > 12 %}
+                                        {% set row_width = 0 %}
+                                </div>
+                                <div class="space-24"></div>
+                                <div class="row">
+                                    {% else %}
+                                        {% set row_width = row_width + widget.width %}
+                                    {% endif %}
+                                {{ widget.render | raw}}
+                                {% endfor %}
+                                </div>
+                            {% endif %}
                         {% endblock content %}
                     </div>
                 </div>
