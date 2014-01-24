@@ -84,6 +84,9 @@
 
             <div class="navbar-header pull-right" role="navigation">
                 <ul class="nav ace-nav">
+
+                    {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkWidget')) }}
+
                     {% if theme.toolbar.menu is defined and theme.toolbar.menu.items|length and app.security.token %}
                     <li class="light-blue">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
@@ -184,6 +187,7 @@
                         {%- endfor %}
                     {%- endif %}
                 </ul>
+                {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkStar', {'currentRoute' : url(app.request.attributes.get('_route')) })) }}
             </div>
             {% endblock header %}
 

@@ -1,0 +1,49 @@
+{% extends 'BigfootAceThemeBundle::base.popin.html.twig' %}
+
+{% block modal_content %}
+    <div id="wrapper_form_quicklink" style="height:100px;">
+        <form action="{{ form_action }}" method="POST" id="form_quicklink">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+
+    <style>
+        div#wrapper_form_quicklink {height:100px;}
+        div#wrapper_form_quicklink div.form-group {width:100%;float:left;}
+    </style>
+
+    <script type="text/javascript">
+    function submitQuickLinkAndClose(id_form)
+    {
+        form = $('#'+id_form);
+        var action_url = form.attr('action');
+
+        if ($('#bigfoot_bundle_corebundle_quicklinktype_link').val() == '') {
+            alert('The field link is mandatory');
+            $('#bigfoot_bundle_corebundle_quicklinktype_link').focus();
+        }
+        else if ($('#bigfoot_bundle_corebundle_quicklinktype_labelLink').val() == '') {
+            alert('The field label link is mandatory');
+            $('#bigfoot_bundle_corebundle_quicklinktype_labelLink').focus();
+        }
+        else {
+            $.ajax({
+                url: action_url,
+                type: "POST",
+                data: form.serialize(),
+                success: function(json) {
+                    if (!json.success) {
+                        errors = json.errors;
+                    } else {
+                        $('button.close').click();
+                    }
+                }
+            });
+        }
+    }
+    </script>
+{% endblock modal_content %}
+
+{% block modal_footer %}
+    <a class="btn btn-lg btn-success" href="#_" onclick="submitQuickLinkAndClose('form_quicklink');return false;"><i class="icon-ok"></i> {{ 'Submit' | trans }}</a>
+{% endblock modal_footer %}
