@@ -18,30 +18,29 @@
         form = $('#'+id_form);
         var action_url = form.attr('action');
 
-        if ($('#bigfoot_bundle_corebundle_quicklinktype_link').val() == '') {
-            alert('The field link is mandatory');
-            $('#bigfoot_bundle_corebundle_quicklinktype_link').focus();
-        }
-        else if ($('#bigfoot_bundle_corebundle_quicklinktype_labelLink').val() == '') {
-            alert('The field label link is mandatory');
-            $('#bigfoot_bundle_corebundle_quicklinktype_labelLink').focus();
-        }
-        else {
-            $.ajax({
-                url: action_url,
-                type: "POST",
-                data: form.serialize(),
-                success: function(json) {
-                    if (!json.success) {
-                        errors = json.errors;
-                    } else {
-                        $('button.close').click();
-                        location.reload();
-                    }
+        $("#" + id_form + " input[required='required']").each(function(){
+            if ($(this).val() == '') {
+                alert('This field is mandatory');
+                $(this).focus();
+                return false;
+            }
+        });
+
+        $.ajax({
+            url: action_url,
+            type: "POST",
+            data: form.serialize(),
+            success: function(json) {
+                if (!json.success) {
+                    errors = json.errors;
+                } else {
+                    $('button.close').click();
+                    location.reload();
                 }
-            });
-        }
+            }
+        });
     }
+
     </script>
 {% endblock modal_content %}
 
