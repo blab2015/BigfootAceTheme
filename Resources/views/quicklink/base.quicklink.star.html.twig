@@ -1,0 +1,11 @@
+<div class="pull-right">
+    {% if alreadyQuickLink == true %}
+        <a class="portfolio-popin-open" href="#_">
+            <i class="icon-star bigger-150 orange2"></i>
+        </a>
+    {% else %}
+        <a class="portfolio-popin-open" href="{{ path('admin_quicklink_form_new') }}" data-base-href="{{ path('admin_quicklink_form_new') }}">
+            <i class="icon-star-empty bigger-150 orange2"></i>
+        </a>
+    {% endif %}
+</div>

@@ -1,0 +1,27 @@
+{% if quicklinks is defined and quicklinks|length > 0 %}
+<li class="blue">
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+        <i class="icon-star orange2"></i>
+        <span class="badge badge-grey">{{ quicklinks|length }}</span>
+    </a>
+
+    <ul class="pull-right dropdown-navbar navbar-blue dropdown-menu dropdown-caret dropdown-close">
+        <li class="dropdown-header">
+            <i class="icon-star orange2 bigger-200"></i>
+            {{ 'Quick links' | trans }}
+        </li>
+
+        {% for quicklink in quicklinks %}
+        <li>
+            <div class="clearfix">
+                <span class="pull-left">
+                    <i class="btn btn-xs no-hover btn-orange2 icon-star"></i>
+                    <a href="{{ quicklink.link }}">{{ quicklink.labelLink }}</a>
+                </span>
+                <a href="{{ path('admin_quicklink_delete', {'id' : quicklink.id} ) }}"><i class="pull-right icon-remove red bigger-100" style="margin-top:15px;"></i></a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</li>
+{% endif %}
