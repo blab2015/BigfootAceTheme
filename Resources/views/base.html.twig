@@ -34,12 +34,12 @@
             'admin/css/ace-skins.min.css'
             'admin/css/jquery.gritter.css'
             'admin/css/colorbox.css'
+            'admin/css/custom.css'
 
         filter='cssrewrite'
             output='compiled/admin/css/admin.css'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
-        <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}" />
         {% endstylesheets %}
 
         <!--[if IE 7]>
@@ -112,60 +112,12 @@
         <a class="menu-toggler" id="menu-toggler" href="#">
             <span class="menu-text"></span>
         </a>
-    {% block sidebar -%}
-        {%- set currentRoute = app.request.get('_route') -%}
-        <div class="sidebar" id="sidebar">
-            <ul class="nav nav-list">
-                {% for section in theme.sidebar.menu.items -%}
-                    {%- if section.childs|length -%}
-                <li{% if section.hasChildWithRoute(currentRoute) %} class="active open"{% endif %}>
-                    <a href="#" class="dropdown-toggle">
-                        <i class="icon-{{ section.icon | default('double-angle-right') }}"></i>
-                        <span class="menu-text">{{ section.label | trans }}</span>
-                        <b class="arrow icon-angle-down"></b>
-                    </a>
-                    <ul class="submenu">
-                    {% for item in section.childs -%}
-                        {%- if item.childs|length -%}
-                        <li{% if item.hasChildWithRoute(currentRoute) %} class="active open"{% endif %}>
-                            <a href="#" class="dropdown-toggle">
-                                <i class="icon-{{ item.icon | default('double-angle-right') }}"></i>
-                                <span class="menu-text">{{ item.label | trans }}</span>
-                                <b class="arrow icon-angle-down"></b>
-                            </a>
-                            <ul class="submenu">
-                            {% for item in item.childs -%}
-                                <li{% if currentRoute == item.route %} class="active"{% endif %}>
-                                    <a href="{{ path(item.route) }}">
-                                        <i class="icon-{{ item.icon | default('double-angle-right') }}"></i>
-                                        {{ item.label | trans }}
-                                    </a>
-                                </li>
-                            {% endfor -%}
-                            </ul>
-                        {% elseif item.route -%}
-                        <li{% if currentRoute == item.route %} class="active"{% endif %}>
-                            <a href="{{ path(item.route) }}">
-                                <i class="icon-{{ item.icon | default('double-angle-right') }}"></i>
-                                {{ item.label | trans }}
-                            </a>
-                        </li>
-                        {% endif -%}
-                    {%- endfor -%}
-                    </ul>
-                </li>
-                    {%- elseif section.route %}
-                <li>
-                    <a href="{{ path(section.route) }}">
-                        <i class="icon-{{ section.icon | default('list-alt') }}"></i>
-                        <span class="menu-text">{{ section.label | trans }}</span>
-                    </a>
-                </li>
-                    {%- endif %}
-                {%- endfor %}
-            </ul>
-        </div>
-    {%- endblock sidebar %}
+
+        {% block sidebar -%}
+            <div class="sidebar" id="sidebar">
+                {{ knp_menu_render('main') }}
+            </div>
+        {%- endblock sidebar %}
 
         <div class="main-content">
         {% block main_content %}
@@ -176,13 +128,13 @@
                         <i class="icon-home home-icon"></i>
                         <a href="{{ path('admin_home') }}">{{ 'Home' | trans }}</a>
                     </li>
-                    {%- if breadcrumbs is defined %}
-                        {%- for item in breadcrumbs %}
-                    <li{% if loop.last %} class="active"{% endif %}>
-                        {% if not loop.last %}<a href="{{ item.url }}">{% endif %}{{ item.label | trans }}{% if not loop.last %}</a>{% endif %}
-                    </li>
-                        {%- endfor %}
-                    {%- endif %}
+                    {% if breadcrumbs is defined %}
+                        {% for item in breadcrumbs %}
+                            <li{% if loop.last %} class="active"{% endif %}>
+                                {% if not loop.last %}<a href="{{ item.url }}">{% endif %}{{ item.label | trans }}{% if not loop.last %}</a>{% endif %}
+                            </li>
+                        {% endfor %}
+                    {% endif %}
                 </ul>
             </div>
             {% endblock header %}
@@ -268,10 +220,9 @@
         'bundles/bigfootnavigation/js/navigation.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         output='compiled/admin/js/scripts.js' %}
-        <script src="{{ asset_url }}"></script>
+        <script language="javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <script src="{{ app.request.basePath }}/admin/js/jqGrid/i18n/grid.locale-{{ app.request.locale }}.js"></script>
-    <script src="{{ asset('/admin/js/custom.js') }}"></script>
+    <script language="javascript" src="{{ app.request.basePath }}/admin/js/jqGrid/i18n/grid.locale-{{ app.request.locale }}.js"></script>
     {% javascripts
         "@BigfootCoreBundle/Resources/views/translation/locale_tabs.html.twig"
         "@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig"
@@ -280,9 +231,9 @@
         "@BigfootAceThemeBundle/Resources/views/modal/base.html.twig"
         filter="twig_js"
         output='compiled/admin/js/twigs.js' %}
-        <script src="{{ asset_url }}"></script>
+        <script language="javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <script src="{{ asset('admin/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script language="javascript" src="{{ asset('admin/vendor/ckeditor/ckeditor.js') }}"></script>
 {% endblock javascripts %}
 </body>
 </html>
