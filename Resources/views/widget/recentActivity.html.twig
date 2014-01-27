@@ -1,0 +1,5 @@
+{% for tabKey, tab in widget.tabs %}
+    <div class="tab-pane{% if loop.first %} active{% endif %}" id="widget_{{ widget.id }}_{{ tabKey }}">
+        {{ tab.content | raw }}
+    </div>
+{% endfor %}

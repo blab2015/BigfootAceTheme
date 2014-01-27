@@ -2,12 +2,12 @@
     <div class="widget-box">
         <div class="widget-header">
             <h5 class="smaller">{{ widget.title }}</h5>
-            {% if tabs is defined %}
+            {% if widget.tabs is defined %}
             <div class="widget-toolbar no-border">
                 <ul id="myTab" class="nav nav-tabs">
-                    {% for tab in tabs %}
-                    <li{% if tab.active %} class="active"{% endif %}>
-                        <a href="#home" data-toggle="tab">Home</a>
+                    {% for tabKey, tab in  widget.tabs %}
+                    <li{% if loop.first %} class="active"{% endif %}>
+                        <a href="#widget_{{ widget.id }}_{{ tabKey }}" data-toggle="tab">{{ tab.title| trans }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -17,16 +17,12 @@
 
         <div class="widget-body">
             <div class="widget-main padding-6">
-                {% if tabs is defined %}
+                {% if widget.tabs is defined %}
                 <div class="tab-content">
-                    {% for tab in tabs %}
-                    <div class="tab-pane{% if tab.active %} in active#{% endif %}" id="home">
-                        <p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
-                    </div>
-                    {% endfor %}
+                    {{ widget.renderContent | raw }}
                 </div>
                 {% else %}
-                    {{ widget.renderContent }}
+                    {{ widget.renderContent | raw }}
                 {% endif %}
             </div>
         </div>
