@@ -1,0 +1,44 @@
+{% if type_tab == 'error' %}
+    <div class="alert alert-danger">
+        Entity <strong>{{ tab.entity }}</strong> not found or has not necessary properties for history.
+    </div>
+{% else %}
+    <div class="timeline-container timeline-style2">
+    {% if tab.timeline is defined %}
+        {% for day, history in tab.timeline %}
+        <span class="timeline-label">
+            <b>{{ day }}</b>
+        </span>
+
+        <div class="timeline-items">
+            {% for item in history %}
+            <div class="timeline-item clearfix">
+                <div class="timeline-info">
+                    <span class="timeline-date">{{ item.time }}</span>
+
+                    <i class="timeline-indicator btn btn-info no-hover"></i>
+                </div>
+
+                <div class="widget-box transparent">
+                    <div class="widget-body">
+                        <div class="widget-main no-padding">
+                            <span class="bigger-110">{{ item.desc|trans({'%username%': item.username, '%name%': item.name}) }}</span>
+                        {% if item.edit_link is defined and item.edit_link %}
+                            <br>
+                            <i class="icon-zoom-in blue bigger-110"></i>
+                            <a href="{{ item.edit_link }}">{% trans %}See element{% endtrans %}</a>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div><!-- /.timeline-items -->
+        {% else %}
+            No history found
+        {% endfor %}
+    {% else %}
+        No history found
+    {% endif %}
+    </div>
+{% endif %}
