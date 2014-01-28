@@ -118,7 +118,8 @@
 
         {% block sidebar -%}
             <div class="sidebar" id="sidebar">
-                {{ knp_menu_render('main') }}
+                {{ knp_menu_render('main', {'currentClass': 'active', 'ancestorClass': 'active open'}) }}
+                {{ knp_menu_render('test', {'currentClass': 'active', 'ancestorClass': 'active open'}) }}
             </div>
         {%- endblock sidebar %}
 
@@ -195,7 +196,6 @@
     </a>
 </div>
 
-</div>
 {% endblock body %}
 {% block javascripts %}
 
@@ -226,7 +226,6 @@
         'admin/js/jquery.maskedinput.min.js'
         'admin/js/bootstrap-tag.min.js'
         'admin/js/bootstrap-wysiwyg.min.js'
-        'admin/js/bootbox.min.js'
         'admin/js/ace-elements.min.js'
         'admin/js/ace.min.js'
         'admin/js/custom.js'
@@ -238,6 +237,7 @@
         'admin/js/jqGrid/custom.js'
         'admin/js/jquery.nestable.min.js'
         'bundles/bigfootnavigation/js/navigation.js'
+        'bundles/bigfootcore/js/modal.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         output='compiled/admin/js/scripts.js' %}
         <script language="javascript" src="{{ asset_url }}"></script>
@@ -257,3 +257,5 @@
 {% endblock javascripts %}
 </body>
 </html>
+<script src="{{ asset('js/bootstrap/bootstrap-modalmanager.js') }}"></script>
+            <script src="{{ asset('js/bootstrap/bootstrap-modal.js') }}"></script>
