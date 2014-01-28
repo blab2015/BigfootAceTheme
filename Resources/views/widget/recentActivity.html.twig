@@ -1,5 +1,23 @@
 {% for tabKey, tab in widget.tabs %}
     <div class="tab-pane{% if loop.first %} active{% endif %}" id="widget_{{ widget.id }}_{{ tabKey }}">
         {{ tab.content | raw }}
+        <script type="text/javascript" language="JavaScript">
+            $("#widget_{{ widget.id }}_{{ tabKey }} .14days").hide();
+            $("#widget_{{ widget.id }}_{{ tabKey }} .21days").hide();
+        </script>
     </div>
 {% endfor %}
+<script type="text/javascript" language="JavaScript">
+    function show7days(tabID) {
+        $("#widget_"+tabID+" .14days").hide();
+        $("#widget_"+tabID+" .21days").hide();
+    }
+    function show14days(tabID) {
+        $("#widget_"+tabID+" .14days").show();
+        $("#widget_"+tabID+" .21days").hide();
+    }
+    function show21days(tabID) {
+        $("#widget_"+tabID+" .14days").show();
+        $("#widget_"+tabID+" .21days").show();
+    }
+</script>
