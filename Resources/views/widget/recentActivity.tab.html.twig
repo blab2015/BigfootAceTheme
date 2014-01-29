@@ -3,15 +3,19 @@
         Entity <strong>{{ tab.entity }}</strong> not found or has not necessary properties for history.
     </div>
 {% else %}
+    {% trans %}Show history from last {% endtrans %}
+    <button class="btn btn-white" onclick="show7days('{{ widget_id }}_{{ tabKey }}')">7 {% trans %}days{% endtrans %}</button>
+    <button class="btn btn-white" onclick="show14days('{{ widget_id }}_{{ tabKey }}')">14 {% trans %}days{% endtrans %}</button>
+    <button class="btn btn-white" onclick="show21days('{{ widget_id }}_{{ tabKey }}')">21 {% trans %}days{% endtrans %}</button>
     <div class="timeline-container timeline-style2">
     {% if tab.timeline is defined %}
         {% for day, history in tab.timeline %}
-        <span class="timeline-label">
-            <b>{{ day }}</b>
+        <span class="timeline-label {{ history.class }}">
+            <b>{{ history.label | trans | capitalize}}</b>
         </span>
 
-        <div class="timeline-items">
-            {% for item in history %}
+        <div class="timeline-items {{ history.class }}">
+            {% for item in history.times %}
             <div class="timeline-item clearfix">
                 <div class="timeline-info">
                     <span class="timeline-date">{{ item.time }}</span>
@@ -38,7 +42,7 @@
             No history found
         {% endfor %}
     {% else %}
-        No history found
+        {% trans %}No history found{% endtrans %}
     {% endif %}
     </div>
 {% endif %}
