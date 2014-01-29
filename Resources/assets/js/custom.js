@@ -195,7 +195,7 @@ function setupTranslatableFields($translatableFields) {
                 $(this).addClass('ckeditor');
             }
 
-            $(this).after($('<span class="input-group-addon"><img src="/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
+            $(this).after($('<span class="input-group-addon"><img src="' + basePath + '/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
             if ($(this).data('locale') != currentLocale) {
                 $(this).closest('div.input-group').hide();
             }
