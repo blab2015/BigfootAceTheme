@@ -8673,7 +8673,7 @@ td .lbl:only-child {
   height: 512px;
   position: absolute;
   top: 50%;
-  margin-top: -286px;
+  margin-top: -303px;
   left: 50%;
   margin-left: -256px;
 }
@@ -8766,11 +8766,11 @@ td .lbl:only-child {
 }
 .login-layout .widget-box .widget-main .header {
   margin-top: 10px;
-  padding-bottom: 25px;
+  padding-bottom: 10px;
 }
 .login-layout .widget-box .widget-main .header img {
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 15px;
 }
 .login-layout .widget-box .widget-main form {
   margin: 0;
@@ -8814,24 +8814,30 @@ td .lbl:only-child {
 .login-box .toolbar > div:first-child + div > a {
   margin-right: 11px;
 }
-.login-box .toolbar.no-signup {
+.login-box .toolbar.light {
   background: #F7F7F7;
   border-top: 0 none;
+  padding: 9px 18px;
 }
-.login-box .toolbar.no-signup > div {
-  width: 100%;
-  text-align: center;
-}
-.login-box .toolbar.no-signup > div > a {
-  text-decoration: underline;
-}
-.login-box .toolbar.no-signup .forgot-password-link {
+.login-box .toolbar.light .forgot-password-link,
+.login-box .toolbar.light .user-signup-link {
   color: #909090;
+  text-decoration: underline;
 }
 .forgot-box .toolbar {
   background: #C16050;
   border-top: 2px solid #976559;
   padding: 9px 18px;
+}
+.forgot-box .toolbar.light {
+  background: #F7F7F7;
+  border-top: 0 none;
+}
+.forgot-box .toolbar.light .back-to-login-link {
+  color: #909090;
+  text-decoration: underline;
+  font-weight: normal;
+  text-shadow: none;
 }
 .signup-box .toolbar {
   background: #76B774;
@@ -8846,7 +8852,8 @@ td .lbl:only-child {
   text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.25);
 }
 /* social login */
-.login-layout .login-box .widget-main {
+.login-layout .login-box .widget-main,
+.login-layout .forgot-box .widget-main {
   padding-bottom: 0px;
 }
 .login-box {
@@ -8911,6 +8918,16 @@ td .lbl:only-child {
   .login-layout .widget-box.visible {
     -webkit-transition: none;
     transition: none;
+  }
+}
+@media screen and (max-height: 690px) {
+  .login-layout h1 {
+    visibility: hidden;
+  }
+}
+@media screen and (max-height: 500px) {
+  .login-layout .footerbar-container {
+    display: none;
   }
 }
 /* invoice */

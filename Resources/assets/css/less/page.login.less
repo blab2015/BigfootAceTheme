@@ -5,7 +5,7 @@
   height:512px;
   position:absolute;
   top:50%;
-  margin-top:-286px;
+  margin-top:-303px;
   left:50%;
   margin-left:-256px;
 }
@@ -75,11 +75,13 @@
 		padding:16px 36px 36px;
 		background:#F7F7F7;
 
-        .header{margin-top: 10px;padding-bottom: 25px;
-            img{display:block;margin:0 auto;}
+        .header {
+            margin-top: 10px;padding-bottom: 10px;
+            img { display:block;margin:0 auto 15px; }
         }
-        form{margin:0;padding:25px 0;
-            fieldset{width:292px;margin:0 auto;}
+        form {
+            margin:0;padding:25px 0;
+            fieldset { width:292px;margin:0 auto; }
         }
 	}
 	.widget-body .toolbar > div > a {
@@ -124,15 +126,12 @@
 			}
 		}
 	}
-    &.no-signup{
+    &.light {
         background:#F7F7F7;
         border-top:0 none;
-        > div {
-            width:100%;
-            text-align: center;
-            > a{text-decoration: underline;}
-        }
-        .forgot-password-link { color:#909090; }
+        padding: 9px 18px;
+        .forgot-password-link,
+        .user-signup-link{ color:#909090;text-decoration: underline; }
     }
   }
 }
@@ -144,6 +143,11 @@
  background:#C16050;
  border-top:2px solid #976559;
  padding:9px 18px;
+    &.light{
+        background:#F7F7F7;
+        border-top:0 none;
+        .back-to-login-link { color:#909090;text-decoration: underline;font-weight: normal;text-shadow: none; }
+    }
 }
 
 .signup-box  .toolbar {
@@ -152,11 +156,11 @@
  padding:9px 18px;
 }
 
-.forgot-box .back-to-login-link  , .signup-box .back-to-login-link{
+.forgot-box .back-to-login-link  , .signup-box .back-to-login-link {
  color:#FE9;
  font-size:14px;
  font-weight:bold;
- text-shadow:1px 0px 1px rgba(0,0,0,0.25); 
+ text-shadow:1px 0px 1px rgba(0,0,0,0.25);
 }
 
 
@@ -164,7 +168,8 @@
 
 
 /* social login */
-.login-layout .login-box .widget-main {
+.login-layout .login-box .widget-main,
+.login-layout .forgot-box .widget-main {
 	padding-bottom:0px;
 }
 .login-box {padding: 15px;
@@ -211,25 +216,20 @@
 
 /* loginbox */
 @media only screen and (max-width: @screen-xs) {
-.login-layout .widget-box .widget-main {
- padding:16px;
-}
+.login-layout .widget-box .widget-main { padding:16px; }
 }
 @media only screen and (max-width: @screen-xs) {
-.login-container {
- width:98%;
-}
-.login-layout .widget-box {
- padding:0;
-}
-
-.login-box .toolbar > div {
- width:auto;
-}
+.login-container { width:98%; }
+.login-layout .widget-box { padding:0; }
+.login-box .toolbar > div { width:auto; }
 }
 @media only screen and (max-width: @screen-xs-max) {
-.login-layout .widget-box.visible {
- .transition(~"none");
-}
+.login-layout .widget-box.visible { .transition(~"none"); }
 }
 
+@media screen and (max-height: 690px) {
+.login-layout h1 { visibility: hidden; }
+}
+@media screen and (max-height: 500px) {
+.login-layout .footerbar-container { display: none; }
+}
