@@ -8,16 +8,21 @@
   margin-top:-303px;
   left:50%;
   margin-left:-256px;
+    > .center{
+        h1{height: 100%;
+            img{height: 100%;}
+        }
+    }
 }
 
 .login-layout {
-  background-color:#1D2024;
+  background-color:@login-bg;
 
  .navbar{background:@ace-dark;
-     .navbar-brand{padding-top:11px;padding-bottom:11px;font-size:20px;
+     .navbar-welcome{padding-top:11px;padding-bottom:11px;font-size:20px;
          img{margin-top:-10px;}
      }
-     .ace-nav > li{border-left: medium none;
+     .ace-nav > li{border-left: medium none;height: 45px;line-height: 45px;
         small{margin: 0 15px;}
      }
  }
@@ -59,7 +64,7 @@
 	border-bottom:none;
 	box-shadow:none;
 	padding:15px;
-	background-color:#394557;
+	background-color:@login-border;
 	 
 	.transform(~"scale(0,1) translate(-150px)");	
 	&.visible {
@@ -228,7 +233,10 @@
 }
 
 @media screen and (max-height: 690px) {
-.login-layout h1 { visibility: hidden; }
+.login-container > .center{ height: 50px;margin-top:77px; }
+}
+@media screen and (max-height: 570px) {
+.login-container > .center img{ visibility: hidden; }
 }
 @media screen and (max-height: 500px) {
 .login-layout .footerbar-container { display: none; }

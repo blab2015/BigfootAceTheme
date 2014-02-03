@@ -77,16 +77,104 @@
             <div class="navbar-header pull-left">
                 <a href="{{ path('admin_home') }}" class="navbar-brand">
                     <small>
-                        {{ bigfoot_theme_values.title | trans }}
+                        <!-- NCH -->
+                        {#{{ bigfoot_theme_values.title | trans }}#}
+                        SEH - Société Européenne d'Hôtellerie
+                        <!-- /NCH -->
                     </small>
                 </a>
             </div>
 
             <div class="navbar-header pull-right" role="navigation">
-                <ul class="nav ace-nav">
+
+                <a href="#" id="brand-nav-toggler" class="brand-nav-toggler">
+                    <span class="menu-text">Marques</span>
+                </a>
+                <ul class="nav ace-nav brand-nav">
 
                     {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkWidget')) }}
 
+
+                    <!-- NCH -->
+                    <li class="brand pink">
+                        <a class="nav-link" href="#">
+                            <span class="">SEH</span>
+                        </a>
+                    </li>
+
+                    <li class="brand red active">
+                        <a class="nav-link" href="#">
+                            <span class="">INTER-HOTEL</span>
+                        </a>
+                    </li>
+
+                    <li class="brand yellow">
+                        <a class="nav-link" href="#">
+                            <span class="">P'tit Dej-HOTEL</span>
+                        </a>
+                    </li>
+
+                    <li class="brand brown">
+                        <a class="nav-link" href="#">
+                            <span class="">QUALYS-HOTEL</span>
+                        </a>
+                    </li>
+
+                    <li class="brand blue">
+                        <a class="nav-link" href="#">
+                            <span class="">Relais du Silence</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+
+                <ul class="nav ace-nav info-nav">
+
+                    <li class="support">
+                        <a href="#" class="align-right">
+                            <span class="align-left">Contactez le support</span>
+                            <i class="icon-wrench align-center bigger-125 icon-on-right"></i>
+                        </a>
+                    </li>
+                    <li class="account">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle align-right">
+                            <span class="user-info align-left">
+                                <small>Bienvenue,</small>
+                                Pat Hibulaire
+                            </span>
+                            <i class="icon-caret-down align-center icon-on-right"></i>
+                        </a>
+
+                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="#">
+                                    <i class="icon-cog"></i>
+                                    Settings
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="icon-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="icon-off"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+
+                    <!-- /NCH -->
                     {% if theme.toolbar.menu is defined and theme.toolbar.menu.items|length and app.security.token %}
                     <li class="light-blue">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">

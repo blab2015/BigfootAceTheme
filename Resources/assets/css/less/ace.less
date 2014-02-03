@@ -2,6 +2,7 @@
 @import "bootstrap/mixins.less";
 
 @import "variables.less";//there are also some variables on top of some other less files
+@import "bigfoot-variables";//specific customer (overriding) variables
 @import "mixins.less";
 
 
@@ -9,10 +10,12 @@
 @import "basic.less";//includes styling of some elements such as pagination, etc
 @import "utility.less";//includes some utility classes such as headers, colors, font sizing, etc
 @import "ace-nav.less";//ace top navigation
+@import "bigfoot-ace-nav";//specific customer (overriding) ace top navigation
 
 @import "breadcrumbs.less";
 @import "searchbox.less";
 @import "sidebar.less";
+@import "bigfoot-sidebar.less";
 
 
 @import "buttons.less";
