@@ -109,3 +109,15 @@
 
 
 }//end of .nav-list > li
+
+.menu-toggler{ font-size:14px;
+    &:before,
+    &:after { border-color:#fff; left:10px; width:16px; }
+    &:before { top:15px; }
+    &:after { top:21px; }
+    &.display{
+        &:before { top:10px; }
+        &:after { top:22px; }
+    }
+    > .menu-text:after{ left:-10px; top:-39px; }
+}

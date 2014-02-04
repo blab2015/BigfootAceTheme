@@ -76,124 +76,134 @@
         <div class="navbar-container" id="navbar-container">
             <div class="navbar-header pull-left">
                 <a href="{{ path('admin_home') }}" class="navbar-brand">
-                    <small>
+
                         <!-- NCH -->
                         {#{{ bigfoot_theme_values.title | trans }}#}
-                        SEH - Société Européenne d'Hôtellerie
+                        SEH - <small>Société Européenne d'Hôtellerie</small>
                         <!-- /NCH -->
-                    </small>
+
                 </a>
             </div>
 
             <div class="navbar-header pull-right" role="navigation">
 
-                <a href="#" id="brand-nav-toggler" class="brand-nav-toggler">
-                    <span class="menu-text">Marques</span>
-                </a>
-                <ul class="nav ace-nav brand-nav">
-
-                    {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkWidget')) }}
-
-
-                    <!-- NCH -->
-                    <li class="brand pink">
-                        <a class="nav-link" href="#">
-                            <span class="">SEH</span>
+                <ul class="nav ace-nav">
+                    <li class="brands grey">
+                        <a href="#" id="brand-nav-toggler" class="btn btn-app no-radius dropdown-toggle brand-nav-toggler">
+                            <i class="icon-folder-close"></i>
+                            <i class="icon-folder-open"></i>
+                            <span class="align-left">Marques</span>
                         </a>
-                    </li>
+                        <ul class="nav ace-nav brand-nav">
 
-                    <li class="brand red active">
-                        <a class="nav-link" href="#">
-                            <span class="">INTER-HOTEL</span>
-                        </a>
-                    </li>
+                            {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkWidget')) }}
+                            {#<li class="dropdown-header">#}
+                                {#<i class="icon-folder-close-alt "></i>#}
+                                {#Choisissez le groupe ou l'une de ses quatre marques hôtelières#}
+                            {#</li>#}
 
-                    <li class="brand yellow">
-                        <a class="nav-link" href="#">
-                            <span class="">P'tit Dej-HOTEL</span>
-                        </a>
-                    </li>
-
-                    <li class="brand brown">
-                        <a class="nav-link" href="#">
-                            <span class="">QUALYS-HOTEL</span>
-                        </a>
-                    </li>
-
-                    <li class="brand blue">
-                        <a class="nav-link" href="#">
-                            <span class="">Relais du Silence</span>
-                        </a>
-                    </li>
-
-                </ul>
-
-
-                <ul class="nav ace-nav info-nav">
-
-                    <li class="support">
-                        <a href="#" class="align-right">
-                            <span class="align-left">Contactez le support</span>
-                            <i class="icon-wrench align-center bigger-125 icon-on-right"></i>
-                        </a>
-                    </li>
-                    <li class="account">
-                        <a data-toggle="dropdown" href="#" class="dropdown-toggle align-right">
-                            <span class="user-info align-left">
-                                <small>Bienvenue,</small>
-                                Pat Hibulaire
-                            </span>
-                            <i class="icon-caret-down align-center icon-on-right"></i>
-                        </a>
-
-                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                            <li>
-                                <a href="#">
-                                    <i class="icon-cog"></i>
-                                    Settings
+                            <!-- NCH -->
+                            <li class="brand pink">
+                                <a class="nav-link" href="#">
+                                    <span class="">SEH</span>
                                 </a>
                             </li>
 
-                            <li>
-                                <a href="#">
+                            <li class="brand red active">
+                                <a class="nav-link" href="#">
+                                    <span class="">INTER-HOTEL</span>
+                                </a>
+                            </li>
+
+                            <li class="brand yellow">
+                                <a class="nav-link" href="#">
+                                    <span class="">P'tit Dej-HOTEL</span>
+                                </a>
+                            </li>
+
+                            <li class="brand brown">
+                                <a class="nav-link" href="#">
+                                    <span class="">QUALYS-HOTEL</span>
+                                </a>
+                            </li>
+
+                            <li class="brand blue">
+                                <a class="nav-link" href="#">
+                                    <span class="">Relais du Silence</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="infos">
+                        <ul class="nav ace-nav info-nav">
+
+                            <li class="support">
+                                <a href="#" class="align-right">
+                                    <span class="align-left">Contactez le support</span>
+                                    <i class="icon-wrench align-center bigger-125 icon-on-right"></i>
+                                </a>
+                            </li>
+                            <li class="account">
+                                <a data-toggle="dropdown" href="#" class="dropdown-toggle align-right">
                                     <i class="icon-user"></i>
-                                    Profile
+                                    <span class="user-info align-left">
+                                        <small>Bienvenue,</small>
+                                        Pat Hibulaire
+                                    </span>
+                                    <i class="icon-caret-down align-center icon-on-right"></i>
                                 </a>
+
+                                <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                                    <li>
+                                        <a href="#">
+                                            <i class="icon-cog"></i>
+                                            Settings
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">
+                                            <i class="icon-user"></i>
+                                            Profile
+                                        </a>
+                                    </li>
+
+                                    <li class="divider"></li>
+
+                                    <li>
+                                        <a href="#">
+                                            <i class="icon-off"></i>
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
 
-                            <li class="divider"></li>
+                            <!-- /NCH -->
 
-                            <li>
-                                <a href="#">
-                                    <i class="icon-off"></i>
-                                    Logout
+                            {% if theme.toolbar.menu is defined and theme.toolbar.menu.items|length and app.security.token %}
+                            <li class="account">
+                                <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                    <i class="icon-user"></i>
+                                    <span class="user-info">
+                                        <small>{{ 'Welcome' | trans }},</small>
+                                        {{ app.security.token.user.fullName }}
+                                    </span>
+
+                                    <i class="icon-caret-down"></i>
                                 </a>
+                                <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                                    {% for item in theme.toolbar.menu.items %}
+                                        <li><a href="{{ path(item.route, item.parameters) }}"><i class="icon-{{ item.icon }}"></i> {{ item.label | trans }}</a></li>
+                                    {%  endfor %}
+                                </ul>
                             </li>
-                        </ul>
-
-                    </li>
-
-
-                    <!-- /NCH -->
-                    {% if theme.toolbar.menu is defined and theme.toolbar.menu.items|length and app.security.token %}
-                    <li class="light-blue">
-                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <i class="icon-user"></i>
-                            <span class="user-info">
-                                <small>{{ 'Welcome' | trans }},</small>
-                                {{ app.security.token.user.fullName }}
-                            </span>
-
-                            <i class="icon-caret-down"></i>
-                        </a>
-                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                            {% for item in theme.toolbar.menu.items %}
-                                <li><a href="{{ path(item.route, item.parameters) }}"><i class="icon-{{ item.icon }}"></i> {{ item.label | trans }}</a></li>
-                            {%  endfor %}
+                            {% endif %}
                         </ul>
                     </li>
-                    {% endif %}
                 </ul>
+
             </div>
         </div>
     {% endblock toolbar %}
@@ -325,6 +335,7 @@
         'admin/js/jqGrid/jquery.jqGrid.min.js'
         'admin/js/jqGrid/custom.js'
         'admin/js/jquery.nestable.min.js'
+        'bundles/bigfootnavigation/js/navigation.js'
         'bundles/bigfootnavigation/js/navigation.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         output='compiled/admin/js/scripts.js' %}

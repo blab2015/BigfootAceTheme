@@ -7,6 +7,7 @@ jQuery(function($) {
 jQuery(function($) {
 	//ace.click_event defined in ace-elements.js
 	ace.handle_side_menu(jQuery);
+	ace.handle_brand_menu(jQuery);
 
 	ace.enable_search_ahead(jQuery);	
 
@@ -97,7 +98,50 @@ ace.handle_side_menu = function($) {
 	 })
 }
 
+ace.handle_brand_menu = function($) {
+    $('#brand-nav-toggler').on(ace.click_event, function() {
+        if( !$(this).is(':visible') ) { return false; }
+        $('#brand-nav-toggler').next('ul.brand-nav').toggleClass('nav ace-nav display pull-left dropdown-navbar dropdown-menu dropdown-purple dropdown-caret dropdown-close').parent().toggleClass('open');
+        $(this).toggleClass('display');
+        return false;
+    });
+    $(window).on('resize', function (ev){
+        $('#brand-nav-toggler').next('ul.brand-nav.display').removeClass('display pull-left dropdown-navbar dropdown-menu dropdown-purple dropdown-caret dropdown-close').addClass('nav ace-nav').slideUp(200).parent().removeClass('open');
+    });
 
+    var touch = "ontouchend" in document;
+    //opening submenu
+    $('ul.brand-nav').on(ace.click_event, function(e){
+        //check to see if we have clicked on an element which is inside a .dropdown-toggle element?!
+        //if so, it means we should toggle a submenu
+        var link_element = $(e.target).closest('a');
+        if(!link_element || link_element.length == 0) return;//if not clicked inside a link element
+
+        //
+        var sub = link_element.next().get(0);
+
+        //if we are opening this submenu, close all other submenus except the ".active" one
+        if(! $(sub).is(':visible') ) {//if not open and visible, let's open it and make it visible
+            var parents_ul = $('ul.dropdown-menu').parent('.open');
+
+            parents_ul.find('> .dropdown-menu').each(function(){
+                //close all other open submenus except for the active one
+                if(this != sub) {
+                    $(this).slideUp(200).parent().removeClass('open');
+
+                    //uncomment the following line to close all submenus on deeper levels when closing a submenu
+                    //$(this).find('.open > .submenu').slideUp(0).parent().removeClass('open');
+                }
+            });
+        } else {
+            //uncomment the following line to close all submenus on deeper levels when closing a submenu
+            //$(sub).find('.open > .submenu').slideUp(0).parent().removeClass('open');
+        }
+
+        $(sub).slideToggle(200).parent().toggleClass('open');
+        return false;
+    })
+}
 
 ace.general_things = function($) {
  $('.ace-nav [class*="icon-animated-"]').closest('a').on('click', function(){

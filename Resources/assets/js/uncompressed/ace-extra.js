@@ -138,8 +138,8 @@ ace.settings = {
 			ace.settings.unset('sidebar', 'collapsed');
 		}
 
-	},
-	/**
+	}
+    /**,
 	select_skin : function(skin) {
 	}
 	*/
