@@ -86,7 +86,7 @@
             </div>
 
             <div class="navbar-header pull-right" role="navigation">
-
+                <!-- NCH -->
                 <ul class="nav ace-nav">
                     <li class="brands grey">
                         <a href="#" id="brand-nav-toggler" class="btn btn-app no-radius dropdown-toggle brand-nav-toggler">
@@ -141,7 +141,7 @@
                             <li class="support">
                                 <a href="#" class="align-right">
                                     <span class="align-left">Contactez le support</span>
-                                    <i class="icon-wrench align-center bigger-125 icon-on-right"></i>
+                                    <i class="icon-sitemap align-center bigger-125 icon-on-right"></i>
                                 </a>
                             </li>
                             <li class="account">
@@ -180,7 +180,7 @@
                                 </ul>
                             </li>
 
-                            <!-- /NCH -->
+
 
                             {% if theme.toolbar.menu is defined and theme.toolbar.menu.items|length and app.security.token %}
                             <li class="account">
@@ -200,10 +200,11 @@
                                 </ul>
                             </li>
                             {% endif %}
+
                         </ul>
                     </li>
                 </ul>
-
+                <!-- /NCH -->
             </div>
         </div>
     {% endblock toolbar %}

@@ -9,23 +9,28 @@
             <div class="navbar-header pull-left">
                 <div class="navbar-welcome">
                     <small>
-                        {#<i class="icon-leaf"></i>#}
                         <img src="{{ asset("admin/images/common/logo-c2is.png") }}" alt="C2iS">
-                        / Bienvenue sur votre interface d'administration
                     </small>
+                    <span>
+                        / Bienvenue sur votre interface d'administration
+                    </span>
                 </div><!-- /.brand -->
             </div><!-- /.navbar-header -->
 
             <div class="navbar-header pull-right">
                 <ul class="nav ace-nav">
                     <li class="grey">
-                        <small>BigFoot v. 1.X ©C2iS</small>
-                    </li>
-                    <li class="grey">
-                        <a href="#">
-                            Contactez le support
-                            <i class="icon-wrench align-center bigger-125 icon-on-right"></i>
-                        </a>
+                        <ul class="nav ace-nav info-nav">
+                            <li class="copyright grey">
+                                <small>BigFoot v. 1.X ©C2iS</small>
+                            </li>
+                            <li class="support grey">
+                                <a href="#" class="align-right">
+                                    <span class="align-left">Contactez le support</span>
+                                    <i class="icon-sitemap align-center bigger-125 icon-on-right"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-header -->
@@ -56,9 +61,25 @@
         </div>
     </div>
     <div id="footerbar-container" class="footerbar-container">
-        <div>
-            <a href="http://www.c2is.fr/" target="_blank">Réalisé par C2iS</a> - <a href="http://symfony.com/" target="_blank">Propulsé par Symfony</a>
-        </div>
+        <ul class="navbar-footer">
+            <li class="c1"></li>
+            <li class="c2">
+                <a href="http://www.c2is.fr/" target="_blank">Réalisé par C2iS</a> - <a href="http://symfony.com/" target="_blank">Propulsé par Symfony</a>
+            </li>
+            <li class="c3">
+                <ul>
+                    <li class="copyright">
+                        <small>BigFoot v. 1.X ©C2iS</small>
+                    </li>
+                    <li class="support">
+                        <a href="#" class="align-right">
+                            <span class="align-left">Contactez le support</span>
+                            <i class="icon-sitemap align-center bigger-125 icon-on-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 {% endblock %}
 

@@ -159,19 +159,19 @@
     top:4px;
 }
 
-/* responsive sidebar */
+/* responsive navbar */
 @media only screen and (min-width: @screen-sm) and (max-width: @screen-md-max) { // 768 --> 1199px
-.navbar-header{float: none !important;}
-.ace-nav { width:100%;
-    > li.brands { width:inherit; height:40px;
-        .brand-nav > li.brand { width:20%; height:40px; line-height:40px;
-            > a {
-                background: #404040 !important;
+    .navbar-header{float: none !important;}
+    .ace-nav { width:100%;
+        > li.brands { width:inherit; height:40px;
+            .brand-nav > li.brand { width:20%; height:40px; line-height:40px;
+                > a {
+                    background: #404040 !important;
+                }
             }
         }
+        > li.infos { position:absolute; top:0; right:0; width:auto; }
     }
-    > li.infos { position:absolute; top:0; right:0; width:auto; }
-}
 }
 
 /*@media only screen and (max-width: @screen-sm-max) { // --> 991px
@@ -179,57 +179,57 @@
 }*/
 
 @media only screen and (max-width:@screen-xs-max) { // --> 767px
-#brand-nav-toggler { display:block; float:left; }
-.ace-nav {
-    > li.brands {
-        .brand-nav { display:none; }
-    }
-    > li.infos {
+    #brand-nav-toggler { display:block; float:left; }
+    .ace-nav {
+        > li.brands {
+            .brand-nav { display:none; }
+        }
+        > li.infos {
 
+        }
     }
-}
 }
 
 /* move the icons to the line below */
 @media only screen and (max-width: @screen-topbar-down) { // --> 680px
-#brand-nav-toggler{
-    > [class*="icon"] { font-size:16px; width:20px; min-height: auto;}
-}
-.navbar-header{float: none !important;}
-.navbar-header > .ace-nav { border: none; width:auto; float:right !important; }
-.ace-nav { width:100%;
-    > li { width:auto; height:40px; line-height:40px;
-        &.brands{ float:left !important;
-            > a{ width:auto; padding:0 15px;
-                .icon-folder-close{ display:inline-block; }
-                .icon-folder-open{ display:none; padding-left:6px; }
-                &.open{
-                    .icon-folder-close{ display:none; }
-                    .icon-folder-open{ display:inline-block; }
+    #brand-nav-toggler{
+        > [class*="icon"] { font-size:16px; width:20px; min-height: auto;}
+    }
+    .navbar-header{float: none !important;}
+    .navbar-header > .ace-nav { border: none; width:auto; float:right !important; }
+    .ace-nav { width:100%;
+        > li { width:auto; height:40px; line-height:40px;
+            &.brands{ float:left !important;
+                > a{ width:auto; padding:0 15px;
+                    .icon-folder-close{ display:inline-block; }
+                    .icon-folder-open{ display:none; padding-left:6px; }
+                    &.open{
+                        .icon-folder-close{ display:none; }
+                        .icon-folder-open{ display:inline-block; }
+                    }
                 }
             }
+            &.infos{ float:left !important; }
         }
-        &.infos{ float:left !important; }
-    }
-     li.infos ul.info-nav { position:relative; top:auto; right:auto; float:right;
-        > li { float:left !important;
-            &:first-child{border-bottom: none;}
+        li.infos ul.info-nav { position:relative; top:auto; right:auto; float:right;
+            > li { float:left !important;
+                &:first-child{border-bottom: none;}
+            }
         }
     }
-}
 }
 
 @media only screen and (max-width: 421px) { // --> 421px
-.ace-nav {
-    > li { width:100%; height:auto; line-height:auto;
-        &.brands{ float:right !important; height:40px; line-height:40px;
-            > a{ width:100%; text-align:right; line-height:40px;
-                > .align-left { float:left; }
-                > [class*="icon"] { float:right; }
+    .ace-nav {
+        > li { width:100%; height:auto; line-height:auto;
+            &.brands{ float:right !important; height:40px; line-height:40px;
+                > a{ width:100%; text-align:right; line-height:40px;
+                    > .align-left { float:left; }
+                    > [class*="icon"] { float:right; }
+                }
+                ul.brand-nav.display { width: 100%; left:0; }
             }
-            ul.brand-nav.display { width: 100%; left:0; }
+            &.infos{ float:left !important; }
         }
-        &.infos{ float:left !important; }
     }
-}
 }
