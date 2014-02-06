@@ -3363,6 +3363,16 @@ li [class*=" icon-"],
   left: -10px;
   top: -39px;
 }
+@media only screen and (max-width: 320px) {
+  .menu-toggler > .menu-text:after {
+    left: -13px;
+    top: -42px;
+  }
+  .menu-toggler:before,
+  .menu-toggler:after {
+    left: 8px;
+  }
+}
 /** buttons */
 .btn {
   display: inline-block;
@@ -10804,15 +10814,23 @@ td .lbl:only-child {
   left: 50%;
   margin-left: -256px;
 }
+.login-container > .center {
+  padding: 10px 0;
+  margin: 4px 0 16px;
+}
 .login-container > .center h1 {
   height: 100%;
   max-height: 102px;
+  margin: 0;
 }
 .login-container > .center h1 img {
   height: 100%;
 }
 .login-layout {
   background-color: #5b2560;
+}
+.login-layout .main-content {
+  padding: 0;
 }
 .login-layout .navbar {
   background: #333333;
@@ -10824,10 +10842,21 @@ td .lbl:only-child {
 .login-layout .navbar .navbar-welcome img {
   margin-top: -15px;
 }
-.login-layout .navbar .navbar-welcome span {
+.login-layout .navbar .navbar-welcome p {
+  margin: 0 0 0 10px;
+  padding: 0;
   font-size: 20px;
   color: #909090;
   line-height: 40px;
+  display: inline-block;
+  position: relative;
+}
+.login-layout .navbar .navbar-welcome p:before {
+  content: "/";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -9px;
 }
 .login-layout .navbar .ace-nav > li {
   border-left: medium none;
@@ -10909,6 +10938,11 @@ td .lbl:only-child {
   text-align: center;
   min-width: 20px;
   display: inline-block;
+  text-decoration: none;
+}
+.login-layout .footerbar-container .navbar-footer .support > a:hover,
+.login-layout .footerbar-container .navbar-footer .support > a:focus {
+  background-color: #4b4b4b;
 }
 .login-layout .footerbar-container .navbar-footer .c1,
 .login-layout .footerbar-container .navbar-footer .c3 {
@@ -10917,6 +10951,7 @@ td .lbl:only-child {
 }
 .login-layout .row > div {
   position: static;
+  padding: 0;
 }
 .login-layout .main-content {
   margin-left: 0;
@@ -10928,6 +10963,7 @@ td .lbl:only-child {
   margin-bottom: 11px;
 }
 .login-layout .widget-box {
+  margin: 0 !important;
   visibility: hidden;
   position: absolute;
   overflow: hidden;
@@ -10973,7 +11009,7 @@ td .lbl:only-child {
   padding: 25px 0;
 }
 .login-layout .widget-box .widget-main form fieldset {
-  width: 292px;
+  width: 288px;
   margin: 0 auto;
 }
 .login-layout .widget-box .widget-body .toolbar > div > a {
@@ -11123,13 +11159,33 @@ td .lbl:only-child {
     transition: none;
   }
 }
-@media screen and (max-height: 690px) {
+@media screen and (max-height: 720px) {
+  .login-layout .login-container {
+    height: 443px;
+    margin-top: -235px;
+  }
   .login-layout .login-container > .center {
-    height: 50px;
-    margin-top: 77px;
+    height: 70px;
+    margin-bottom: 0;
   }
 }
 @media screen and (max-height: 570px) {
+  .login-layout .login-container {
+    margin-top: -200px;
+    height: 375px;
+  }
+  .login-layout .login-container > .center h1 {
+    margin: 5px 0;
+  }
+  .login-layout #login-box h4 {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  .login-layout #login-box form {
+    padding: 3px 0;
+  }
+}
+@media screen and (max-height: 479px) {
   .login-layout #navbar,
   .login-layout #footerbar-container {
     position: relative;
@@ -11140,6 +11196,7 @@ td .lbl:only-child {
     top: auto;
     left: auto;
     margin: 0 auto;
+    height: 400px;
   }
   .login-layout .login-container > .center {
     margin-top: 0;
@@ -11157,7 +11214,7 @@ td .lbl:only-child {
   .login-layout .navbar .navbar-welcome img {
     margin-top: -13px;
   }
-  .login-layout .navbar .navbar-welcome span {
+  .login-layout .navbar .navbar-welcome p {
     font-size: 16px;
   }
 }
@@ -11190,13 +11247,25 @@ td .lbl:only-child {
     display: none;
   }
   .login-layout .navbar .navbar-welcome small {
-    text-align: center;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 5px;
   }
-  .login-layout .navbar .navbar-welcome img {
-    margin-top: -11px;
+  .login-layout .navbar .navbar-welcome small img {
+    margin: 3px 0;
   }
-  .login-layout .navbar .navbar-welcome span {
+  .login-layout .navbar .navbar-welcome p {
     font-size: 13px;
+    display: block;
+    line-height: 40px;
+    margin-left: 70px;
+  }
+  .login-layout .navbar .navbar-welcome p span {
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 14px;
+    margin-top: -5px;
   }
   .login-layout #footerbar-container {
     bottom: 40px;
@@ -11232,6 +11301,15 @@ td .lbl:only-child {
     width: 100%;
     left: 0;
     margin-left: 0;
+  }
+}
+@media only screen and (max-width: 319px) {
+  .login-layout #navbar,
+  .login-layout .main-container,
+  .login-layout .main-container .login-container .center,
+  .login-layout #login-box,
+  .login-layout #footerbar-container {
+    width: 320px;
   }
 }
 /* invoice */
