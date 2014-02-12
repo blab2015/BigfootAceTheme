@@ -11,7 +11,7 @@
                 <div class="widget-header">
                     <h4>{{ form_title|default('Edition')|trans }}</h4>
                     <span class="widget-toolbar">
-                        <div id="locales-container"></div>
+                        <div class="locales-container"></div>
                     </span>
                 </div>
 
@@ -37,10 +37,12 @@
                                         {{ "Delete" | trans }}
                                     </a>
                                 {% endif %}
-                                <button class="btn btn-success" type="submit">
-                                    <i class="icon-ok bigger-110"></i>
-                                    {{ form_submit|default('Submit')|trans }}
-                                </button>
+                                {% if isAjax == false %}
+                                    <button class="btn btn-success" type="submit">
+                                        <i class="icon-ok bigger-110"></i>
+                                        {{ form_submit|default('Submit')|trans }}
+                                    </button>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

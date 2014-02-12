@@ -10,6 +10,7 @@
     <script type="text/javascript">
         var defaultPortfolioRoute = "{{ path('portfolio_dashboard') }}";
         var currentLocale = "{{ app.request.locale }}";
+        var defaultLocale = currentLocale;
         var locales = ["{{ localeFlags() | join('","') | raw }}"];
         var basePath = "{{ app.request.basePath }}";
         var tagsPath = "{{ path('admin_tag_get') }}";
@@ -39,6 +40,7 @@
         filter='cssrewrite'
             output='compiled/admin/css/admin.css'
         %}
+        <link rel="stylesheet" href="{{ asset('admin/css/bootstrap/bootstrap-modal.css') }}" />
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
@@ -118,7 +120,7 @@
 
         {% block sidebar -%}
             <div class="sidebar" id="sidebar">
-                {{ knp_menu_render('main', {'currentClass': 'active', 'ancestorClass': 'active open'}) }}
+                {{ knp_menu_render('main', { 'depth': 4, 'currentClass': 'active', 'ancestorClass': 'active open' }) }}
                 {{ knp_menu_render('test', {'currentClass': 'active', 'ancestorClass': 'active open'}) }}
             </div>
         {%- endblock sidebar %}
@@ -237,12 +239,15 @@
         'admin/js/jqGrid/custom.js'
         'admin/js/jquery.nestable.min.js'
         'bundles/bigfootnavigation/js/navigation.js'
-        'bundles/bigfootcore/js/modal.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         output='compiled/admin/js/scripts.js' %}
         <script language="javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <script language="javascript" src="{{ app.request.basePath }}/admin/js/jqGrid/i18n/grid.locale-{{ app.request.locale }}.js"></script>
+    <script src="{{ asset('admin/js/bootstrap/modal.js') }}"></script>
+    <script src="{{ asset('admin/js/bootstrap/bootstrap-modal.js') }}"></script>
+    <script src="{{ asset('admin/js/bootstrap/bootstrap-modalmanager.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.form.js') }}"></script>
+    <script src="{{ app.request.basePath }}/admin/js/jqGrid/i18n/grid.locale-{{ app.request.locale }}.js"></script>
     {% javascripts
         "@BigfootCoreBundle/Resources/views/translation/locale_tabs.html.twig"
         "@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig"
@@ -257,5 +262,8 @@
 {% endblock javascripts %}
 </body>
 </html>
+<<<<<<< HEAD
 <script src="{{ asset('js/bootstrap/bootstrap-modalmanager.js') }}"></script>
             <script src="{{ asset('js/bootstrap/bootstrap-modal.js') }}"></script>
+=======
+>>>>>>> e046598... Refacto
