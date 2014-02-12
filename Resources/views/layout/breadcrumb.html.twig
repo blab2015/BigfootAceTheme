@@ -1,0 +1,28 @@
+{% set breadcrumb = knp_breadcrumb_render(name, action|default(null)) %}
+
+{% if breadcrumb|length > 1 %}
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            {% for item in breadcrumb %}
+                <li>
+                    {% if item.uri is not empty %}
+                        <a href="{{ item.uri }}">{{ item.label }}</a>
+                    {% else %}
+                        {% if item.label == 'Home' %}
+                            <i class="icon-home home-icon"></i>
+                        {% endif %}
+
+                        {{ item.label }}
+                    {% endif %}
+
+                    {% if not loop.last %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+
+            {# <li>{{ app.request.get('_route') }}</li> #}
+        </ul>
+
+        {# {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkStar', { 'currentRoute' : app.request.uri })) }} #}
+    </div>
+{% endif %}

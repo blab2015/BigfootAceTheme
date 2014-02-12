@@ -1,1 +1,0 @@
-<a href="{{ path(item.route, item.parameters) }}" {% for attrname, attrvalue in item.attributes %}{{ attrname }}="{{ attrvalue }}"{% endfor %}>{% if item.icon %}<i class="icon-{{ item.icon }}"></i>{% else %}{{ item.label | trans }}{% endif %}</a>

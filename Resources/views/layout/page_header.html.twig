@@ -1,0 +1,12 @@
+<div class="page-header">
+    <h1>
+        {{ theme.page_header.title|default(bigfoot_theme_values.title)|trans }}
+
+        {% if theme.page_header.subtitle is defined %}
+            <small>
+                <i class="icon-double-angle-right"></i>
+                {{ theme.page_header.subtitle|default('')|trans }}
+            </small>
+        {% endif %}
+    </h1>
+</div>

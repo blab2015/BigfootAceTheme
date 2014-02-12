@@ -1,44 +1,7 @@
 {% extends 'BigfootAceThemeBundle::base.html.twig' %}
 
 {% block body %}
-    <div class="navbar navbar-default" id="navbar">
-        {% block toolbar %}
-            <div class="navbar-container" id="navbar-container">
-                <div class="navbar-header pull-left">
-                    <a href="{{ path('admin_home') }}" class="navbar-brand">
-                        <small>
-                            {{ bigfoot_theme_values.title | trans }}
-                        </small>
-                    </a>
-                </div>
-
-                <div class="navbar-header pull-right" role="navigation">
-                    <ul class="nav ace-nav">
-                        {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkWidget')) }}
-
-                        {% if theme.toolbar.menu is defined and theme.toolbar.menu.items|length and app.security.token %}
-                            <li class="light-blue">
-                                <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                    <i class="icon-user"></i>
-                                    <span class="user-info">
-                                        <small>{{ 'Welcome' | trans }},</small>
-                                        {{ app.security.token.user.fullName }}
-                                    </span>
-
-                                    <i class="icon-caret-down"></i>
-                                </a>
-                                <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                                    {% for item in theme.toolbar.menu.items %}
-                                        <li><a href="{{ path(item.route, item.parameters) }}"><i class="icon-{{ item.icon }}"></i> {{ item.label | trans }}</a></li>
-                                    {%  endfor %}
-                                </ul>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        {% endblock %}
-    </div>
+    {% include 'BigfootAceThemeBundle:layout:navbar.html.twig' %}
 
     <div class="main-container" id="main-container">
         <div class="main-container-inner">
@@ -46,82 +9,31 @@
                 <span class="menu-text"></span>
             </a>
 
-            {% block sidebar %}
-                <div class="sidebar" id="sidebar">
+            <div class="sidebar" id="sidebar">
+                {% block sidebar %}
                     {{ knp_menu_render('main', { 'currentClass': 'active', 'ancestorClass': 'active open' }) }}
-                </div>
-            {% endblock sidebar %}
+                {% endblock %}
+            </div>
 
             <div class="main-content">
-                {% block main_content %}
-                    {% block header %}
-                        <div class="breadcrumbs" id="breadcrumbs">
-                            <ul class="breadcrumb">
-                                <li>
-                                    <i class="icon-home home-icon"></i>
-                                    <a href="{{ path('admin_home') }}">{{ 'Home' | trans }}</a>
-                                </li>
-                                {% if breadcrumbs is defined %}
-                                    {% for item in breadcrumbs %}
-                                        <li{% if loop.last %} class="active"{% endif %}>
-                                            {% if not loop.last %}<a href="{{ item.url }}">{% endif %}{{ item.label | trans }}{% if not loop.last %}</a>{% endif %}
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-                            </ul>
+                {% block breadcrumb %}
+                    {% include 'BigfootAceThemeBundle:layout:breadcrumb.html.twig' with { 'name': 'main' } %}
+                {% endblock %}
 
-                            {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkStar', {'currentRoute' : app.request.uri })) }}
-                        </div>
+                <div class="page-content">
+                    {% block page_header %}
+                        {% include 'BigfootAceThemeBundle:layout:page_header.html.twig' %}
                     {% endblock %}
 
-                    <div class="page-content">
-                        {% block page_header %}
-                            <div class="page-header">
-                                <h1>
-                                    {{ theme.page_header.title | default( bigfoot_theme_values.title ) | trans }}
-                                    {% if theme.page_header.subtitle is defined %}
-                                        <small>
-                                            <i class="icon-double-angle-right"></i>
-                                            {{ theme.page_header.subtitle | default('') | trans }}
-                                        </small>
-                                    {% endif %}
-                                </h1>
-                            </div>
-                        {% endblock %}
+                    {% include 'BigfootAceThemeBundle:admin:flash.html.twig' %}
 
-                        {% import 'BigfootAceThemeBundle:macros:flash.html.twig' as flash %}
-
-                        {% block flash_messages %}
-                            {{ flash.messages('error') }}
-                            {{ flash.messages('success') }}
-                            {{ flash.messages('warning') }}
-                            {{ flash.messages('notice') }}
-                        {% endblock %}
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                {% block content %}
-                                    {% if dashboard is defined and dashboard|length > 0 %}
-                                        {% set row_width = 0 %}
-                                        <div class="row">
-                                        {% for widget in dashboard %}
-                                            {% if (row_width + widget.width) > 12 %}
-                                                {% set row_width = 0 %}
-                                        </div>
-                                        <div class="space-24"></div>
-                                        <div class="row">
-                                            {% else %}
-                                                {% set row_width = row_width + widget.width %}
-                                            {% endif %}
-                                        {{ widget.render | raw}}
-                                        {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                {% endblock %}
-                            </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {% block content %}
+                            {% endblock %}
                         </div>
                     </div>
-                {% endblock %}
+                </div>
             </div>
         </div>
 
