@@ -8,25 +8,6 @@ $(document).ready(function () {
     });
 });
 
-// Support for AJAX loaded modal window.
-// Focuses on first input textbox after it loads the window.
-$(document).ready(function () {
-    $('[data-toggle="modal"]').click(function (e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
-        if (url.indexOf('#') == 0) {
-            $(url).modal('open');
-        } else {
-            $.get(url, function (data) {
-                $('<div class="modal hide fade">' + data + '</div>').modal();
-            }).success(function () {
-                    $('input:text:visible:first').focus();
-                });
-        }
-    });
-
-});
-
 /* Setup */
 jQuery(function($) {
     $('[data-rel=tooltip]').tooltip({container:'body'});
@@ -79,17 +60,12 @@ function setupColorboxScripts()
 /* Translatable fields */
 function setTranslatableFields()
 {
-    if ($('#colorbox').length) {
-        var $translatableFields = $('#colorbox .translatable-fields');
-    }
-    else {
-        var $translatableFields = $('.translatable-fields');
-    }
+    var $translatableFields = $('.translatable-fields');
 
     if ($translatableFields.length) {
         setupTranslatableFields($translatableFields);
 
-        $('#locales-container').html(Twig.render(localeTabs, {locales: locales, currentLocale: currentLocale, basePath: basePath}));
+        $('.locales-container').html(Twig.render(localeTabs, {locales: locales, currentLocale: currentLocale, basePath: basePath}));
 
         var $localeTab = $('.locale-tabs');
         $localeTab.on('click', 'a', function(event) {
@@ -175,18 +151,18 @@ function setupTranslatableFields($translatableFields) {
         var $parentElement = $('#'+parentElementId);
 
         $parentElement
-            .data('locale', currentLocale)
-            .attr('data-locale', currentLocale);
+            .data('locale', defaultLocale)
+            .attr('data-locale', defaultLocale);
 
         $(this).appendTo($parentElement.parent());
     });
 
     var $wrapper = $('<div class="input-group"></div>');
     var $toWrap = $('input[data-locale], textarea[data-locale]');
-    $toWrap.wrap($wrapper);
-    $toWrap.each(function() {
 
+    $toWrap.each(function() {
         if (!$(this).data('flag')) {
+            $(this).wrap($wrapper);
             $(this).parent().addClass($(this).attr('class') + ' no-padding-right no-padding-left');
             $(this).removeClass().addClass('form-control');
 
