@@ -1,15 +1,7 @@
-{% twig_js name="nestableList" %}
-{%- if items is defined and items %}
-<ol class="dd-list">
-    {%- for item in items %}
-        <li class="dd-item" data-id="{{ item.id }}">
-            <div class="dd-handle">{{ item.label }}</div>
-            {%- if item.children is defined and item.children %}
-                <ol class="dd-list">
-                    {% include 'BigfootAceThemeBundle:navigation:list.html.twig' with {items: item.children} %}
-                </ol>
-            {%- endif %}
-        </li>
-    {%- endfor %}
-</ol>
-{%- endif %}
+{% if items is defined and items|length %}
+    <ol class="dd-list">
+        {% for item in items %}
+            {% include 'BigfootAceThemeBundle:navigation:item.html.twig' with { 'item': item } %}
+        {% endfor %}
+    </ol>
+{% endif %}

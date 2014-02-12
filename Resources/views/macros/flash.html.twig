@@ -1,9 +1,0 @@
-{% macro messages(type) %}
-    {% if app.session.flashBag.has(type) %}
-        {% for message in app.session.flashBag.get(type) %}
-            <div class="alert alert-block alert-{{ type }}">
-                {{ message | raw }}
-            </div>
-        {% endfor %}
-    {% endif %}
-{% endmacro %}

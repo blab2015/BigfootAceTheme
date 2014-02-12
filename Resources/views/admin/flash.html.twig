@@ -1,0 +1,26 @@
+{% if app.session.flashbag.has('error') %}
+    <div class="alert alert-block alert-error fade in">
+        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+        {% for flash in app.session.flashbag.get('error') %}
+            <div>{{ flash|raw }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if app.session.flashbag.has('success') %}
+    <div class="alert alert-block alert-success fade in">
+        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+        {% for flash in app.session.flashbag.get('success') %}
+            <div>{{ flash|raw }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if app.session.flashbag.has('warning') %}
+    <div class="alert alert-block fade in">
+        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+        {% for flash in app.session.flashbag.get('warning') %}
+            <div>{{ flash|raw }}</div>
+        {% endfor %}
+    </div>
+{% endif %}

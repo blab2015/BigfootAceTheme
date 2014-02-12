@@ -1,0 +1,92 @@
+{% extends bigfoot_theme_bundle ~ '::layout_home.html.twig' %}
+
+{% block form %}
+    <div id="login-box" class="login-box visible widget-box no-border">
+        <div class="widget-body">
+            <div class="widget-main">
+                <h4 class="header blue lighter bigger">
+                    {{ bigfoot_theme_values.title }}
+                </h4>
+
+                <div class="space-6"></div>
+
+                <form action="{{ path('admin_login_check') }}" method="post">
+                    <fieldset>
+                        {% if error %}
+                            <div>{{ error.message }}</div>
+                        {% endif %}
+
+                        <label class="block clearfix">
+                            <span class="block input-icon input-icon-right">
+                                <input type="text" name="_username" class="form-control" value="{{ last_username }}" placeholder="{{ 'Username'|trans }}" />
+                                <i class="icon-user"></i>
+                            </span>
+                        </label>
+
+                        <label class="block clearfix">
+                            <span class="block input-icon input-icon-right">
+                                <input type="password" name="_password" class="form-control" placeholder="{{ 'Password'|trans }}" />
+                                <i class="icon-lock"></i>
+                            </span>
+                        </label>
+
+                        <label class="inline" for="remember_me">
+                            <input class="ace" type="checkbox" id="remember_me" name="_remember_me" checked />
+                            <span class="lbl"> {{ 'Remember Me'|trans }}</span>
+                        </label>
+
+                        <div class="space"></div>
+
+                        <div class="clearfix">
+                            <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+                                <i class="icon-key"></i>
+                                {{ 'Login'|trans }}
+                            </button>
+                        </div>
+
+                        <div class="space-4"></div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <div class="toolbar clearfix">
+            <div>
+                <a href="#" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
+                    <i class="icon-arrow-left"></i>
+                    {{ 'I forgot my password'|trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {{ render(controller('BigfootUserBundle:Security:forgotPassword')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $('body').on('click', '.f-password', function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url:  $(this).closest('form').attr('action'),
+                type: 'post',
+                data: $('#admin_forgot_password_email')
+            }).done(function (data) {
+                var message = data.message;
+
+                if (data.status === true) {
+                    message = '<font color="green">' + message + '</font>';
+                } else {
+                    message = '<font color="red">' + message + '</font>';
+                }
+
+                $('.f-p-message')
+                    .html('')
+                    .append(message);
+            });
+        });
+    </script>
+{% endblock javascripts %}

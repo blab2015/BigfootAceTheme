@@ -1,0 +1,34 @@
+<div class="navbar navbar-default" id="navbar">
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="{{ path('admin_home') }}" class="navbar-brand">
+                <small>
+                    {{ bigfoot_theme_values.title|trans }}
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                {# {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkWidget')) }} #}
+
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <i class="icon-user"></i>
+                        <span class="user-info">
+                            <small>{{ 'Welcome'|trans }},</small> {{ app.user.fullName }}
+                        </span>
+
+                        <i class="icon-caret-down"></i>
+                    </a>
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="{{ path('admin_user_edit', { 'id': app.user.id }) }}"><i class="icon-logout"></i> {{ 'Edit profile'|trans }}</a>
+                            <a href="{{ path('admin_logout') }}"><i class="icon-logout"></i> {{ 'Logout'|trans }}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

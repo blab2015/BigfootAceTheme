@@ -1,0 +1,42 @@
+{% extends bigfoot_theme_bundle ~ '::layout.html.twig' %}
+
+{% block content %}
+    <form action="{{ form_action }}" method="{{ form_method }}" class="form-horizontal" {{ form_enctype(form) }}>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h4>{{ form_title }}</h4>
+
+                        <span class="widget-toolbar">
+                            <div class="locales-container"></div>
+                        </span>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            {% block form %}
+                                {{ form_rest(form) }}
+                            {% endblock %}
+
+                            <div class="clearfix form-actions">
+                                <div class="col-md-offset-3 col-md-9">
+                                    {% if form_cancel_route is defined and form_cancel_route != '' %}
+                                        <a href="{{ path(form_cancel_route) }}" class="btn btn-link">
+                                            {{ form_cancel|default('Cancel')|trans }}
+                                        </a>
+                                    {% endif %}
+
+                                    <button class="btn btn-success" type="submit">
+                                        <i class="icon-ok bigger-110"></i>
+                                        {{ form_submit|default('Submit')|trans }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
