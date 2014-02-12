@@ -1,4 +1,6 @@
-{% extends bigfoot_theme_bundle ~ '::layout.html.twig' %}
+{% extends modal is not defined
+    ? bigfoot_theme_bundle ~ '::layout.html.twig'
+    : bigfoot_theme_bundle ~ '::layoutModal.html.twig' %}
 
 {% block content %}
     <form action="{{ form_action }}" method="{{ form_method }}" class="form-horizontal" {{ form_enctype(form) }}>
@@ -7,7 +9,6 @@
                 <div class="widget-box">
                     <div class="widget-header">
                         <h4>{{ form_title }}</h4>
-
                         <span class="widget-toolbar">
                             <div class="locales-container"></div>
                         </span>
