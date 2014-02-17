@@ -49,6 +49,7 @@
 
                 $(popinHref).on('hidden.bs.modal', function () {
                     $(".modal-backdrop").hide();
+                    $(".modal-scrollable").hide();
                     $(base.options['portfolioPopinClass']).modal('hide');
                 });
             } else {
@@ -72,6 +73,7 @@
 
                     $data.on('hidden.bs.modal', function () {
                         $(".modal-backdrop").hide();
+                        $(".modal-scrollable").hide();
                         $(base.options['portfolioPopinClass']).modal('hide');
                     });
 
@@ -276,6 +278,7 @@
             }
 
             $(".modal-backdrop").hide();
+            $(".modal-scrollable").hide();
             $(base.options['portfolioPopinClass']).modal('hide');
 
             return false;
