@@ -20,3 +20,7 @@
 .nestable-list {
     padding-top: 8px;
 }
+
+img.crud-column-media {
+    max-width: 300px;
+}
