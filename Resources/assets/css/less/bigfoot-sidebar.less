@@ -1,0 +1,130 @@
+//some sidebar variables
+/*@menu-focus-color:@c-customer;*/
+@menu-hover-indicator:@c-customer;
+
+
+.nav-list .open > a, .nav-list .open > a:hover, .nav-list .open > a:focus {
+    background-color: @menu-open-bg;
+}
+
+.nav-list > li {
+    > a {
+        background-color:@menu-bg;
+        color:@menu-color;
+
+        &:focus {
+            background-color:@menu-bg;
+            color:@menu-focus-color;
+        }
+
+        &:hover  {
+            background-color:#FFF;
+            color:@menu-focus-color;
+            &:before {content:none;}
+        }
+
+    }
+
+    /* menu active/open states */
+    &.open > a {
+        background-color:@menu-open-bg;
+        color:@menu-focus-color;
+        &:before {
+            display:block; content:"";
+            position:absolute;
+            top:auto; bottom:0; left:0; right:0;
+            width:100%; max-width:100%; height:3px; max-height:3px; overflow:hidden;
+            background-color:@menu-hover-indicator;
+        }
+    }
+
+    &.active {
+        background-color:@menu-active-bg;
+        > a {
+            & , &:hover, &:focus, &:active {
+                background-color:@menu-active-bg;
+                color:@menu-active-color;
+                font-weight:bold;
+                font-size:13px;
+            }
+
+            > [class*="icon-"] {
+                font-weight:normal;
+            }
+
+            &:hover:before {/* no left side menu item border on active state */
+                display:none;
+            }
+            &:before {
+                display:block; content:"";
+                position:absolute;
+                top:auto; bottom:0; left:0; right:0;
+                width:100%; max-width:100%; height:3px; max-height:3px; overflow:hidden;
+                background-color:@menu-hover-indicator;
+            }
+        }
+        //////
+
+
+        &:after {/* the border on right of active item */
+            content:none;
+        }
+    }
+
+    /* submenu */
+    .submenu {
+
+        > li {
+
+            &.active > a {
+                color:@menu-active-color;
+                &:after {content:none;}
+                &:before {
+                    display:block; content:"";
+                    position:absolute;
+                    top:-1px; bottom:0; right:0;
+                    width:5px; max-width:5px; overflow:hidden;
+                    background-color:@menu-active-color;
+                }
+            }
+
+
+            /* optional icon before each item */
+            &.active > a > [class*="icon-"]:first-child {
+                color:inherit;
+            }
+
+        }// > li
+    }//end of submenu
+
+
+    > .submenu {//the first level submenu
+        > li {
+            //tree like menu
+            &:before { content:none; }
+        }
+
+        &:before { content:none; }
+    }
+
+
+}//end of .nav-list > li
+
+.menu-toggler{ font-size:14px;
+    &:before,
+    &:after { border-color:#fff; left:10px; width:16px; }
+    &:before { top:15px; }
+    &:after { top:21px; }
+    &.display{
+        &:before { top:10px; }
+        &:after { top:22px; }
+    }
+    > .menu-text:after{ left:-10px; top:-39px; }
+}
+
+@media only screen and (max-width: @screen-tiny) {
+    .menu-toggler > .menu-text:after {
+        left:-13px; top:-42px;
+    }
+    .menu-toggler:before, .menu-toggler:after { left:8px; }
+}
