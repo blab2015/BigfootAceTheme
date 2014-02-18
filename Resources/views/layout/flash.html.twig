@@ -1,26 +1,26 @@
-<p>
-    {% if icon is defined %}
-        <strong>
-            <i class="icon-{{ icon }}"></i>
-        </strong>
-    {% endif %}
-    {% if heading is defined %}
-        <strong>
-            {{ heading|trans|raw }}
-        </strong>
-    {% endif %}
-
-    {% if message is defined %}
-        {{ message|trans|raw }}
-    {% endif %}
-</p>
-
-{% if actions is defined and actions|length %}
-    <p>
-        {% for action in actions %}
-            {% if action %}
-                <a href="{{ action.route }}" class="btn btn-sm btn-{{ action.type }}">{{ action.label|trans }}</a>
-            {% endif %}
+{% if app.session.flashbag.has('error') %}
+    <div class="alert alert-block alert-error fade in">
+        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+        {% for flash in app.session.flashbag.get('error') %}
+            <div>{{ flash|raw }}</div>
         {% endfor %}
-    </p>
+    </div>
+{% endif %}
+
+{% if app.session.flashbag.has('success') %}
+    <div class="alert alert-block alert-success fade in">
+        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+        {% for flash in app.session.flashbag.get('success') %}
+            <div>{{ flash|raw }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if app.session.flashbag.has('warning') %}
+    <div class="alert alert-block fade in">
+        <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
+        {% for flash in app.session.flashbag.get('warning') %}
+            <div>{{ flash|raw }}</div>
+        {% endfor %}
+    </div>
 {% endif %}
