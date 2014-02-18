@@ -134,7 +134,7 @@
 {% endblock %}
 
 {% block collection_widget %}
-    <label class="control-label col-sm-3">{{ label }}</label>
+    <label class="control-label col-sm-3">{{ label | trans }}</label>
     {% if prototype is defined %}
     <div class="col-xs-10 col-sm-5 ">
         <a href="#" class="addCollectionItem btn btn-link" data-collection-id="#{{ id }}" data-prototype-name="{{ prototype_name | default('__name__') }}">{{ 'Add' | trans }}</a>

@@ -6,7 +6,7 @@
             {% for item in breadcrumb %}
                 <li>
                     {% if item.uri is not empty %}
-                        <a href="{{ item.uri }}">{{ item.label }}</a>
+                        <a href="{{ item.uri }}">{{ item.label | trans }}</a>
                     {% else %}
                         {% if item.label == 'Home' %}
                             <i class="icon-home home-icon"></i>
