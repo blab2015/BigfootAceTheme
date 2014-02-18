@@ -1,14 +1,15 @@
-{% extends modal is not defined or not modal
-    ? bigfoot_theme_bundle ~ '::layout.html.twig'
-    : bigfoot_theme_bundle ~ '::layout_modal.html.twig' %}
+{% extends modal is defined and modal != false
+    ? bigfoot_theme_bundle ~ '::layout_modal.html.twig'
+    : bigfoot_theme_bundle ~ '::layout.html.twig' %}
 
 {% block content %}
-    <form action="{{ form_action }}" method="{{ form_method }}" class="form-horizontal" {{ form_enctype(form) }}>
+    <form action="{{ form_action }}" method="{{ form_method|default('POST') }}" class="form-horizontal" {{ form_enctype(form) }}>
         <div class="row">
             <div class="col-sm-12">
                 <div class="widget-box">
                     <div class="widget-header">
                         <h4>{{ form_title }}</h4>
+
                         <span class="widget-toolbar">
                             <div class="locales-container"></div>
                         </span>
