@@ -252,16 +252,3 @@ $(document).ready(function() {
         }
     });
 });
-
-$(document).ready(function() {
-    $("input.treeView").each(function() {
-        var base  = $(this);
-        //base.after(Twig.render(nestableView, {items: $.parseJSON(base.val()), output: $(this).attr('id'), newUrl: $(this).data('new-url')}));
-    });
-    $('.dd.nestable').nestable().on('change', function(e) {
-        var list   = e.length ? e : $(e.target),
-            output = list.data('output');
-        $('#'+output).val(window.JSON.stringify(list.nestable('serialize')));
-    });
-});
-

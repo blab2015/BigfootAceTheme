@@ -1,0 +1,24 @@
+<p>
+    {% if icon is defined %}
+    <strong>
+        <i class="icon-{{ icon }}"></i>
+    </strong>
+    {% endif %}
+    {% if heading is defined %}
+    <strong>
+        {{ heading|trans|raw }}
+    </strong>
+    {% endif %}
+    {% if message is defined %}
+        {{ message|trans|raw }}
+    {% endif %}
+</p>
+{% if actions is defined and actions|length %}
+<p>
+    {% for action in actions %}
+        {% if action %}
+    <a href="{{ action.route }}" class="btn btn-sm btn-{{ action.type }}">{{ action.label|trans }}</a>
+        {% endif %}
+    {% endfor %}
+</p>
+{% endif %}
