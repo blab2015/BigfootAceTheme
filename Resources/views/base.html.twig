@@ -82,6 +82,8 @@
             <script src="{{ asset('admin/js/excanvas.min.js') }}"></script>
             <![endif]-->
 
+            <script src="{{ asset('bundles/bigfootnavigation/js/nestable.js') }}"></script>
+
             {% javascripts
                 'admin/js/bootstrap.min.js'
                 'admin/js/dropzone.min.js'
@@ -126,8 +128,6 @@
 
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
-
-            <script src="{{ asset('bundles/bigfootnavigation/js/nestable.js') }}"></script>
 
             <script src="{{ asset('bundles/bigfootcore/js/modal.js') }}"></script>
             <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modal.js') }}"></script>
