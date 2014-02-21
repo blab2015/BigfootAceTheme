@@ -23,4 +23,17 @@
 
 img.crud-column-media {
     max-width: 300px;
+    max-height: 300px;
+}
+
+.field-media .medias-container {
+    display: inline-block;
+}
+
+.field-media .medias-container a {
+    margin-left: -100px;
+}
+
+.field-media .medias-container a:first-child {
+    margin: 0;
 }
