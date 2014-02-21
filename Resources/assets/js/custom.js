@@ -40,6 +40,38 @@ jQuery(function($) {
             $modal.modal('show');
         });
     });
+
+    $('.carousel').each(function(e) {
+        var nbVisible = Math.min(5, $(this).children().length);
+        $(this).parent('.wrapper').css('width', width+'px');
+        var width = 500 + (50 * (nbVisible - 1));
+        $(this).carouFredSel({
+            width: width,
+            height: 250,
+            align: false,
+            padding: [0, width - (nbVisible * 50), 0, 0],
+            items: {
+                width: 50,
+                height: 250,
+                visible: nbVisible,
+                minimum: 1
+            },
+            scroll: {
+                items: 1,
+                duration: 750,
+                onBefore: function( data ) {
+                    data.items.old.add( data.items.visible ).find( 'span' ).stop().slideUp();
+                },
+                onAfter: function( data ) {
+                    data.items.visible.last().find( 'span' ).stop().slideDown();
+                }
+            },
+            auto: false
+        });
+        $(this).children().click(function() {
+            $(this).trigger( 'slideTo', [this, (-1 * nbVisible) + 1, 'prev'] );
+        });
+    });
 });
 
 

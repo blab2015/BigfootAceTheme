@@ -21,19 +21,32 @@
     padding-top: 8px;
 }
 
-img.crud-column-media {
-    max-width: 300px;
-    max-height: 300px;
+.wrapper {
+    height: 250px;
+    overflow: hidden;
 }
-
-.field-media .medias-container {
+.carousel div {
+    cursor: pointer;
+    margin-right: -450px;
+    float: left;
+    position: relative;
+    box-shadow: 0 0 10px #000;
+}
+.carousel div:last-child {
+    cursor: default;
+}
+.carousel div span {
+    background-color: #222;
+    background-color: rgba(0,0,0, 0.8);
+    color: #fff;
+    font-size: 25px;
+    text-align: center;
     display: inline-block;
-}
-
-.field-media .medias-container a {
-    margin-left: -100px;
-}
-
-.field-media .medias-container a:first-child {
-    margin: 0;
+    width: 700px;
+    height: 25px;
+    padding: 20px 0;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
