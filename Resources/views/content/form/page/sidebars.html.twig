@@ -1,0 +1,66 @@
+{% block _admin_page_sidebar_sidebar_1_sidebars_widget block('sidebars_widget') %}
+{% block _admin_page_sidebar_sidebar_2_sidebars_widget block('sidebars_widget') %}
+
+{% block sidebars_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
+        {% endif %}
+
+        <div class="col-sm-3"></div>
+        <div class="col-sm-5">
+            <div class="widget-box">
+                <div class="widget-header">
+                    <h4>Sidebars</h4>
+                    <div class="widget-toolbar">
+                        <a href="#" class="admin-add-page-sidebar"><i class="icon-plus bigger-130"></i></a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="widget-main">
+                        <ul {{ block('widget_container_attributes') }}>
+                            {% for child in form %}
+                                {{ form_row(child) }}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock sidebars_widget %}
+
+{% block admin_page_sidebar_row %}
+    {% spaceless %}
+        <li class="sidebar-row">
+            <div class="pull-right">
+                <a href="#" class="admin-delete-page-sidebar"><i class="icon-remove red bigger-130"></i></a>
+            </div>
+
+            {{ form_row(form.sidebar, { 'attr': { 'class': 'admin_sidebar_select' }}) }}
+
+            <div class="clear"></div>
+
+            <div class="form-group">
+                {{ form_label(form.template, 'Template') }}
+
+                <fieldset>
+                    {% for template in form.template %}
+                        <label>
+                            {{ form_widget(template) }}
+                            <img src="{{ asset('images/template/sidebar/' ~ template.vars.value|replace('/', '.') ~ '.svg') }}">
+                        </label>
+                    {% endfor %}
+                </fieldset>
+            </div>
+
+            <hr />
+        </li>
+    {% endspaceless %}
+{% endblock admin_page_sidebar_row %}
+
+{% block radio_widget %}
+    {% spaceless %}
+        <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    {% endspaceless %}
+{% endblock radio_widget %}
