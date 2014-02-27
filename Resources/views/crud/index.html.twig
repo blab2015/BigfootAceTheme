@@ -7,6 +7,7 @@
         </div>
 
         <div class="pull-right">
+            {% block global_actions %}
             {% for globalAction in globalActions %}
                 <div class="action-buttons">
                     <a href="{{ path(globalAction.route) }}" class="mg-right-5">
@@ -14,7 +15,10 @@
                     </a>
                 </div>
             {% endfor %}
+            {% endblock global_actions %}
         </div>
+        {% block index_actions %}
+        {% endblock index_actions %}
 
         <div class="clearfix"></div>
     </div>

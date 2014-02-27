@@ -50,3 +50,7 @@
     left: 0;
     bottom: 0;
 }
+
+div.table-header div.action-buttons {
+    margin-right: 10px;
+}
