@@ -20,17 +20,17 @@
         };
 
         base.listener = function() {
-            $('body').on('click', base.options['portfolioPopinOpenClass'], base.openPortfolio);
-            $('body').delegate(base.options['portfolioDragContainerId'], 'dragenter dragexit dragover', base.preventDefault);
-            $('body').delegate(base.options['portfolioDragContainerId'], 'drop', base.dragMedia);
-            $('body').delegate(base.options['portfolioToggleEditClass'], 'click', base.editFormMedia);
-            $('body').delegate(base.options['portfolioAddTagClass'], 'click', base.addTagMedia);
-            $('body').delegate(base.options['portfolioEditFormClass'], 'submit', base.submitFormMedia);
-            $('body').delegate(base.options['portfolioToggleUseClass'], 'click', base.useMedia);
-            $('body').delegate(base.options['portfolioMediaDeleteClass'], 'click', base.deleteMedia);
-            $('body').delegate(base.options['portfolioValidateClass'], 'click', base.validate);
-            $('body').delegate(base.options['portfolioSearchFormClass'], 'submit', base.submitSearchForm);
-            $('body').delegate(base.options['portfolioSearchFormTableClass'], 'change', base.changeTableSelection);
+            $('body').on('click', base.options['portfolioPopinOpenClass']       , base.openPortfolio);
+            $('body').delegate(base.options['portfolioDragContainerId']         , 'dragenter dragexit dragover' , base.preventDefault);
+            $('body').delegate(base.options['portfolioDragContainerId']         , 'drop'                        , base.dragMedia);
+            $('body').delegate(base.options['portfolioToggleEditClass']         , 'click'                       , base.editFormMedia);
+            $('body').delegate(base.options['portfolioAddTagClass']             , 'click'                       , base.addTagMedia);
+            $('body').delegate(base.options['portfolioEditFormClass']           , 'submit'                      , base.submitFormMedia);
+            $('body').delegate(base.options['portfolioToggleUseClass']          , 'click'                       , base.useMedia);
+            $('body').delegate(base.options['portfolioMediaDeleteClass']        , 'click'                       , base.deleteMedia);
+            $('body').delegate(base.options['portfolioValidateClass']           , 'click'                       , base.validate);
+            $('body').delegate(base.options['portfolioSearchFormClass']         , 'submit'                      , base.submitSearchForm);
+            $('body').delegate(base.options['portfolioSearchFormTableClass']    , 'change'                      , base.changeTableSelection);
         }
 
         base.preventDefault = function(e) {
@@ -79,8 +79,13 @@
 
                     $("table tbody", $('#media')).sortable({
                         axis: 'y',
-                        handle: 'img'
-                    }).disableSelection();
+                        handle: 'img',
+                        update: function (e, ui) {
+                            var $mediaItem = ui.item;
+
+                            console.log($mediaItem.prevAll().length);
+                        }
+                    });
 
                     $('#dragContainer', $data).ace_file_input({
                         style:      'well',
@@ -226,8 +231,7 @@
                         break;
                     }
                 }
-            }
-            else {
+            } else {
                 $('table tbody', $('#media')).append(mediaItem.clone());
                 mediaItemList.removeClass('unused').addClass('used');
                 selectedIds.push(mediaItemId);
@@ -313,22 +317,22 @@
     };
 
     $.bigfoot.portfolio.defaultOptions = {
-        'portfolioDragContainerId': '#dragContainer',
-        'portfolioPopinClass': '.portfolio-popin',
-        'portfolioPopinOpenClass': '.portfolio-popin-open',
-        'portfolioValidateClass': '.portfolio-validate',
-        'portfolioMediaItemClass': '.portfolio-media-item',
-        'portfolioMediaDeleteClass': '.portfolio-media-delete',
-        'portfolioEditFormClass': '.portfolio-edit-form',
-        'portfolioToggleEditClass': '.portfolio-toggle-edit',
-        'portfolioToggleUseClass': '.portfolio-toggle-use',
-        'portfolioAddTagClass': '.portfolio-add-tag',
-        'portfolioSearchFormClass': '.portfolio-search-form',
-        'portfolioSearchFormTableClass': '.portfolio-search-form-table',
-        'portfolioSearchFormColumnClass': '.portfolio-search-form-column',
-        'portfolioListClass': '.portfolio-list',
-        'portfolioLimit': 1,
-        'portfolioType': ["image"]
+        'portfolioDragContainerId':         '#dragContainer',
+        'portfolioPopinClass':              '.portfolio-popin',
+        'portfolioPopinOpenClass':          '.portfolio-popin-open',
+        'portfolioValidateClass':           '.portfolio-validate',
+        'portfolioMediaItemClass':          '.portfolio-media-item',
+        'portfolioMediaDeleteClass':        '.portfolio-media-delete',
+        'portfolioEditFormClass':           '.portfolio-edit-form',
+        'portfolioToggleEditClass':         '.portfolio-toggle-edit',
+        'portfolioToggleUseClass':          '.portfolio-toggle-use',
+        'portfolioAddTagClass':             '.portfolio-add-tag',
+        'portfolioSearchFormClass':         '.portfolio-search-form',
+        'portfolioSearchFormTableClass':    '.portfolio-search-form-table',
+        'portfolioSearchFormColumnClass':   '.portfolio-search-form-column',
+        'portfolioListClass':               '.portfolio-list',
+        'portfolioLimit':                   1,
+        'portfolioType':                    ["image"]
     };
 
     $.fn.bigfoot_portfolio = function(options) {

@@ -121,9 +121,21 @@
 
 {% block bigfoot_media_widget %}
     {% spaceless %}
-        <div class="field-media">
+        <div class="field-media col-xs-10 col-sm-5">
         {% if value %}
-            <a class="portfolio-popin-open" href="{{ path('portfolio_popin', {'id': value}) }}"data-base-href="{{ path('portfolio_popin') }}"><img class="crud-column-media" src="{{ value | media }}" /></a>
+            {% if ';' in value %}
+            <div class="wrapper">
+                <div class="carousel">
+                    {%- for media in value | medias %}
+                    <div><img class="crud-column-media" src="{{ media | imagine_filter('media_gallery') }}" width="500" height="250" /></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <br/>
+            <a class="portfolio-popin-open btn" href="{{ path('portfolio_popin', {'id': value}) }}" data-base-href="{{ path('portfolio_popin') }}">{{ 'Upload or select medias' | trans }}</a>
+            {% else %}
+                <a class="portfolio-popin-open " href="{{ path('portfolio_popin', {'id': value}) }}" data-base-href="{{ path('portfolio_popin') }}"><img class="crud-column-media" src="{{ value|media|imagine_filter('media_single') }}" width="300" height="200" /></a>
+            {% endif %}
         {% else %}
             <a class="portfolio-popin-open btn" href="{{ path('portfolio_popin') }}" data-base-href="{{ path('portfolio_popin') }}">{{ 'Upload or select medias' | trans }}</a>
         {% endif %}
