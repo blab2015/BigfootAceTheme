@@ -72,3 +72,37 @@ img.crud-column-media {
 .clear {
     clear: both;
 }
+
+.wrapper {
+    height: 250px;
+    overflow: hidden;
+}
+.carousel div {
+    cursor: pointer;
+    margin-right: -450px;
+    float: left;
+    position: relative;
+    box-shadow: 0 0 10px #000;
+}
+.carousel div:last-child {
+    cursor: default;
+}
+.carousel div span {
+    background-color: #222;
+    background-color: rgba(0,0,0, 0.8);
+    color: #fff;
+    font-size: 25px;
+    text-align: center;
+    display: inline-block;
+    width: 700px;
+    height: 25px;
+    padding: 20px 0;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+div.table-header div.action-buttons {
+    margin-right: 10px;
+}

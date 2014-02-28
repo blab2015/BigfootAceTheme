@@ -1,5 +1,5 @@
 <tr class="portfolio-media-item{% if used == true %} used{% else %} unused{% endif %}" data-edit="formMedia{{ line.id }}" data-media-id="{{ line.id }}">
-    <td class="span1"><img class="crud-column-media" src="{{ asset('timthumb.php?src='~line.file) }}"></td>
+    <td class="span1"><img class="crud-column-media" src="{{ asset(line.file|imagine_filter('media_thumbnail')) }}"></td>
     <td>{{ "Title" | trans }} : {{ line.getMetadata('title') }}</td>
     <td>{{ "Height" | trans }} : {{ line.getMetadata('height') }}px</td>
     <td>{{ "Width" | trans }} : {{ line.getMetadata('width') }}px</td>
