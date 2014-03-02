@@ -1,6 +1,6 @@
-{% block _admin_sidebar_title_block_title_block_1_blocks_widget block('blocks_widget') %}
-{% block _admin_sidebar_title_desc_block_title_desc_block_1_blocks_widget block('blocks_widget') %}
-{% block _admin_sidebar_title_desc_img_block_title_desc_img_block_1_blocks_widget block('blocks_widget') %}
+{% block _admin_sidebar_template_title_block_blocks_widget block('blocks_widget') %}
+{% block _admin_sidebar_template_title_desc_block_blocks_widget block('blocks_widget') %}
+{% block _admin_sidebar_template_title_desc_img_block_blocks_widget block('blocks_widget') %}
 
 {% block blocks_widget %}
     {% spaceless %}
@@ -53,7 +53,7 @@
                     {% for template in form.template %}
                         <label>
                             {{ form_widget(template) }}
-                            <img src="{{ asset('images/template/block/' ~ template.vars.value|replace('/', '.') ~ '.svg') }}">
+                            <img src="{{ asset('images/template/block/' ~ template.vars.label ~ '.svg') }}">
                         </label>
                     {% endfor %}
                 </fieldset>

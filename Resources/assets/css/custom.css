@@ -25,10 +25,6 @@ img.crud-column-media {
     max-width: 300px;
 }
 
-.templates-type {
-    text-align: center;
-}
-
 .template-row input[type="radio"] {
     display: none;
 }

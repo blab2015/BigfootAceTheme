@@ -45,7 +45,7 @@
                     {% for template in form.template %}
                         <label>
                             {{ form_widget(template) }}
-                            <img src="{{ asset('images/template/block/' ~ template.vars.value|replace('/', '.') ~ '.svg') }}">
+                            <img src="{{ asset('images/template/block/' ~ template.vars.label ~ '.svg') }}">
                         </label>
                     {% endfor %}
                 </fieldset>
