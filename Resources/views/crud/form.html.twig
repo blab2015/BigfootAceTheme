@@ -1,4 +1,4 @@
-{% extends modal is defined and modal != false
+{% extends modal is defined and modal != null
     ? bigfoot_theme_bundle ~ '::layout_modal.html.twig'
     : bigfoot_theme_bundle ~ '::layout.html.twig' %}
 
@@ -21,20 +21,22 @@
                                 {{ form_rest(form) }}
                             {% endblock %}
 
-                            <div class="clearfix form-actions">
-                                <div class="col-md-offset-3 col-md-9">
-                                    {% if cancel_route is defined and cancel_route != '' %}
-                                        <a href="{{ path(cancel_route) }}" class="btn btn-link">
-                                            {{ form_cancel|default('Cancel')|trans }}
-                                        </a>
-                                    {% endif %}
+                            {% block form_actions %}
+                                <div class="clearfix form-actions">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        {% if form_cancel is defined %}
+                                            <a href="{{ path(form_cancel) }}" class="btn btn-link">
+                                                {{ 'Cancel'|trans }}
+                                            </a>
+                                        {% endif %}
 
-                                    <button class="btn btn-success" type="submit">
-                                        <i class="icon-ok bigger-110"></i>
-                                        {{ form_submit|default('Submit')|trans }}
-                                    </button>
+                                        <button class="btn btn-success" type="submit">
+                                            <i class="icon-ok bigger-110"></i>
+                                            {{ form_submit|default('Submit')|trans }}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endblock %}
                         </div>
                     </div>
                 </div>

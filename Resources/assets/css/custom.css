@@ -21,6 +21,54 @@
     padding-top: 8px;
 }
 
+img.crud-column-media {
+    max-width: 300px;
+}
+
+.template-row input[type="radio"] {
+    display: none;
+}
+
+.template-row input[type="radio"]:checked + img {
+    border: 1px solid #438EB9;
+}
+
+.block-row input[type="radio"] {
+    display: none;
+}
+
+.block-row input[type="radio"]:checked + img {
+    border: 1px solid #438EB9;
+}
+
+.block-row input[type="radio"]+ img {
+    margin-right: 10px;
+}
+
+.sidebar-row input[type="radio"] {
+    display: none;
+}
+
+.sidebar-row input[type="radio"]:checked + img {
+    border: 1px solid #438EB9;
+}
+
+.sidebar-row input[type="radio"]+ img {
+    margin-right: 10px;
+}
+
+.widget-blocks {
+    list-style: none;
+}
+
+.widget-sidebars {
+    list-style: none;
+}
+
+.clear {
+    clear: both;
+}
+
 .wrapper {
     height: 250px;
     overflow: hidden;

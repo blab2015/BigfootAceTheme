@@ -1,101 +1,17 @@
-{# <div class="navbar navbar-default" id="navbar">
-    <div class="navbar-container" id="navbar-container">
-        <div class="navbar-header pull-left">
-            <a href="{{ path('admin_home') }}" class="navbar-brand">
-                <small>
-                    {{ bigfoot_theme_values.title|trans }}
-                </small>
-            </a>
-        </div>
-
-        <div class="navbar-header pull-right" role="navigation">
-            <ul class="nav ace-nav">
-                {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkWidget')) }}
-
-                <li class="light-blue">
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <i class="icon-user"></i>
-                        <span class="user-info">
-                            <small>{{ 'Welcome'|trans }},</small> {{ app.user.fullName }}
-                        </span>
-
-                        <i class="icon-caret-down"></i>
-                    </a>
-                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <li>
-                            <a href="{{ path('admin_user_edit', { 'id': app.user.id }) }}"><i class="icon-logout"></i> {{ 'Edit profile'|trans }}</a>
-                            <a href="{{ path('admin_logout') }}"><i class="icon-logout"></i> {{ 'Logout'|trans }}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div> #}
-
 <div class="navbar navbar-default" id="navbar">
     {% block toolbar %}
         <div class="navbar-container" id="navbar-container">
             <div class="navbar-header pull-left">
                 <a href="{{ path('admin_home') }}" class="navbar-brand">
-                    SEH - <small>Société Européenne d'Hôtellerie</small>
+                    Sandbox - <small>Démo</small>
                 </a>
             </div>
 
             <div class="navbar-header pull-right" role="navigation">
                 <ul class="nav ace-nav">
-                    <li class="brands grey">
-                        <a href="#" id="brand-nav-toggler" class="btn btn-app no-radius dropdown-toggle brand-nav-toggler">
-                            <i class="icon-folder-close"></i>
-                            <i class="icon-folder-open"></i>
-                            <span class="align-left">Marques</span>
-                        </a>
-
-                        <ul class="nav ace-nav brand-nav">
-
-                            {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkWidget')) }}
-
-                            <li class="brand pink">
-                                <a class="nav-link" href="#">
-                                    <span class="">SEH</span>
-                                </a>
-                            </li>
-
-                            <li class="brand red active">
-                                <a class="nav-link" href="#">
-                                    <span class="">INTER-HOTEL</span>
-                                </a>
-                            </li>
-
-                            <li class="brand yellow">
-                                <a class="nav-link" href="#">
-                                    <span class="">P'tit Dej-HOTEL</span>
-                                </a>
-                            </li>
-
-                            <li class="brand brown">
-                                <a class="nav-link" href="#">
-                                    <span class="">QUALYS-HOTEL</span>
-                                </a>
-                            </li>
-
-                            <li class="brand blue">
-                                <a class="nav-link" href="#">
-                                    <span class="">Relais du Silence</span>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
                     <li class="infos">
                         <ul class="nav ace-nav info-nav">
-                            <li class="support">
-                                <a href="http://support.c2is.fr/projects/seh-hotels/issues" target="_blank" class="align-right">
-                                    <span class="align-left">Contactez le support</span>
-                                    <i class="icon-sitemap align-center bigger-125 icon-on-right"></i>
-                                </a>
-                            </li>
-                            <li class="account">
+                            <li class="light-blue">
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle align-right">
                                     <i class="icon-user"></i>
                                     <span class="user-info align-left">
@@ -106,13 +22,6 @@
                                 </a>
 
                                 <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-{#                                     <li>
-                                        <a href="#">
-                                            <i class="icon-cog"></i>
-                                            Settings
-                                        </a>
-                                    </li> #}
-
                                     <li>
                                         <a href="{{ path('admin_user_edit', { 'id': app.user.id }) }}">
                                             <i class="icon-user"></i>

@@ -6,17 +6,17 @@
             {{ list_title|trans }}
         </div>
 
-        <div class="pull-right">
-            {% block global_actions %}
-            {% for globalAction in globalActions %}
-                <div class="action-buttons">
-                    <a href="{{ path(globalAction.route) }}" class="mg-right-5">
-                        <i class="icon-plus-sign white bigger-140"></i>
-                    </a>
-                </div>
-            {% endfor %}
-            {% endblock global_actions %}
-        </div>
+        {% block global_actions %}
+            <div class="pull-right">
+                {% for globalAction in globalActions %}
+                    <div class="action-buttons">
+                        <a href="{{ path(globalAction.route, globalAction.parameters) }}" class="mg-right-5">
+                            <i class="icon-plus-sign white bigger-140"></i>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endblock %}
         {% block index_actions %}
         {% endblock index_actions %}
 

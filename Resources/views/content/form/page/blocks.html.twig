@@ -1,0 +1,72 @@
+{% block _admin_page_template_title_desc_block_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc_img_block_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc_block_sidebar_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc_img_block_sidebar_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc2_block_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc2_img_block_blocks_widget block('blocks_widget') %}
+
+{% block blocks_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
+        {% endif %}
+
+        <div class="col-sm-3"></div>
+        <div class="col-sm-5">
+            <div class="widget-box">
+                <div class="widget-header">
+                    <h4>Blocks</h4>
+                    <div class="widget-toolbar">
+                        <a href="#" class="admin-add-page-block"><i class="icon-plus bigger-130"></i></a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="widget-main">
+                        <ul {{ block('widget_container_attributes') }}>
+                            {% for child in form %}
+                                {{ form_row(child) }}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock blocks_widget %}
+
+{% block admin_page_block_row %}
+    {% spaceless %}
+        <li class="block-row">
+            <div class="pull-right">
+                <a href="#" class="admin-delete-page-block"><i class="icon-remove red bigger-130"></i></a>
+            </div>
+
+            {{ form_row(form.block, { 'attr': { 'class': 'admin_block_select' }}) }}
+
+            <div class="clear"></div>
+
+            {{ form_row(form.position) }}
+
+            <div class="form-group">
+                {{ form_label(form.template, 'Template') }}
+
+                <fieldset>
+                    {% for template in form.template %}
+                        <label>
+                            {{ form_widget(template) }}
+                            <img src="{{ asset('images/template/block/' ~ template.vars.label ~ '.svg') }}">
+                        </label>
+                    {% endfor %}
+                </fieldset>
+            </div>
+
+            <hr />
+        </li>
+    {% endspaceless %}
+{% endblock admin_page_block_row %}
+
+{% block radio_widget %}
+    {% spaceless %}
+        <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    {% endspaceless %}
+{% endblock radio_widget %}
