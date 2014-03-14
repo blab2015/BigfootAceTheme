@@ -135,6 +135,15 @@ $(function() {
             }
         });
     });
+    $('body').on('click', 'a.confirm-action', function(event) {
+        event.preventDefault();
+        var link = $(this).attr('href');
+        bootbox.confirm($(this).data('confirm-message'), function(result) {
+            if (result) {
+                window.location.replace(link);
+            }
+        });
+    });
 });
 
 /* Tags fields */
