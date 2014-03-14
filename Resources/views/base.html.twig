@@ -1,141 +1,141 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}" class="{% block htmlClass %}{% endblock %}">
-    <head>
-        <meta charset="utf-8">
-        <title>{{ bigfoot_theme_values.title|trans }}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="{{ bigfoot_theme_values.provided_by|trans }}">
+<head>
+    <meta charset="utf-8">
+    <title>{{ bigfoot_theme_values.title|trans }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="{{ bigfoot_theme_values.provided_by|trans }}">
 
-        {% block stylesheets %}
-            {% stylesheets
-                'admin/css/bootstrap.min.css'
-                'admin/css/font-awesome.min.css'
-                'admin/css/jquery-ui-1.10.3.full.min.css'
-                'admin/css/jquery-ui-1.10.3.custom.min.css'
-                'admin/css/chosen.css'
-                'admin/css/datepicker.css'
-                'admin/css/bootstrap-timepicker.css'
-                'admin/css/daterangepicker.css'
-                'admin/css/colorpicker.css'
-                'admin/css/ace-fonts.css'
-                'admin/css/ui.jqgrid.css'
-                'admin/css/ace-fonts.css'
-                'admin/css/ace.min.css'
-                'admin/css/ace-rtl.min.css'
-                'admin/css/ace-skins.min.css'
-                'admin/css/jquery.gritter.css'
-                'admin/css/colorbox.css'
-                'admin/css/custom.css'
-                filter='cssrewrite'
-                    output='compiled/admin/css/admin.css'
-                %}
-                <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal.css') }}" />
-                <link rel="stylesheet" href="{{ asset_url }}" />
-            {% endstylesheets %}
+    {% block stylesheets %}
+        {% stylesheets
+        'admin/css/bootstrap.min.css'
+        'admin/css/font-awesome.min.css'
+        'admin/css/jquery-ui-1.10.3.full.min.css'
+        'admin/css/jquery-ui-1.10.3.custom.min.css'
+        'admin/css/chosen.css'
+        'admin/css/datepicker.css'
+        'admin/css/bootstrap-timepicker.css'
+        'admin/css/daterangepicker.css'
+        'admin/css/colorpicker.css'
+        'admin/css/ace-fonts.css'
+        'admin/css/ui.jqgrid.css'
+        'admin/css/ace-fonts.css'
+        'admin/css/ace.min.css'
+        'admin/css/ace-rtl.min.css'
+        'admin/css/ace-skins.min.css'
+        'admin/css/jquery.gritter.css'
+        'admin/css/colorbox.css'
+        'admin/css/custom.css'
+        filter='cssrewrite'
+        output='compiled/admin/css/admin.css'
+        %}
+        <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal.css') }}" />
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
 
-            <!--[if IE 7]>
-            <link rel="stylesheet" href="{{ 'admin/css/font-awesome-ie7.min.css' }}" />
-            <![endif]-->
-
-            <!--[if lte IE 8]>
-            <link rel="stylesheet" href="{{ 'admin/css/ace-ie.min.css' }}" />
-            <![endif]-->
-
-            <!--[if lt IE 9]>
-            <script src="{{ 'admin/js/html5shiv.js' }}"></script>
-            <script src="{{ 'admin/js/respond.min.js' }}"></script>
-            <![endif]-->
-        {% endblock %}
-
-        <!--[if !IE]> -->
-        <script type="text/javascript">
-            window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-2.0.3.min.js') }}'>"+"<"+"/script>");
-        </script>
-        <!-- <![endif]-->
-
-        <!--[if IE]>
-        <script type="text/javascript">
-            window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-1.10.2.min.js') }}'>"+"<"+"/script>");
-        </script>
+        <!--[if IE 7]>
+        <link rel="stylesheet" href="{{ 'admin/css/font-awesome-ie7.min.css' }}" />
         <![endif]-->
-    </head>
 
-    <body class="{% block bodyClass %}{% endblock bodyClass %} skin-bigfoot">
-        {% block body %}
-        {% endblock %}
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" href="{{ 'admin/css/ace-ie.min.css' }}" />
+        <![endif]-->
 
-        {% block javascripts %}
-            <script type="text/javascript">
-                var
-                    defaultPortfolioRoute = "{{ path('portfolio_dashboard') }}",
-                    currentLocale         = "{{ app.request.locale }}",
-                    basePath              = "{{ app.request.basePath }}",
-                    tagsPath              = "{{ path('admin_tag_get') }}",
-                    defaultLocale         = currentLocale,
-                    locales               = ["{{ localeFlags() | join('","') | raw }}"];
+        <!--[if lt IE 9]>
+        <script src="{{ 'admin/js/html5shiv.js' }}"></script>
+        <script src="{{ 'admin/js/respond.min.js' }}"></script>
+        <![endif]-->
+    {% endblock %}
 
-                if("ontouchend" in document) document.write("<script src='{{ asset('admin/js/jquery.mobile.custom.min.js') }}'>" + "<" + "/script>");
-            </script>
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-2.0.3.min.js') }}'>"+"<"+"/script>");
+    </script>
+    <!-- <![endif]-->
 
-            <!--[if lte IE 8]>
-            <script src="{{ asset('admin/js/excanvas.min.js') }}"></script>
-            <![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='{{ asset('admin/js/jquery-1.10.2.min.js') }}'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+</head>
 
-            <script src="{{ asset('bundles/bigfootnavigation/js/nestable.js') }}"></script>
+<body class="{% block bodyClass %}{% endblock bodyClass %} skin-bigfoot">
+{% block body %}
+{% endblock %}
 
-            {% javascripts
-                'admin/js/bootstrap.min.js'
-                'admin/js/bootbox.min.js'
-                'admin/js/dropzone.min.js'
-                'admin/js/typeahead-bs2.min.js'
-                'admin/js/jquery-ui-1.10.3.custom.min.js'
-                'admin/js/jquery.ui.touch-punch.min.js'
-                'admin/js/chosen.jquery.min.js'
-                'admin/js/fuelux/fuelux.spinner.min.js'
-                'admin/js/date-time/bootstrap-datepicker.min.js'
-                'admin/js/date-time/bootstrap-timepicker.min.js'
-                'admin/js/date-time/moment.min.js'
-                'admin/js/date-time/daterangepicker.min.js'
-                'admin/js/bootstrap-colorpicker.min.js'
-                'admin/js/jquery.knob.min.js'
-                'admin/js/jquery.autosize.min.js'
-                'admin/js/jquery.inputlimiter.1.3.1.min.js'
-                'admin/js/jquery.maskedinput.min.js'
-                'admin/js/bootstrap-tag.min.js'
-                'admin/js/bootstrap-wysiwyg.min.js'
-                'admin/js/ace-elements.min.js'
-                'admin/js/ace.min.js'
-                'admin/js/custom.js'
-                'admin/js/jquery.portfolio.js'
-                'admin/js/jquery.colorbox-min.js'
-                'admin/js/jquery.gritter.min.js'
-                'admin/js/spin.min.js'
-                'admin/js/jqGrid/jquery.jqGrid.min.js'
-                'admin/js/jqGrid/custom.js'
-                'admin/js/jquery.carouFredSel.js'
-                '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
-                output='compiled/admin/js/scripts.js' %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
+{% block javascripts %}
+    <script type="text/javascript">
+        var
+            defaultPortfolioRoute = "{{ path('portfolio_dashboard') }}",
+            currentLocale         = "{{ app.request.locale }}",
+            basePath              = "{{ app.request.basePath }}",
+            tagsPath              = "{{ path('admin_tag_get') }}",
+            defaultLocale         = currentLocale,
+            locales               = ["{{ localeFlags() | join('","') | raw }}"];
 
-            {% javascripts
-                "@BigfootCoreBundle/Resources/views/translation/locale_tabs.html.twig"
-                "@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig"
-                "@BigfootAceThemeBundle/Resources/views/modal/base.html.twig"
-                filter="twig_js"
-                output='compiled/admin/js/twigs.js' %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
+        if("ontouchend" in document) document.write("<script src='{{ asset('admin/js/jquery.mobile.custom.min.js') }}'>" + "<" + "/script>");
+    </script>
 
-            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-            <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <!--[if lte IE 8]>
+    <script src="{{ asset('admin/js/excanvas.min.js') }}"></script>
+    <![endif]-->
 
-            <script src="{{ asset('bundles/bigfootcore/js/modal.js') }}"></script>
-            <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modal.js') }}"></script>
-            <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modalmanager.js') }}"></script>
-            <script src="{{ asset('bundles/bigfootcore/js/jquery.form.js') }}"></script>
-            <script src="{{ asset('admin/vendor/ckeditor/ckeditor.js') }}"></script>
-        {% endblock %}
-    </body>
+    {% javascripts
+        'admin/js/bootstrap.min.js'
+        'admin/js/bootbox.min.js'
+        'admin/js/dropzone.min.js'
+        'admin/js/typeahead-bs2.min.js'
+        'admin/js/jquery-ui-1.10.3.custom.min.js'
+        'admin/js/jquery.ui.touch-punch.min.js'
+        'admin/js/chosen.jquery.min.js'
+        'admin/js/fuelux/fuelux.spinner.min.js'
+        'admin/js/date-time/bootstrap-datepicker.min.js'
+        'admin/js/date-time/bootstrap-timepicker.min.js'
+        'admin/js/date-time/moment.min.js'
+        'admin/js/date-time/daterangepicker.min.js'
+        'admin/js/bootstrap-colorpicker.min.js'
+        'admin/js/jquery.knob.min.js'
+        'admin/js/jquery.autosize.min.js'
+        'admin/js/jquery.inputlimiter.1.3.1.min.js'
+        'admin/js/jquery.maskedinput.min.js'
+        'admin/js/bootstrap-tag.min.js'
+        'admin/js/bootstrap-wysiwyg.min.js'
+        'admin/js/ace-elements.min.js'
+        'admin/js/ace.min.js'
+        'admin/js/custom.js'
+        'admin/js/jquery.portfolio.js'
+        'admin/js/jquery.colorbox-min.js'
+        'admin/js/jquery.gritter.min.js'
+        'admin/js/spin.min.js'
+        'admin/js/jqGrid/jquery.jqGrid.min.js'
+        'admin/js/jqGrid/custom.js'
+        'admin/js/jquery.carouFredSel.js'
+        '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
+        output='compiled/admin/js/scripts.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% javascripts
+    "@BigfootCoreBundle/Resources/views/translation/locale_tabs.html.twig"
+    "@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig"
+    "@BigfootAceThemeBundle/Resources/views/modal/base.html.twig"
+    filter="twig_js"
+    output='compiled/admin/js/twigs.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script src="{{ asset('bundles/bigfootnavigation/js/nestable.js') }}"></script>
+
+    <script src="{{ asset('bundles/bigfootcore/js/modal.js') }}"></script>
+    <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modal.js') }}"></script>
+    <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modalmanager.js') }}"></script>
+    <script src="{{ asset('bundles/bigfootcore/js/jquery.form.js') }}"></script>
+    <script src="{{ asset('admin/vendor/ckeditor/ckeditor.js') }}"></script>
+{% endblock %}
+</body>
 </html>
