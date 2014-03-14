@@ -1,5 +1,5 @@
-{% extends modal is defined and modal != null
-    ? bigfoot_theme_bundle ~ '::layout_modal.html.twig'
+{% extends blank is defined and blank != null
+    ? bigfoot_theme_bundle ~ '::layout_blank.html.twig'
     : bigfoot_theme_bundle ~ '::layout.html.twig' %}
 
 {% block content %}
@@ -9,7 +9,6 @@
                 <div class="widget-box">
                     <div class="widget-header">
                         <h4>{{ form_title }}</h4>
-
                         <span class="widget-toolbar">
                             <div class="locales-container"></div>
                         </span>
