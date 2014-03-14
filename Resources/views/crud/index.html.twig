@@ -43,7 +43,7 @@
                     <td>
                         <div class="action-buttons">
                             {% for action in actions %}
-                                <a href="{{ path(action.route, { 'id': item.id }) }}" class="{{ action.color }} {{ action.icon }}">
+                                <a href="{{ path(action.route, { 'id': item.id }) }}" class="{{ action.color }} {{ action.icon }}{% if action.class is defined %} {{ action.class }}{% endif %}"{% if action.attributes is defined %}{% for key, value in action.attributes %} {{ key }}="{{ value }}"{% endfor %}{% endif %}>
                                     <i class="icon-{{ action.icon }} bigger-130"></i>
                                 </a>
                             {% endfor %}
