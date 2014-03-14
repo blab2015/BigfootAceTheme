@@ -48,9 +48,10 @@
 
                 <fieldset>
                     {% for template in form.template %}
-                        <label>
+                        <label style="text-align:center;">
                             {{ form_widget(template) }}
-                            <img src="{{ asset('images/template/sidebar/' ~ template.vars.label ~ '.svg') }}">
+                            <img src="{{ asset('images/template/sidebar/' ~ template.vars.label ~ '.svg') }}" width="80" height="80"><br />
+                            <span style="font-size:9px;">{{ template.vars.label }}</span>
                         </label>
                     {% endfor %}
                 </fieldset>
