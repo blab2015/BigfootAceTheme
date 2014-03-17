@@ -2,4 +2,17 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('admin/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('admin/vendor/ckeditor/adapters/jquery.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#ajax-modal .ckeditor').ckeditor();
+            $('[data-rel=tooltip]').tooltip();
+            $('[data-rel=popover]').popover();
+            $('.chosen-select').chosen({width: '300px'});
+            $.bigfoot.portfolio();
+            setTranslatableFields();
+        });
+    </script>
 {% endblock %}

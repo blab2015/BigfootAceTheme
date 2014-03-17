@@ -30,6 +30,7 @@
         filter='cssrewrite'
         output='compiled/admin/css/admin.css'
         %}
+        <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal-bs3patch.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal.css') }}" />
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -64,6 +65,8 @@
 <body class="{% block bodyClass %}{% endblock bodyClass %} skin-bigfoot">
 {% block body %}
 {% endblock %}
+
+<div id="ajax-modal" class="modal container fade" tabindex="-1" style="display: none;"></div>
 
 {% block javascripts %}
     <script type="text/javascript">
@@ -129,11 +132,10 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
-    <script src="{{ asset('bundles/bigfootnavigation/js/nestable.js') }}"></script>
-
-    <script src="{{ asset('bundles/bigfootcore/js/modal.js') }}"></script>
-    <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modal.js') }}"></script>
+    <script src="{{ asset('bundles/bigfootcore/js/nestable.js') }}"></script>
     <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modalmanager.js') }}"></script>
+    <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modal.js') }}"></script>
+    <script src="{{ asset('bundles/bigfootcore/js/modal.js') }}"></script>
     <script src="{{ asset('bundles/bigfootcore/js/jquery.form.js') }}"></script>
     <script src="{{ asset('admin/vendor/ckeditor/ckeditor.js') }}"></script>
 {% endblock %}

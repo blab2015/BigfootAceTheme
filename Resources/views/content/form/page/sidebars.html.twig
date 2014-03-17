@@ -9,14 +9,14 @@
             {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
         {% endif %}
 
-        <div class="col-sm-3"></div>
-        <div class="panel-group col-xs-10 col-sm-5">
-            <div class="panel panel-default">
+        <div class="col-sm-2"></div>
+        <div class="panel-group col-xs-10 col-sm-7">
+            <div class="panel panel-default collection-container">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Sidebars
                         <span>
-                            <a href="#" class="admin-add-page-sidebar pull-right"><i class="icon-plus bigger-130"></i></a>
+                            <a href="#" class="admin-add-sidebar pull-right"><i class="icon-plus bigger-130"></i></a>
                         </span>
                     </h4>
                 </div>
@@ -36,7 +36,7 @@
     {% spaceless %}
         <li class="sidebar-row">
             <div class="pull-right">
-                <a href="#" class="admin-delete-page-sidebar"><i class="icon-remove red bigger-130"></i></a>
+                <a href="#" class="admin-delete-sidebar"><i class="icon-remove red bigger-130"></i></a>
             </div>
 
             {{ form_row(form.sidebar, { 'attr': { 'class': 'admin_sidebar_select' }}) }}
@@ -50,7 +50,11 @@
                     {% for template in form.template %}
                         <label style="text-align:center;">
                             {{ form_widget(template) }}
-                            <img src="{{ asset('images/template/sidebar/' ~ template.vars.label ~ '.svg') }}" width="80" height="80"><br />
+                            {% set templateFileName = template.vars.value %}
+                            {% if '/' in templateFileName %}
+                                {% set templateFileName = template.vars.value|split('/')|slice(1)|join('/') %}
+                            {% endif %}
+                            <img src="{{ asset('images/template/sidebar/' ~ templateFileName ~ '.svg') }}" width="80" height="80"><br />
                             <span style="font-size:9px;">{{ template.vars.label }}</span>
                         </label>
                     {% endfor %}

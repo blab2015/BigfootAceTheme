@@ -33,6 +33,10 @@ img.crud-column-media {
     border: 1px solid #438EB9;
 }
 
+.block-row a {
+    text-decoration: none;
+}
+
 .block-row input[type="radio"] {
     display: none;
 }
@@ -65,8 +69,30 @@ img.crud-column-media {
     list-style: none;
 }
 
+.admin-create-block {
+    font-size: 12px;
+    margin-left: -10px;
+}
+
+.admin-edit-block {
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.admin-delete-block {
+    font-size: 17px;
+}
+
+.panel-heading a {
+    text-decoration: none;
+}
+
 .clear {
     clear: both;
+}
+
+.form-errors {
+    color: #FF0000;
 }
 
 .wrapper {

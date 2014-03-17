@@ -1,6 +1,4 @@
-{% extends blank is defined and blank != null
-    ? bigfoot_theme_bundle ~ '::layout_blank.html.twig'
-    : bigfoot_theme_bundle ~ '::layout.html.twig' %}
+{% extends bigfoot_theme_bundle ~ '::layout' ~ app.request.get('layout') ~ '.html.twig' %}
 
 {% block content %}
     <form action="{{ form_action }}" method="{{ form_method|default('POST') }}" class="form-horizontal" {{ form_enctype(form) }}>
@@ -24,7 +22,8 @@
                                 <div class="clearfix form-actions">
                                     <div class="col-md-offset-3 col-md-9">
                                         {% if form_cancel is defined %}
-                                            <a href="{{ path(form_cancel) }}" class="btn btn-link">
+                                            <a href="{{ path(form_cancel) }}" class="btn btn-info">
+                                                <i class="icon-remove bigger-110"></i>
                                                 {{ 'Cancel'|trans }}
                                             </a>
                                         {% endif %}
