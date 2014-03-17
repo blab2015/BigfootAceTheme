@@ -6,7 +6,7 @@
             <a href="{{ path('admin_menu_item_delete', {'id': item.id }) }}" class="delete-menu-item-tree red pull-right">
                 <i class="icon-trash bigger-130"></i>
             </a>
-            <a href="{{ path('admin_menu_item_edit', {'id': item.id, 'modal': true }) }}" class="modal-trigger edit-menu-item-tree pull-right" data-toggle="modal" data-target="#edit-item">
+            <a href="#" class="ajax-modal edit-menu-item-tree pull-right" data-toggle="modal" data-url="{{ path('admin_menu_item_edit', {'id': item.id, 'layout': '_modal' }) }}">
                 <i class="icon-pencil bigger-130"></i>
             </a>
         </div>
