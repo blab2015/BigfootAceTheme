@@ -1,6 +1,4 @@
-{% extends blank is defined and blank != null
-    ? bigfoot_theme_bundle ~ '::layout_blank.html.twig'
-    : bigfoot_theme_bundle ~ '::layout.html.twig' %}
+{% extends bigfoot_theme_bundle ~ '::layout' ~ app.request.get('layout') ~ '.html.twig' %}
 
 {% block content %}
     <form action="{{ form_action }}" method="{{ form_method|default('POST') }}" class="form-horizontal" {{ form_enctype(form) }}>

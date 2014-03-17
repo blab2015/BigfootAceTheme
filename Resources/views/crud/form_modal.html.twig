@@ -1,13 +1,24 @@
 {% extends bigfoot_theme_bundle ~ '::layout_modal.html.twig' %}
 
 {% block content %}
-    <form action="{{ form_action }}" method="{{ form_method }}" class="form-horizontal" {{ form_enctype(form) }}>
-        <div class="row">
-            {% block form %}
-                {{ form_rest(form) }}
-            {% endblock %}
-        </div>
-    </form>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Modal header</h3>
+        <div class="locales-container"></div>
+    </div>
+    <div class="modal-body">
+        <form action="{{ form_action }}" method="{{ form_method }}" class="form-horizontal" {{ form_enctype(form) }}>
+            <div class="row">
+                {% block form %}
+                    {{ form_rest(form) }}
+                {% endblock %}
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">Close</button>
+        <button type="button" class="btn btn-primary modal-save">Save</button>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
