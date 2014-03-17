@@ -30,10 +30,11 @@
         filter='cssrewrite'
         output='compiled/admin/css/admin.css'
         %}
-        <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal-bs3patch.css') }}" />
-        <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal.css') }}" />
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+
+        <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal-bs3patch.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal.css') }}" />
 
         <!--[if IE 7]>
         <link rel="stylesheet" href="{{ 'admin/css/font-awesome-ie7.min.css' }}" />
