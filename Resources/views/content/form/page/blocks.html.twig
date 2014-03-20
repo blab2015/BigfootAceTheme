@@ -1,9 +1,13 @@
 {% block _admin_page_template_title_desc_block_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc2_block_blocks_widget block('blocks_widget') %}
 {% block _admin_page_template_title_desc_img_block_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc2_img_block_blocks_widget block('blocks_widget') %}
 {% block _admin_page_template_title_desc_block_sidebar_blocks_widget block('blocks_widget') %}
 {% block _admin_page_template_title_desc_img_block_sidebar_blocks_widget block('blocks_widget') %}
-{% block _admin_page_template_title_desc2_block_blocks_widget block('blocks_widget') %}
-{% block _admin_page_template_title_desc2_img_block_blocks_widget block('blocks_widget') %}
+
+{% block _admin_page_template_title_desc2_block2_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc_img_block2_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc2_img_block2_blocks_widget block('blocks_widget') %}
 
 {% block blocks_widget %}
     {% spaceless %}
@@ -11,23 +15,23 @@
             {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
         {% endif %}
 
-        <div class="col-sm-3"></div>
-        <div class="col-sm-5">
-            <div class="widget-box">
-                <div class="widget-header">
-                    <h4>Blocks</h4>
-                    <div class="widget-toolbar">
-                        <a href="#" class="admin-add-page-block"><i class="icon-plus bigger-130"></i></a>
-                    </div>
+        <div class="col-sm-2"></div>
+        <div class="panel-group col-xs-10 col-sm-7">
+            <div class="panel panel-default collection-container">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Blocks
+                        <span>
+                            <a href="#" class="ajax-modal create-block" data-toggle="modal" data-url="{{ path('admin_content_template_choose', { 'contentType': 'block', 'layout': '_modal' }) }}" data-title="Create a new block">Create a new block</a>
+                            <a href="#" class="admin-add-page-block pull-right"><i class="icon-plus bigger-130"></i></a>
+                        </span>
                 </div>
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <ul {{ block('widget_container_attributes') }}>
-                            {% for child in form %}
-                                {{ form_row(child) }}
-                            {% endfor %}
-                        </ul>
-                    </div>
+                <div class="panel-body">
+                    <ul {{ block('widget_container_attributes') }}>
+                        {% for child in form %}
+                            {{ form_row(child) }}
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
