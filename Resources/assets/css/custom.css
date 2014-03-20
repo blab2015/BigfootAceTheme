@@ -87,6 +87,10 @@ img.crud-column-media {
     text-decoration: none;
 }
 
+.create-block {
+    margin-left: 20px;
+}
+
 .clear {
     clear: both;
 }
