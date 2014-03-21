@@ -18,7 +18,8 @@
                     <h4 class="panel-title">
                         Blocks
                         <span>
-                            <a href="#" class="admin-add-sidebar-block pull-right"><i class="icon-plus bigger-130"></i></a>
+                            <a href="#" class="ajax-modal admin-create-block" data-toggle="modal" data-url="{{ path('admin_content_template_choose', { 'contentType': 'block', 'layout': '_modal' }) }}" data-title="Create a new block">Create a new block</a>
+                            <a href="#" class="admin-add-block pull-right"><i class="icon-plus bigger-130"></i></a>
                         </span>
                     </h4>
                 </div>
@@ -38,7 +39,8 @@
     {% spaceless %}
         <li class="block-row">
             <div class="pull-right">
-                <a href="#" class="admin-delete-sidebar-block"><i class="icon-remove red bigger-130"></i></a>
+                <a href="#" class="admin-edit-block" data-toggle="modal" data-title="Edit block"><i class="icon-edit bigger-130"></i></a>
+                <a href="#" class="admin-delete-block"><i class="icon-remove red bigger-130"></i></a>
             </div>
 
             {{ form_row(form.block, { 'attr': { 'class': 'admin_block_select' }}) }}
