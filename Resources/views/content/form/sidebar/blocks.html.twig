@@ -66,10 +66,10 @@
                     {% for template in form.template %}
                         <label style="text-align:center;">
                             {{ form_widget(template) }}
-                            {% set templateFileName = template.vars.value %}
-                            {% if '/' in templateFileName %}
-                                {% set templateFileName = template.vars.value|split('/')|slice(1)|join('/') %}
-                            {% endif %}
+                            {%- set templateFileName = template.vars.value %}
+                            {%- if '/' in templateFileName %}
+                                {%- set templateFileName = template.vars.value|split('/')|slice(1)|join('/') %}
+                            {%- endif %}
                             <img src="{{ asset('images/template/block/' ~ templateFileName ~ '.svg') }}" width="80" height="80"><br />
                             <span style="font-size:9px;">{{ template.vars.label }}</span>
                         </label>
