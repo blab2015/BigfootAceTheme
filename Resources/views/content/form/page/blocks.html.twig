@@ -28,14 +28,12 @@
                             <a href="#" class="admin-add-block pull-right"><i class="icon-plus bigger-130"></i></a>
                         </span>
                 </div>
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <ul {{ block('widget_container_attributes') }}>
-                            {% for child in form %}
-                                {{ form_row(child) }}
-                            {% endfor %}
-                        </ul>
-                    </div>
+                <div class="panel-body">
+                    <ul {{ block('widget_container_attributes') }}>
+                        {% for child in form %}
+                            {{ form_row(child) }}
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
