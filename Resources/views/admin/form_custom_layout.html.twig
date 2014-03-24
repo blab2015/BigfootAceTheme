@@ -182,10 +182,15 @@
 {% block form_row %}
     {% spaceless %}
         <div class="form-group">
-            {% if not form.vars.compound %}
-            {{ form_label(form) }}
+            {% if form_errors(form)|length %}
+                <div class="form-errors">
+                    <div class="col-sm-3 "></div>
+                    {{ form_errors(form) }}
+                </div>
             {% endif %}
-            {{ form_errors(form) }}
+            {% if not form.vars.compound %}
+                {{ form_label(form) }}
+            {% endif %}
             {{ form_widget(form) }}
         </div>
     {% endspaceless %}

@@ -91,6 +91,10 @@ img.crud-column-media {
     clear: both;
 }
 
+.form-errors {
+    color: #FF0000;
+}
+
 .wrapper {
     height: 250px;
     overflow: hidden;
