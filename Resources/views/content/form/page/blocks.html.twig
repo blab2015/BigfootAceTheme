@@ -1,15 +1,15 @@
 {% block _admin_page_template_title_desc_block_blocks_widget block('blocks_widget') %}
-{% block _admin_page_template_title_desc_img_block_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc_media_block_blocks_widget block('blocks_widget') %}
 {% block _admin_page_template_title_desc_block_sidebar_blocks_widget block('blocks_widget') %}
-{% block _admin_page_template_title_desc_img_block_sidebar_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc_media_block_sidebar_blocks_widget block('blocks_widget') %}
 {% block _admin_page_template_title_desc2_block_blocks_widget block('blocks_widget') %}
-{% block _admin_page_template_title_desc2_img_block_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc2_media_block_blocks_widget block('blocks_widget') %}
 {% block _admin_page_template_title_desc2_block2_blocks_widget block('blocks_widget') %}
-{% block _admin_page_template_title_desc_img_block2_blocks_widget block('blocks_widget') %}
-{% block _admin_page_template_title_desc2_img_block2_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc_media_block2_blocks_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc2_media_block2_blocks_widget block('blocks_widget') %}
 {% block _admin_page_template_title_desc2_block2_blocks2_widget block('blocks_widget') %}
-{% block _admin_page_template_title_desc_img_block2_blocks2_widget block('blocks_widget') %}
-{% block _admin_page_template_title_desc2_img_block2_blocks2_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc_media_block2_blocks2_widget block('blocks_widget') %}
+{% block _admin_page_template_title_desc2_media_block2_blocks2_widget block('blocks_widget') %}
 
 {% block blocks_widget %}
     {% spaceless %}
@@ -24,18 +24,15 @@
                     <h4 class="panel-title">
                         Blocks
                         <span>
-                            <a href="#" class="ajax-modal admin-create-block" data-toggle="modal" data-url="{{ path('admin_content_template_choose', { 'contentType': 'block', 'layout': '_modal' }) }}" data-title="Create a new block">Create a new block</a>
                             <a href="#" class="admin-add-block pull-right"><i class="icon-plus bigger-130"></i></a>
                         </span>
                 </div>
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <ul {{ block('widget_container_attributes') }}>
-                            {% for child in form %}
-                                {{ form_row(child) }}
-                            {% endfor %}
-                        </ul>
-                    </div>
+                <div class="panel-body">
+                    <ul {{ block('widget_container_attributes') }}>
+                        {% for child in form %}
+                            {{ form_row(child) }}
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
@@ -52,6 +49,15 @@
 
             {{ form_row(form.block, { 'attr': { 'class': 'admin_block_select' }}) }}
 
+            <div class="form-group">
+                <div class="control-label col-sm-3"></div>
+                <div class="panel-group col-xs-10 col-sm-5">
+                    <a href="#" class="ajax-modal admin-create-block" data-toggle="modal" data-url="{{ path('admin_content_template_choose', { 'contentType': 'block', 'layout': '_modal' }) }}" data-title="Create a new block">
+                        Create a new block
+                    </a>
+                </div>
+            </div>
+
             <div class="clear"></div>
 
             {{ form_row(form.position) }}
@@ -59,11 +65,15 @@
             <div class="form-group">
                 {{ form_label(form.template, 'Template') }}
 
-                <fieldset>
+                <fieldset class="templates-container">
                     {% for template in form.template %}
                         <label style="text-align:center;">
                             {{ form_widget(template) }}
-                            <img src="{{ asset('images/template/block/' ~ template.vars.label ~ '.svg') }}" width="80" height="80"><br />
+                            {% set templateFileName = template.vars.value %}
+                            {% if '/' in templateFileName %}
+                                {% set templateFileName = template.vars.value|split('/')|slice(1)|join('/') %}
+                            {% endif %}
+                            <img src="{{ asset('images/template/block/' ~ templateFileName ~ '.svg') }}" width="80" height="80"><br />
                             <span style="font-size:9px;">{{ template.vars.label }}</span>
                         </label>
                     {% endfor %}

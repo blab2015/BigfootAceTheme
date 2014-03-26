@@ -71,7 +71,7 @@ img.crud-column-media {
 
 .admin-create-block {
     font-size: 12px;
-    margin-left: 20px;
+    margin-left: -10px;
 }
 
 .admin-edit-block {
@@ -89,6 +89,10 @@ img.crud-column-media {
 
 .clear {
     clear: both;
+}
+
+.form-errors {
+    color: #FF0000;
 }
 
 .wrapper {

@@ -1,9 +1,9 @@
 {% block _admin_sidebar_template_block_blocks_widget block('blocks_widget') %}
 {% block _admin_sidebar_template_title_block_blocks_widget block('blocks_widget') %}
-{% block _admin_sidebar_template_img_block_blocks_widget block('blocks_widget') %}
-{% block _admin_sidebar_template_title_img_block_blocks_widget block('blocks_widget') %}
+{% block _admin_sidebar_template_media_block_blocks_widget block('blocks_widget') %}
+{% block _admin_sidebar_template_title_media_block_blocks_widget block('blocks_widget') %}
 {% block _admin_sidebar_template_title_desc_block_blocks_widget block('blocks_widget') %}
-{% block _admin_sidebar_template_title_desc_img_block_blocks_widget block('blocks_widget') %}
+{% block _admin_sidebar_template_title_desc_media_block_blocks_widget block('blocks_widget') %}
 
 {% block blocks_widget %}
     {% spaceless %}
@@ -11,14 +11,13 @@
             {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
         {% endif %}
 
-        <div class="col-sm-3"></div>
-        <div class="panel-group col-xs-10 col-sm-5">
+        <div class="col-sm-2"></div>
+        <div class="panel-group col-xs-10 col-sm-7 collection-container">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Blocks
                         <span>
-                            <a href="#" class="ajax-modal admin-create-block" data-toggle="modal" data-url="{{ path('admin_content_template_choose', { 'contentType': 'block', 'layout': '_modal' }) }}" data-title="Create a new block">Create a new block</a>
                             <a href="#" class="admin-add-block pull-right"><i class="icon-plus bigger-130"></i></a>
                         </span>
                     </h4>
@@ -45,6 +44,15 @@
 
             {{ form_row(form.block, { 'attr': { 'class': 'admin_block_select' }}) }}
 
+            <div class="form-group">
+                <div class="control-label col-sm-3"></div>
+                <div class="panel-group col-xs-10 col-sm-5">
+                    <a href="#" class="ajax-modal admin-create-block" data-toggle="modal" data-url="{{ path('admin_content_template_choose', { 'contentType': 'block', 'layout': '_modal' }) }}" data-title="Create a new block">
+                        Create a new block
+                    </a>
+                </div>
+            </div>
+
             <div class="clear"></div>
 
             {{ form_row(form.position) }}
@@ -58,7 +66,11 @@
                     {% for template in form.template %}
                         <label style="text-align:center;">
                             {{ form_widget(template) }}
-                            <img src="{{ asset('images/template/block/' ~ template.vars.label ~ '.svg') }}" width="80" height="80"><br />
+                            {% set templateFileName = template.vars.value %}
+                            {% if '/' in templateFileName %}
+                                {% set templateFileName = template.vars.value|split('/')|slice(1)|join('/') %}
+                            {% endif %}
+                            <img src="{{ asset('images/template/block/' ~ templateFileName ~ '.svg') }}" width="80" height="80"><br />
                             <span style="font-size:9px;">{{ template.vars.label }}</span>
                         </label>
                     {% endfor %}
