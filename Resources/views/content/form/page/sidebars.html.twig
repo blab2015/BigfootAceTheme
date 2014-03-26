@@ -46,7 +46,7 @@
             <div class="form-group">
                 {{ form_label(form.template, 'Template') }}
 
-                <fieldset>
+                <fieldset class="templates-container">
                     {% for template in form.template %}
                         <label style="text-align:center;">
                             {{ form_widget(template) }}
