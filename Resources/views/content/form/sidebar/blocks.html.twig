@@ -18,7 +18,6 @@
                     <h4 class="panel-title">
                         Blocks
                         <span>
-                            <a href="#" class="ajax-modal admin-create-block" data-toggle="modal" data-url="{{ path('admin_content_template_choose', { 'contentType': 'block', 'layout': '_modal' }) }}" data-title="Create a new block">Create a new block</a>
                             <a href="#" class="admin-add-block pull-right"><i class="icon-plus bigger-130"></i></a>
                         </span>
                     </h4>
@@ -44,6 +43,15 @@
             </div>
 
             {{ form_row(form.block, { 'attr': { 'class': 'admin_block_select' }}) }}
+
+            <div class="form-group">
+                <div class="control-label col-sm-3"></div>
+                <div class="panel-group col-xs-10 col-sm-5">
+                    <a href="#" class="ajax-modal admin-create-block" data-toggle="modal" data-url="{{ path('admin_content_template_choose', { 'contentType': 'block', 'layout': '_modal' }) }}" data-title="Create a new block">
+                        Create a new block
+                    </a>
+                </div>
+            </div>
 
             <div class="clear"></div>
 
