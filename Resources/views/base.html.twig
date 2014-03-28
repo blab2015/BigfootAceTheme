@@ -9,31 +9,32 @@
 
     {% block stylesheets %}
         {% stylesheets
-        'admin/css/bootstrap.min.css'
-        'admin/css/font-awesome.min.css'
-        'admin/css/jquery-ui-1.10.3.full.min.css'
-        'admin/css/jquery-ui-1.10.3.custom.min.css'
-        'admin/css/chosen.css'
-        'admin/css/datepicker.css'
-        'admin/css/bootstrap-timepicker.css'
-        'admin/css/daterangepicker.css'
-        'admin/css/colorpicker.css'
-        'admin/css/ace-fonts.css'
-        'admin/css/ui.jqgrid.css'
-        'admin/css/ace-fonts.css'
-        'admin/css/ace.min.css'
-        'admin/css/ace-rtl.min.css'
-        'admin/css/ace-skins.min.css'
-        'admin/css/jquery.gritter.css'
-        'admin/css/colorbox.css'
-        'admin/css/custom.css'
-        filter='cssrewrite'
-        output='compiled/admin/css/admin.css'
+            'admin/css/bootstrap.min.css'
+            'admin/css/font-awesome.min.css'
+            'admin/css/jquery-ui-1.10.3.full.min.css'
+            'admin/css/jquery-ui-1.10.3.custom.min.css'
+            'admin/css/chosen.css'
+            'admin/css/datepicker.css'
+            'admin/css/bootstrap-timepicker.css'
+            'admin/css/daterangepicker.css'
+            'admin/css/colorpicker.css'
+            'admin/css/ace-fonts.css'
+            'admin/css/ui.jqgrid.css'
+            'admin/css/ace-fonts.css'
+            'admin/css/ace.min.css'
+            'admin/css/ace-rtl.min.css'
+            'admin/css/ace-skins.min.css'
+            'admin/css/jquery.gritter.css'
+            'admin/css/colorbox.css'
+            'admin/css/custom.css'
+            filter='cssrewrite'
+            output='compiled/admin/css/admin.css'
         %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
         <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal-bs3patch.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal.css') }}" />
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
 
         <!--[if IE 7]>
         <link rel="stylesheet" href="{{ 'admin/css/font-awesome-ie7.min.css' }}" />
@@ -116,22 +117,23 @@
         'admin/js/jqGrid/custom.js'
         'admin/js/jquery.carouFredSel.js'
         '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
-        output='compiled/admin/js/scripts.js' %}
+        output='compiled/admin/js/scripts.js'
+    %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
     {% javascripts
-    "@BigfootCoreBundle/Resources/views/translation/locale_tabs.html.twig"
-    "@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig"
-    "@BigfootAceThemeBundle/Resources/views/modal/base.html.twig"
-    filter="twig_js"
-    output='compiled/admin/js/twigs.js' %}
-    <script src="{{ asset_url }}"></script>
+        "@BigfootCoreBundle/Resources/views/translation/locale_tabs.html.twig"
+        "@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig"
+        "@BigfootAceThemeBundle/Resources/views/modal/base.html.twig"
+        filter="twig_js"
+        output='compiled/admin/js/twigs.js'
+    %}
+        <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
-
     <script src="{{ asset('bundles/bigfootcore/js/nestable.js') }}"></script>
     <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modalmanager.js') }}"></script>
     <script src="{{ asset('bundles/bigfootcore/js/bootstrap-modal.js') }}"></script>
