@@ -223,3 +223,40 @@
         {{ block('form_widget') }}
     </div>
 {% endblock %}
+
+{% block bigfoot_link_widget %}
+    {{ form_label(form) }}
+    <div class="tabbable col-sm-5">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="{% if form.externalLink.vars.value is not defined or not form.externalLink.vars.value %}active{% endif %}">
+                <a href="#internal-link" class="internal-link" data-toggle="tab">
+                    Internal link
+                </a>
+            </li>
+            <li class="{% if form.externalLink.vars.value is defined and form.externalLink.vars.value %}active{% endif %}">
+                <a href="#external-link" class="external-link" data-toggle="tab">
+                    External link
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="internal-link" class="tab-pane {% if form.externalLink.vars.value is not defined or not form.externalLink.vars.value %}active{% endif %} internal-link-tab">
+                <div class="form-group">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, { 'attr': { 'data-link': 'link' }}) }}
+                </div>
+
+                {% if form.parameters is defined %}
+                    {{ form_widget(form.parameters) }}
+                {% endif %}
+            </div>
+            <div id="external-link" class="tab-pane {% if form.externalLink.vars.value is defined and form.externalLink.vars.value %}active{% endif %}">
+                <div class="form-group">
+                    {{ form_label(form.externalLink) }}
+                    {{ form_widget(form.externalLink) }}
+                </div>
+            </div>
+            {{ form_widget(form.linkType, { 'attr': { 'class': 'link-type' }}) }}
+        </div>
+    </div>
+{% endblock %}
