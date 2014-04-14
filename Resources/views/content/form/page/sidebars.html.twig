@@ -3,6 +3,8 @@
 {% block _admin_page_template_title_desc_block_sidebar_sidebars_widget block('sidebars_widget') %}
 {% block _admin_page_template_title_desc_media_block_sidebar_sidebars_widget block('sidebars_widget') %}
 
+{% block _admin_page_template_block_sidebar_sidebars_widget block('sidebars_widget') %}
+
 {% block sidebars_widget %}
     {% spaceless %}
         {% if prototype is defined %}
@@ -12,7 +14,6 @@
         <div class="col-sm-2"></div>
         <div class="panel-group col-xs-10 col-sm-7">
             <div class="panel panel-default collection-container">
-                <div class="panel-heading">
                     <h4 class="panel-title">
                         Sidebars
                         <span>
@@ -50,10 +51,10 @@
                     {% for template in form.template %}
                         <label style="text-align:center;">
                             {{ form_widget(template) }}
-                            {% set templateFileName = template.vars.value %}
-                            {% if '/' in templateFileName %}
-                                {% set templateFileName = template.vars.value|split('/')|slice(1)|join('/') %}
-                            {% endif %}
+                            {%- set templateFileName = template.vars.value %}
+                            {%- if '/' in templateFileName %}
+                                {%- set templateFileName = template.vars.value|split('/')|slice(1)|join('/') %}
+                            {%- endif %}
                             <img src="{{ asset('images/template/sidebar/' ~ templateFileName ~ '.svg') }}" width="80" height="80"><br />
                             <span style="font-size:9px;">{{ template.vars.label }}</span>
                         </label>

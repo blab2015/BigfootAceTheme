@@ -30,7 +30,7 @@
             filter='cssrewrite'
             output='compiled/admin/css/admin.css'
         %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
+        <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
         <link rel="stylesheet" href="{{ asset('bundles/bigfootcore/css/bootstrap-modal-bs3patch.css') }}" />
@@ -67,7 +67,9 @@
 {% block body %}
 {% endblock %}
 
+{% block modals %}
 <div id="ajax-modal" class="modal container fade" tabindex="-1" style="display: none;"></div>
+{% endblock modals %}
 
 {% block javascripts %}
     <script type="text/javascript">
@@ -132,6 +134,7 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
+    <script src="{{ asset('bundles/bigfootnavigation/js/link.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     <script src="{{ asset('bundles/bigfootcore/js/nestable.js') }}"></script>

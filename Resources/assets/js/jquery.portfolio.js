@@ -45,13 +45,8 @@
             var popinHref       = popinOpenButton.attr('href');
 
             if (popinHref.indexOf('#') == 0) {
-                $(popinHref).modal('open');
-
-                $(popinHref).on('hidden.bs.modal', function () {
-                    $(".modal-backdrop").hide();
-                    $(".modal-scrollable").hide();
-                    $(base.options['portfolioPopinClass']).modal('hide');
-                });
+                $(popinHref).modalmanager('createModal');
+                $(popinHref).modalmanager('appendModal');
             } else {
                 $.get(popinHref, function(data) {
                     $(base.options['portfolioPopinClass']).remove();
@@ -72,8 +67,6 @@
                     $data.modal('show');
 
                     $data.on('hidden.bs.modal', function () {
-                        $(".modal-backdrop").hide();
-                        $(".modal-scrollable").hide();
                         $(base.options['portfolioPopinClass']).modal('hide');
                     });
 
@@ -281,8 +274,6 @@
                 linkPopin.attr('href', urlArray.join('/'));
             }
 
-            $(".modal-backdrop").hide();
-            $(".modal-scrollable").hide();
             $(base.options['portfolioPopinClass']).modal('hide');
 
             return false;

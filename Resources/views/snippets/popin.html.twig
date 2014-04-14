@@ -13,9 +13,9 @@
             <div class="tab-pane {% if selectedMedias %} active{% endif %}" id="media">
                 <table id="list" class="table table-striped ">
                     <tbody>
-                    {% for media in selectedMedias %}
+                        {% for media in selectedMedias %}
                         {% include 'BigfootAceThemeBundle:snippets:table_line.html.twig' with {'line': media, 'used': true} %}
-                    {% endfor %}
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
