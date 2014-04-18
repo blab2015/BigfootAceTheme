@@ -10,7 +10,7 @@
         <div class="navbar-container" id="navbar-container">
             <div class="navbar-header pull-left">
                 <a href="{{ path('admin_home') }}" class="navbar-brand">
-                    {{ bigfoot_theme.title }} - <small>Société Européenne d'Hôtellerie</small>
+                    {{ bigfoot_theme.title }} - <small>{{ bigfoot_theme.subtitle }}</small>
                 </a>
             </div>
 
@@ -28,7 +28,7 @@
 
                             {%- if bigfoot_theme.menu_context is defined and bigfoot_theme.menu_context -%}
                                 {%- for contextSlug, contextLabel in context.getValues(bigfoot_theme.menu_context) %}
-                                    {% include 'BigfootAceThemeBundle:admin:context_menu_item.html.twig' %}
+                                    {% include 'BigfootAceThemeBundle:layout:context_menu_item.html.twig' %}
                                 {%- endfor %}
                             {%- endif %}
                         </ul>
