@@ -226,7 +226,7 @@
 
 {% block bigfoot_link_widget %}
     {{ form_label(form) }}
-    <div class="tabbable col-sm-5">
+    <div class="tabbable col-sm-5 bigfoot-link">
         <ul id="myTab" class="nav nav-tabs">
             <li class="{% if form.externalLink.vars.value is not defined or not form.externalLink.vars.value %}active{% endif %}">
                 <a href="#internal-link" class="internal-link" data-toggle="tab">
