@@ -58,14 +58,14 @@
 
 {% block form_widget_time_picker %}
     {% if inDateTime is not defined %}
-        {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+        {% set widgetClass = 'col-xs-10 col-sm-2 ' %}
     {% else %}
         {% set widgetClass = '' %}
     {% endif %}
     {% if attr.class is defined %}
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
-    {% set attr = (attr | merge({class: widgetClass})) %}
+    {#{% set attr = (attr | merge({class: widgetClass})) %}#}
     {% if attr['data-popover'] is defined and attr['data-popover'] %}
         {% set dataContent = attr['data-content'] %}
         {% set dataTitle = attr['data-title'] %}
@@ -73,7 +73,7 @@
         {% set dataPlacement = attr['data-placement'] %}
     {% endif %}
     {% set type = type|default('text') %}
-    <div class="input-group bootstrap-timepicker">
+    <div class="input-group bootstrap-timepicker {{ widgetClass }}">
         <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
         <span class="input-group-addon">
             <i class="icon-time bigger-110"></i>
@@ -312,7 +312,7 @@
 {% endblock %}
 
 {% block datetime_widget %}
-    {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+    {% set widgetClass = 'col-xs-10 col-sm-2 ' %}
     {% spaceless %}
         {% if widget == 'single_text' %}
             {{ block('form_widget_simple') }}
@@ -332,14 +332,14 @@
     {% spaceless %}
         {% if widget == 'single_text' %}
             {% if not inDateTime is defined or inDateTime == false %}
-                {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+                {% set widgetClass = 'col-xs-10 col-sm-2 ' %}
                 {% if widgetClass is defined %}
                     {% set attr = attr|merge({ 'class': widgetClass }) %}
                 {% endif %}
                 <div {{ block('widget_container_attributes') }}>
             {% endif %}
             {% set attr = {'class': 'date-picker'} %}
-                {{ block('form_widget_date_picker') }}
+            {{ block('form_widget_date_picker') }}
             {% if not inDateTime is defined or inDateTime == false %}
                 </div>
             {% endif %}
@@ -362,8 +362,18 @@
 {% block time_widget %}
 {% spaceless %}
     {% if widget == 'single_text' %}
+        {% if not inDateTime is defined or inDateTime == false %}
+            {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+            {% if widgetClass is defined %}
+                {% set attr = attr|merge({ 'class': widgetClass }) %}
+            {% endif %}
+            <div {{ block('widget_container_attributes') }}>
+        {% endif %}
         {% set attr = {'class': 'timepicker'} %}
         {{ block('form_widget_time_picker') }}
+        {% if not inDateTime is defined or inDateTime == false %}
+            </div>
+        {% endif %}
     {% else %}
         {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {} %}
         <div {{ block('widget_container_attributes') }}>
