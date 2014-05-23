@@ -13,6 +13,7 @@ jQuery(function($) {
     $('[data-rel=tooltip]').tooltip({container:'body'});
     $('[data-rel=popover]').popover({container:'body'});
 
+    $(".chosen-select-no-search").chosen({disable_search: true});
     $(".chosen-select").chosen();
     $('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
         $(this).prev().focus();
