@@ -12,7 +12,19 @@ $(document).ready(function () {
 jQuery(function($) {
     $('[data-rel=tooltip]').tooltip({container:'body'});
     $('[data-rel=popover]').popover({container:'body'});
+
     $(".chosen-select").chosen();
+    $('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+        $(this).prev().focus();
+    });
+    $('.timepicker').timepicker({
+        minuteStep: 15,
+        showSeconds: false,
+        showMeridian: false
+    }).next().on(ace.click_event, function(){
+        $(this).prev().focus();
+    });
+
     $.bigfoot.portfolio();
     setTranslatableFields();
 
