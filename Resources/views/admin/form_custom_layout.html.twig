@@ -118,7 +118,11 @@
 {% endblock choice_widget_expanded %}
 
 {% block choice_widget_collapsed %}
-    {% set widgetClass = 'width-30 chosen-select ' %}
+    {% if attr['data-no-search'] is defined and attr['data-no-search'] == true%}
+        {% set widgetClass = 'width-30 chosen-select-no-search ' %}
+    {% else %}
+        {% set widgetClass = 'width-30 chosen-select ' %}
+    {% endif  %}
     {% if multiple %}
         {% set widgetClass = widgetClass~'tag-input-style ' %}
     {% endif %}
