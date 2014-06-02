@@ -198,7 +198,6 @@
 {% endblock %}
 
 {% block collection_widget %}
-    <label class="control-label col-sm-3">{{ label | trans }}</label>
     {% if prototype is defined %}
     <div class="col-xs-10 col-sm-5 ">
         <a href="#" class="addCollectionItem btn btn-link" data-collection-id="#{{ id }}" data-prototype-name="{{ prototype_name | default('__name__') }}">{{ 'Add' | trans }}</a>
@@ -210,7 +209,9 @@
 {% endblock %}
 
 {% block bigfoot_collection_item_widget %}
+    {%- if label is sameas(false) %}
     <div class="col-sm-3 "></div>
+    {%- endif %}
     <div id="accordion-container-{{ id }}" class="sortable-collection-item accordion-style1 panel-group col-xs-10 col-sm-5 ">
         <div class="panel panel-default">
             <div class="panel-heading">
