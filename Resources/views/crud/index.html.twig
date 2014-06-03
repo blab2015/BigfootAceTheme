@@ -28,8 +28,8 @@
         {% block table_head %}
             <thead>
                 <tr>
-                    {% for attr, field in list_fields %}
-                        <th>{{ knp_pagination_sortable(list_items, field|trans, 'e.' ~ attr) }}</th>
+                    {% for field in list_fields.list %}
+                        <th>{{ knp_pagination_sortable(list_items, field.label, field.sort) }}</th>
                     {% endfor %}
 
                     <th>Actions</th>
@@ -40,7 +40,7 @@
             <tbody>
                 {% for item in list_items %}
                     <tr class="entity-edit">
-                        {% for attr, field in list_fields %}
+                        {% for attr, field in list_fields.list %}
                             <td>{{ attribute(item, attr)|nl2br }}</td>
                         {% endfor %}
 
