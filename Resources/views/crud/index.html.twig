@@ -23,13 +23,12 @@
 
         <div class="clearfix"></div>
     </div>
-
     <table class="table table-striped table-bordered table-hover">
         {% block table_head %}
             <thead>
                 <tr>
-                    {% for field in list_fields %}
-                        <th>{{ knp_pagination_sortable(list_items, field.label|trans, field.sort) }}</th>
+                    {% for attr, field in list_fields %}
+                        <th>{{ knp_pagination_sortable(list_items, field.label|trans, field.sort|default('e.' ~ attr)) }}</th>
                     {% endfor %}
 
                     <th>Actions</th>
