@@ -134,15 +134,15 @@ div.table-header div.action-buttons {
 }
  .dd-handle .action-buttons,
  .dd2-content .action-buttons {
-     margin-top: 0px;
+     margin-top: -7px;
      margin-right: 10px;
  }
  .dd-handle,
  .dd2-content {
      display: block;
      min-height: 38px;
-     margin: 3px 0;
-     padding: 7px 0 0 12px;
+     margin: 3px 0 0;
+     padding: 16px 0 0 12px;
      background: #F8FAFF;
      border: 1px solid #DAE2EA;
      color: #7C9EB2;
@@ -151,4 +151,9 @@ div.table-header div.action-buttons {
      -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
      box-sizing: border-box;
+ }
+ .dd-item,
+ .dd-empty,
+ .dd-placeholder {
+     line-height: 5px;
  }
