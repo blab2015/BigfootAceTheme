@@ -132,3 +132,12 @@ img.crud-column-media {
 div.table-header div.action-buttons {
     margin-right: 10px;
 }
+
+
+/**
+ * Form render
+ */
+.form-block input[type="text"], .form-block input[type="password"], .form-block input[type="number"], .form-block select, .form-block .input-group, .chosen-container, .width-100 { width: 100% !important; }
+.input-group-addon.no-style { border: none; padding: 0 10px; background: none; }
+.select-popover .chosen-container { width: calc(100% - 50px) !important; }
+.popover-addon { padding: 0 10px; }
