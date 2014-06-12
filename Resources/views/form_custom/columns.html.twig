@@ -1,0 +1,389 @@
+{% use 'form_div_layout.html.twig' %}
+
+{% block form_start %}
+    {% set widgetClass = 'form-horizontal ' %}
+    {% if attr.class is defined %}
+        {% set widgetClass = widgetClass ~ attr.class %}
+    {% endif %}
+    {% set attr = (attr | merge({class: widgetClass})) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block form_label %}
+    {% set widgetClass = 'control-label col-sm-3 ' %}
+    {% if label_attr.class is defined %}
+        {% set widgetClass = widgetClass ~ label_attr.class %}
+    {% endif %}
+    {% set label_attr = (label_attr | merge({class: widgetClass})) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block form_widget_simple %}
+    {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+    {% if attr.class is defined %}
+        {% set widgetClass = widgetClass ~ attr.class %}
+    {% endif %}
+    {% set attr = (attr | merge({class: widgetClass})) %}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        {% set dataContent = attr['data-content'] %}
+        {% set dataTitle = attr['data-title'] %}
+        {% set dataTrigger = attr['data-trigger'] %}
+        {% set dataPlacement = attr['data-placement'] %}
+    {% endif %}
+    {{ parent() }}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+    {% endif %}
+{% endblock %}
+
+{% block form_widget_date_picker %}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        {% set dataContent = attr['data-content'] %}
+        {% set dataTitle = attr['data-title'] %}
+        {% set dataTrigger = attr['data-trigger'] %}
+        {% set dataPlacement = attr['data-placement'] %}
+    {% endif %}
+    {% set type = type|default('text') %}
+    <div class="input-group">
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <span class="input-group-addon">
+            <i class="icon-calendar bigger-110"></i>
+        </span>
+    </div>
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+    {% endif %}
+{% endblock %}
+
+{% block form_widget_time_picker %}
+    {% if inDateTime is not defined %}
+        {% set widgetClass = 'col-xs-10 col-sm-2 ' %}
+    {% else %}
+        {% set widgetClass = '' %}
+    {% endif %}
+    {% if attr.class is defined %}
+        {% set widgetClass = widgetClass ~ attr.class %}
+    {% endif %}
+    {#{% set attr = (attr | merge({class: widgetClass})) %}#}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        {% set dataContent = attr['data-content'] %}
+        {% set dataTitle = attr['data-title'] %}
+        {% set dataTrigger = attr['data-trigger'] %}
+        {% set dataPlacement = attr['data-placement'] %}
+    {% endif %}
+    {% set type = type|default('text') %}
+    <div class="input-group bootstrap-timepicker {{ widgetClass }}">
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <span class="input-group-addon">
+            <i class="icon-time bigger-110"></i>
+        </span>
+    </div>
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+    {% endif %}
+{% endblock %}
+
+{% block textarea_widget %}
+    {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+    {% if attr.class is defined %}
+        {% set widgetClass = widgetClass ~ attr.class %}
+    {% endif %}
+    {% set attr = (attr | merge({class: widgetClass})) %}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        {% set dataContent = attr['data-content'] %}
+        {% set dataTitle = attr['data-title'] %}
+        {% set dataTrigger = attr['data-trigger'] %}
+        {% set dataPlacement = attr['data-placement'] %}
+    {% endif %}
+    {{ parent() }}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+    {% endif %}
+{% endblock %}
+
+{% block choice_widget_expanded %}
+    {% spaceless %}
+        {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+        {% if attr.class is defined %}
+            {% set widgetClass = widgetClass ~ attr.class %}
+        {% endif %}
+        {% set attr = (attr | merge({class: widgetClass})) %}
+        <div {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                {{ form_widget(child) }}
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block choice_widget_collapsed %}
+    {% if attr['data-no-search'] is defined and attr['data-no-search'] == true%}
+        {% set widgetClass = 'width-30 chosen-select-no-search ' %}
+    {% else %}
+        {% set widgetClass = 'width-30 chosen-select ' %}
+    {% endif  %}
+    {% if multiple %}
+        {% set widgetClass = widgetClass~'tag-input-style ' %}
+    {% endif %}
+    {% if attr.class is defined %}
+        {% set widgetClass = widgetClass ~ attr.class %}
+    {% endif %}
+    {% set attr = (attr | merge({class: widgetClass})) %}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        {% set dataContent = attr['data-content'] %}
+        {% set dataTitle = attr['data-title'] %}
+        {% set dataTrigger = attr['data-trigger'] %}
+        {% set dataPlacement = attr['data-placement'] %}
+    {% endif %}
+    {{ parent() }}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+    {% endif %}
+{% endblock choice_widget_collapsed %}
+
+{% block checkbox_widget %}
+    {% spaceless %}
+        {% set widgetClass = 'ace ace-switch ace-switch-7 ' %}
+        {% if attr.class is defined %}
+            {% set widgetClass = widgetClass ~ attr.class %}
+        {% endif %}
+        {% set attr = (attr | merge({class: widgetClass})) %}
+        {% if attr['data-popover'] is defined and attr['data-popover'] %}
+            {% set dataContent = attr['data-content'] %}
+            {% set dataTitle = attr['data-title'] %}
+            {% set dataTrigger = attr['data-trigger'] %}
+            {% set dataPlacement = attr['data-placement'] %}
+        {% endif %}
+        <label>
+            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+            <span class="lbl"></span>
+        </label>
+    {% endspaceless %}
+    {% if attr['data-popover'] is defined and attr['data-popover'] %}
+        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+    {% endif %}
+    {% endblock checkbox_widget %}
+
+{% block radio_widget %}
+    {% spaceless %}
+        <div class="radio">
+            <label>
+                <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> {{ label }}
+            </label>
+        </div>
+    {% endspaceless %}
+{% endblock radio_widget %}
+
+{% block bigfoot_media_widget %}
+    {% spaceless %}
+        <div class="field-media col-xs-10 col-sm-5">
+        {% if value %}
+            {% if ';' in value %}
+            <div class="wrapper">
+                <div class="carousel">
+                    {%- for media in value | medias %}
+                    <div><img class="crud-column-media" src="{{ media | imagine_filter('media_gallery') }}" width="500" height="250" /></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <br/>
+            <a class="portfolio-popin-open btn" href="{{ path('portfolio_popin', {'id': value}) }}" data-base-href="{{ path('portfolio_popin') }}">{{ 'Upload or select medias' | trans }}</a>
+            {% else %}
+                <a class="portfolio-popin-open " href="{{ path('portfolio_popin', {'id': value}) }}" data-base-href="{{ path('portfolio_popin') }}"><img class="crud-column-media" src="{{ value|media|imagine_filter('media_single') }}" width="300" height="200" /></a>
+            {% endif %}
+        {% else %}
+            <a class="portfolio-popin-open btn" href="{{ path('portfolio_popin') }}" data-base-href="{{ path('portfolio_popin') }}">{{ 'Upload or select medias' | trans }}</a>
+        {% endif %}
+        {% set type = 'hidden' %}
+        {{ block('form_widget_simple') }}
+    {% endspaceless %}
+    </div>
+{% endblock %}
+
+{% block collection_widget %}
+    {% if prototype is defined %}
+    <div class="col-xs-10 col-sm-5 ">
+        <a href="#" class="addCollectionItem btn btn-link" data-collection-id="#{{ id }}" data-prototype-name="{{ prototype_name | default('__name__') }}">{{ 'Add' | trans }}</a>
+    </div>
+    {% endif %}
+</div>
+<div class="form-group">
+    {{ parent() }}
+{% endblock %}
+
+{% block bigfoot_collection_item_widget %}
+    {%- if label is sameas(false) %}
+    <div class="col-sm-3 "></div>
+    {%- endif %}
+    <div id="accordion-container-{{ id }}" class="sortable-collection-item accordion-style1 panel-group col-xs-10 col-sm-5 ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-container-{{ id }}" href="#accordion-{{ id }}">
+                        <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i>
+                        &nbsp;{{ value.__toString() | default('new item') | trans }}
+                        <a href="#_" class="deleteCollectionItem pull-right"><i class="icon-trash bigger-110"></i></a>
+                    </span>
+                </h4>
+            </div>
+            <div class="panel-collapse collapse in" id="accordion-{{ id }}">
+                <div class="panel-body">
+                    {{ block('form_widget') }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group">
+            {% if form_errors(form)|length %}
+                <div class="form-errors">
+                    <div class="col-sm-3 "></div>
+                    {{ form_errors(form) }}
+                </div>
+            {% endif %}
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block bigfoot_tag_widget %}
+    <div class="form-group">
+        {% if label is not sameas(false) %}
+            {% if not compound %}
+                {% set label_attr = label_attr|merge({'for': id}) %}
+            {% endif %}
+            {% if required %}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+            {% endif %}
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label col-sm-3')|trim}) %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+        {% endif %}
+        <div class="col-sm-5">
+            <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} placeholder="{{ 'Enter tags ...' | trans }}"/>
+        </div>
+    </div>
+{% endblock %}
+
+{% block parameters_collection_widget %}
+    <label class="control-label col-sm-3">{{ label }}</label>
+    <div class="col-xs-10 col-sm-5 ">
+        {{ block('form_widget') }}
+    </div>
+{% endblock %}
+
+{% block bigfoot_link_widget %}
+    <div class="tabbable col-sm-5 bigfoot-link">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="{% if form.externalLink.vars.value is not defined or not form.externalLink.vars.value %}active{% endif %}">
+                <a href="#internal-link" class="internal-link" data-toggle="tab">
+                    Internal link
+                </a>
+            </li>
+            <li class="{% if form.externalLink.vars.value is defined and form.externalLink.vars.value %}active{% endif %}">
+                <a href="#external-link" class="external-link" data-toggle="tab">
+                    External link
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="internal-link" class="tab-pane {% if form.externalLink.vars.value is not defined or not form.externalLink.vars.value %}active{% endif %} internal-link-tab">
+                <div class="form-group">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, { 'attr': { 'data-link': 'link' }}) }}
+                </div>
+
+                {% if form.parameters is defined %}
+                    {{ form_widget(form.parameters) }}
+                {% endif %}
+            </div>
+            <div id="external-link" class="tab-pane {% if form.externalLink.vars.value is defined and form.externalLink.vars.value %}active{% endif %}">
+                <div class="form-group">
+                    {{ form_label(form.externalLink) }}
+                    {{ form_widget(form.externalLink) }}
+                </div>
+            </div>
+            {{ form_widget(form.linkType, { 'attr': { 'class': 'link-type' }}) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block datetime_widget %}
+    {% set widgetClass = 'col-xs-10 col-sm-2 ' %}
+    {% spaceless %}
+        {% if widget == 'single_text' %}
+            {{ block('form_widget_simple') }}
+        {% else %}
+            {% set attr = attr|merge({ 'class': widgetClass }) %}
+            <div {{ block('widget_container_attributes') }}>
+                {{ form_widget(form.date, { inDateTime: true }) }}
+                {{ form_widget(form.time, { inDateTime: true }) }}
+                {{ form_errors(form.date, { inDateTime: true }) }}
+                {{ form_errors(form.time, { inDateTime: true }) }}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock datetime_widget %}
+
+{% block date_widget %}
+    {% spaceless %}
+        {% if widget == 'single_text' %}
+            {% if not inDateTime is defined or inDateTime == false %}
+                {% set widgetClass = 'col-xs-10 col-sm-2 ' %}
+                {% if widgetClass is defined %}
+                    {% set attr = attr|merge({ 'class': widgetClass }) %}
+                {% endif %}
+                <div {{ block('widget_container_attributes') }}>
+            {% endif %}
+            {% set attr = {'class': 'date-picker'} %}
+            {{ block('form_widget_date_picker') }}
+            {% if not inDateTime is defined or inDateTime == false %}
+                </div>
+            {% endif %}
+        {% else %}
+            {% if widgetClass is defined %}
+                {% set attr = attr|merge({ 'class': widgetClass }) %}
+            {% endif %}
+            <div {{ block('widget_container_attributes') }}>
+                {% set attr = attr|merge({ 'style': 'width: auto' }) %}
+                {{ date_pattern|replace({
+                '{{ year }}':  form_widget(form.year, { 'attr': attr }),
+                '{{ month }}': form_widget(form.month),
+                '{{ day }}':   form_widget(form.day),
+                })|raw }}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock date_widget %}
+
+{% block time_widget %}
+{% spaceless %}
+    {% if widget == 'single_text' %}
+        {% if not inDateTime is defined or inDateTime == false %}
+            {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+            {% if widgetClass is defined %}
+                {% set attr = attr|merge({ 'class': widgetClass }) %}
+            {% endif %}
+            <div {{ block('widget_container_attributes') }}>
+        {% endif %}
+        {% set attr = {'class': 'timepicker'} %}
+        {{ block('form_widget_time_picker') }}
+        {% if not inDateTime is defined or inDateTime == false %}
+            </div>
+        {% endif %}
+    {% else %}
+        {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {} %}
+        <div {{ block('widget_container_attributes') }}>
+            {{ form_widget(form.hour, vars) }}
+            {% if with_minutes %}:{{ form_widget(form.minute, vars) }}{% endif %}
+            {% if with_seconds %}:{{ form_widget(form.second, vars) }}{% endif %}
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock time_widget %}

@@ -24,6 +24,10 @@
         <div class="clearfix"></div>
     </div>
 
+    {% if list_filters is not null %}
+        {% include bigfoot_theme_bundle ~ ':crud:form_filters.html.twig' with {'form': list_filters} only %}
+    {% endif %}
+
     <table class="table table-striped table-bordered table-hover">
         {% block table_head %}
             <thead>
