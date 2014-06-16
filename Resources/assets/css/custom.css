@@ -29,10 +29,6 @@ img.crud-column-media {
     display: none;
 }
 
-.template-row input[type="radio"]:checked + img {
-    border: 1px solid #438EB9;
-}
-
 .block-row a {
     text-decoration: none;
 }
