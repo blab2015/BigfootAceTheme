@@ -1,0 +1,13 @@
+{% form_theme form 'BigfootAceThemeBundle:form_custom:filter.html.twig' %}
+
+<div class="dataTables_wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <form action="#" method="POST">
+                {{ form_rest(form) }}
+                <input type="submit" class="btn btn-xs btn-primary" value="{{ 'bigfoot.crud.index.filter.global.submit' | trans }}">
+            	<input type="submit" name="clear" class="btn btn-xs btn-danger" value="{{ 'bigfoot.crud.index.filter.global.clear' | trans }}">
+            </form>
+        </div>
+    </div>
+</div>

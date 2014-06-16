@@ -1,7 +1,10 @@
 {% extends bigfoot_theme_bundle ~ '::layout' ~ app.request.get('layout') ~ '.html.twig' %}
 
+{% form_theme form 'BigfootAceThemeBundle:form_custom:inline.html.twig' %}
+
 {% block content %}
-    <form action="{{ form_action }}" method="{{ form_method|default('POST') }}" class="form-horizontal" {{ form_enctype(form) }}>
+    {{ form_start(form) }}
+    {# <form action="{{ form_action }}" method="{{ form_method|default('POST') }}" class="form-horizontal" {{ form_enctype(form) }}> #}
         <div class="row">
             <div class="col-sm-12">
                 <div class="widget-box">

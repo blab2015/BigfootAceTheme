@@ -1,0 +1,7 @@
+bigfoot:
+    crud:
+        index:
+            filter:
+                global:
+                    submit: 'Filter'
+                    clear: 'Clear Filters'
