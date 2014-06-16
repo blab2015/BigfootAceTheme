@@ -1,5 +1,5 @@
 {% form_theme form 'BigfootAceThemeBundle:form_custom:filter.html.twig' %}
-
+{% if form is defined and form %}
 <div class="dataTables_wrapper">
     <div class="row">
         <div class="col-sm-12">
@@ -11,3 +11,4 @@
         </div>
     </div>
 </div>
+{% endif %}
