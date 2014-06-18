@@ -2,35 +2,6 @@
 {% block _admin_page_template_title_desc2_block2_blocks2_widget block('blocks2_widget') %}
 {% block _admin_page_template_title_desc2_img_block2_blocks2_widget block('blocks2_widget') %}
 
-{% block blocks2_widget %}
-    {% spaceless %}
-        {% if prototype is defined %}
-            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
-        {% endif %}
-
-        <div class="col-sm-2"></div>
-        <div class="col-sm-7">
-            <div class="widget-box">
-                <div class="widget-header">
-                    <h4>Blocks 2</h4>
-                    <div class="widget-toolbar">
-                        <a href="#" class="admin-add-page-block"><i class="icon-plus bigger-130"></i></a>
-                    </div>
-                </div>
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <ul {{ block('widget_container_attributes') }}>
-                            {% for child in form %}
-                                {{ form_row(child) }}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endspaceless %}
-{% endblock blocks2_widget %}
-
 {% block admin_page_block_row %}
     {% spaceless %}
         <li class="block-row">

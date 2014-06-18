@@ -1,8 +1,8 @@
 {% extends bigfoot_theme_bundle ~ '::layout' ~ app.request.get('layout') ~ '.html.twig' %}
 
-{% form_theme form bigfoot_theme_bundle ~ ':form_custom:inline.html.twig' %}
-
 {% block content %}
+    {% form_theme form bigfoot_theme_bundle ~ ':form_custom:columns.html.twig' %}
+
     {{ form_start(form, {'action': form_action, 'method': form_method|default('POST')}) }}
         <div class="row">
             <div class="col-sm-12">

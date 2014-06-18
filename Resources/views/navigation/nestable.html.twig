@@ -1,6 +1,14 @@
-<div class="form-group">
-    <label class="control-label col-sm-3">{{ 'Items' }}</label>
-    <div class="col-sm-5 nestable-list">
+<div class="panel-nestable"></div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            Items
+            <span>
+                <a href="#" class="ajax-modal pull-right" data-toggle="modal" data-url="{{ path('bigfoot_menu_item_new', { 'layout': '_modal' }) }}"><i class="icon-plus bigger-130"></i></a>
+            </span>
+        </h4>
+    </div>
+    <div class="panel-body">
         <div class="dd nestable" data-output="{{ output }}">
             {% include 'BigfootAceThemeBundle:navigation:list.html.twig' with { 'items': items } %}
         </div>
@@ -8,3 +16,5 @@
 </div>
 
 {% include 'BigfootAceThemeBundle:layout:modal.html.twig' with { 'name': 'edit-item', 'title': 'Edit item' } %}
+
+<div class="clear"></div>
