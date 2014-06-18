@@ -172,17 +172,19 @@
             {% set dataTrigger = attr['data-trigger'] %}
             {% set dataPlacement = attr['data-placement'] %}
         {% endif %}
-        <label>
-            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-            <span class="lbl"></span>
-        </label>
+        <div class="bigfoot-checkbox">
+            <label>
+                <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+                <span class="lbl"></span>
+            </label>
+        </div>
     {% endspaceless %}
     {% if attr['data-popover'] is defined and attr['data-popover'] %}
         <span class="input-group-addon no-style">
             <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
         </span>
     {% endif %}
-    {% endblock checkbox_widget %}
+{% endblock checkbox_widget %}
 
 {% block radio_widget %}
     {% spaceless %}
@@ -411,3 +413,100 @@
     {% endif %}
 {% endspaceless %}
 {% endblock time_widget %}
+
+{% block blocks_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
+        {% endif %}
+
+        <div class="col-sm-2"></div>
+        <div class="bigfoot-content-blocks">
+            <div class="panel panel-default collection-container">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Blocks
+                        <span>
+                            <a href="#" class="admin-add-block pull-right"><i class="icon-plus bigger-130"></i></a>
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <ul {{ block('widget_container_attributes') }}>
+                        <div class="block-accordion">
+                            {% for child in form %}
+                                {{ form_row(child) }}
+                            {% endfor %}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock blocks_widget %}
+
+{% block blocks2_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
+        {% endif %}
+
+        <div class="col-sm-2"></div>
+        <div class="bigfoot-content-blocks">
+            <div class="panel panel-default collection-container">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Blocks
+                        <span>
+                            <a href="#" class="admin-add-block pull-right"><i class="icon-plus bigger-130"></i></a>
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <ul {{ block('widget_container_attributes') }}>
+                        <div class="block-accordion">
+                            {% for child in form %}
+                                {{ form_row(child) }}
+                            {% endfor %}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock blocks2_widget %}
+
+{% block sidebars_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
+        {% endif %}
+
+        <div class="col-sm-2"></div>
+        <div class="bigfoot-content-blocks">
+            <div class="panel panel-default collection-container">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Sidebars
+                        <span>
+                            <a href="#" class="admin-add-sidebar pull-right"><i class="icon-plus bigger-130"></i></a>
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <ul {{ block('widget_container_attributes') }}>
+                        <div class="sidebar-accordion">
+                            {% for child in form %}
+                                {{ form_row(child) }}
+                            {% endfor %}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock sidebars_widget %}
+
+{% block bigfoot_richtext_widget %}
+
+{% endblock %}

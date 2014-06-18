@@ -5,12 +5,12 @@
     {% if attr.class is defined %}
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
-    {% set attr = (attr | merge({class: widgetClass})) %}
+    {% set attr = (attr|merge({class: widgetClass})) %}
     {{ parent() }}
 {% endblock %}
 
 {% block form_label %}
-    {% set widgetClass = 'control-label col-sm-3 ' %}
+    {% set widgetClass = 'control-label col-sm-2 ' %}
     {% if label_attr.class is defined %}
         {% set widgetClass = widgetClass ~ label_attr.class %}
     {% endif %}
@@ -19,21 +19,25 @@
 {% endblock %}
 
 {% block form_widget_simple %}
-    {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+    {% set widgetClass = 'col-sm-10 ' %}
     {% if attr.class is defined %}
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
     {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        {% set dataContent = attr['data-content'] %}
-        {% set dataTitle = attr['data-title'] %}
-        {% set dataTrigger = attr['data-trigger'] %}
-        {% set dataPlacement = attr['data-placement'] %}
+        <div class="select-popover">
+            {% set dataContent = attr['data-content'] %}
+            {% set dataTitle = attr['data-title'] %}
+            {% set dataTrigger = attr['data-trigger'] %}
+            {% set dataPlacement = attr['data-placement'] %}
     {% endif %}
-    {{ parent() }}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
-    {% endif %}
+    <div class="col-sm-10 ">
+        {{ parent() }}
+        {% if attr['data-popover'] is defined and attr['data-popover'] %}
+                <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block form_widget_date_picker %}
@@ -84,20 +88,22 @@
 {% endblock %}
 
 {% block textarea_widget %}
-    {% set widgetClass = 'col-xs-10 col-sm-5 ' %}
+    {% set widgetClass = 'col-xs-10 col-sm-10 ' %}
     {% if attr.class is defined %}
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
     {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        {% set dataContent = attr['data-content'] %}
-        {% set dataTitle = attr['data-title'] %}
-        {% set dataTrigger = attr['data-trigger'] %}
-        {% set dataPlacement = attr['data-placement'] %}
+        <div class="select-popover">
+            {% set dataContent = attr['data-content'] %}
+            {% set dataTitle = attr['data-title'] %}
+            {% set dataTrigger = attr['data-trigger'] %}
+            {% set dataPlacement = attr['data-placement'] %}
     {% endif %}
     {{ parent() }}
     {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+            <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+        </div>
     {% endif %}
 {% endblock %}
 
@@ -117,11 +123,7 @@
 {% endblock choice_widget_expanded %}
 
 {% block choice_widget_collapsed %}
-    {% if attr['data-no-search'] is defined and attr['data-no-search'] == true%}
-        {% set widgetClass = 'width-30 chosen-select-no-search ' %}
-    {% else %}
-        {% set widgetClass = 'width-30 chosen-select ' %}
-    {% endif  %}
+    {% set widgetClass = 'width-100 chosen-select ' %}
     {% if multiple %}
         {% set widgetClass = widgetClass~'tag-input-style ' %}
     {% endif %}
@@ -129,16 +131,20 @@
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        {% set dataContent = attr['data-content'] %}
-        {% set dataTitle = attr['data-title'] %}
-        {% set dataTrigger = attr['data-trigger'] %}
-        {% set dataPlacement = attr['data-placement'] %}
-    {% endif %}
-    {{ parent() }}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
-    {% endif %}
+    <div class="col-sm-10">
+        {% if attr['data-popover'] is defined and attr['data-popover'] %}
+            <div class="select-popover">
+                {% set dataContent   = attr['data-content'] %}
+                {% set dataTitle     = attr['data-title'] %}
+                {% set dataTrigger   = attr['data-trigger'] %}
+                {% set dataPlacement = attr['data-placement'] %}
+        {% endif %}
+            {{ parent() }}
+            {% if attr['data-popover'] is defined and attr['data-popover'] %}
+                    <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+                </div>
+            {% endif %}
+        </div>
 {% endblock choice_widget_collapsed %}
 
 {% block checkbox_widget %}
@@ -154,10 +160,14 @@
             {% set dataTrigger = attr['data-trigger'] %}
             {% set dataPlacement = attr['data-placement'] %}
         {% endif %}
-        <label>
-            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-            <span class="lbl"></span>
-        </label>
+        <div class="col-sm-10">
+            <div class="bigfoot-checkbox">
+                <label>
+                    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+                    <span class="lbl"></span>
+                </label>
+            </div>
+        </div>
     {% endspaceless %}
     {% if attr['data-popover'] is defined and attr['data-popover'] %}
         <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
@@ -279,7 +289,7 @@
 {% endblock %}
 
 {% block bigfoot_link_widget %}
-    <div class="tabbable col-sm-5 bigfoot-link">
+    <div class="tabbable col-sm-9 bigfoot-link">
         <ul id="myTab" class="nav nav-tabs">
             <li class="{% if form.externalLink.vars.value is not defined or not form.externalLink.vars.value %}active{% endif %}">
                 <a href="#internal-link" class="internal-link" data-toggle="tab">
@@ -387,3 +397,97 @@
     {% endif %}
 {% endspaceless %}
 {% endblock time_widget %}
+
+{% block blocks_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
+        {% endif %}
+
+        <div class="col-xs-10 col-sm-12 bigfoot-content-blocks">
+            <div class="panel panel-default collection-container">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Blocks
+                        <span>
+                            <a href="#" class="admin-add-block pull-right"><i class="icon-plus bigger-130"></i></a>
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <ul {{ block('widget_container_attributes') }}>
+                        <div class="block-accordion">
+                            {% for child in form %}
+                                {{ form_row(child) }}
+                            {% endfor %}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock blocks_widget %}
+
+{% block blocks2_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
+        {% endif %}
+
+        <div class="col-xs-10 col-sm-12 bigfoot-content-blocks">
+            <div class="panel panel-default collection-container">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Blocks 2
+                        <span>
+                            <a href="#" class="admin-add-block pull-right"><i class="icon-plus bigger-130"></i></a>
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <ul {{ block('widget_container_attributes') }}>
+                        {% for child in form %}
+                            {{ form_row(child) }}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock blocks2_widget %}
+
+{% block sidebars_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
+        {% endif %}
+
+        <div class="col-xs-10 col-sm-12">
+            <div class="panel panel-default collection-container">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Sidebars
+                        <span>
+                            <a href="#" class="admin-add-sidebar pull-right"><i class="icon-plus bigger-130"></i></a>
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <ul {{ block('widget_container_attributes') }}>
+                        <div class="sidebar-accordion">
+                            {% for child in form %}
+                                {{ form_row(child) }}
+                            {% endfor %}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock sidebars_widget %}
+
+{% block bigfoot_richtext_widget %}
+    <div class="col-xs-10 col-sm-10">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}

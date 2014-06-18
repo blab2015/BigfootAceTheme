@@ -93,7 +93,7 @@
         'admin/js/bootbox.min.js'
         'admin/js/dropzone.min.js'
         'admin/js/typeahead-bs2.min.js'
-        'admin/js/jquery-ui-1.10.3.custom.min.js'
+        'admin/js/jquery-ui-1.10.3.full.min.js'
         'admin/js/jquery.ui.touch-punch.min.js'
         'admin/js/chosen.jquery.min.js'
         'admin/js/fuelux/fuelux.spinner.min.js'
@@ -134,7 +134,7 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    <script src="{{ asset('admin/js/date-time/locales/bootstrap-datepicker.'~app.request.locale~'.js') }}"></script>
+    {# // <script src="{{ asset('admin/js/date-time/locales/bootstrap-datepicker.' ~ app.request.locale ~ '.js') }}"></script> #}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     <script src="{{ asset('bundles/bigfootcore/js/nestable.js') }}"></script>

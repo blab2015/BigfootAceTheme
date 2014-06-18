@@ -5,64 +5,47 @@
 
 {% block _admin_page_template_block_sidebar_sidebars_widget block('sidebars_widget') %}
 
-{% block sidebars_widget %}
-    {% spaceless %}
-        {% if prototype is defined %}
-            {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
-        {% endif %}
-
-        <div class="col-sm-2"></div>
-        <div class="panel-group col-xs-10 col-sm-7">
-            <div class="panel panel-default collection-container">
-                    <h4 class="panel-title">
-                        Sidebars
-                        <span>
-                            <a href="#" class="admin-add-sidebar pull-right"><i class="icon-plus bigger-130"></i></a>
-                        </span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <ul {{ block('widget_container_attributes') }}>
-                        {% for child in form %}
-                            {{ form_row(child) }}
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    {% endspaceless %}
-{% endblock sidebars_widget %}
-
 {% block admin_page_sidebar_row %}
     {% spaceless %}
         <li class="sidebar-row">
-            <div class="pull-right">
-                <a href="#" class="admin-delete-sidebar"><i class="icon-remove red bigger-130"></i></a>
+            <h3>
+                <div class="content-sidebar-name"></div>
+            </h3>
+            <div class="s-accordion">
+                <p>
+                    <div class="width-100 pull-left">
+                        {{ form_row(form.sidebar, { 'attr': { 'class': 'admin_sidebar_select' }}) }}
+                    </div>
+
+                    <div class="pull-right">
+                        <a href="#" class="admin-delete-sidebar"><i class="icon-remove red bigger-130"></i></a>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="hidden">
+                        {{ form_row(form.position, {'attr': {'class': 'sidebar-position'} }) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.template, 'Template') }}
+
+                        <fieldset class="templates-container">
+                            {% for template in form.template %}
+                                <label style="text-align:center;">
+                                    {{ form_widget(template) }}
+                                    {%- set templateFileName = template.vars.value %}
+                                    {%- if '/' in templateFileName %}
+                                        {%- set templateFileName = template.vars.value|split('/')|slice(1)|join('/') %}
+                                    {%- endif %}
+                                    <img src="{{ asset('images/template/sidebar/' ~ templateFileName ~ '.svg') }}" width="80" height="80"><br />
+                                    <span style="font-size:9px;">{{ template.vars.label }}</span>
+                                </label>
+                            {% endfor %}
+                        </fieldset>
+                    </div>
+                </p>
             </div>
-
-            {{ form_row(form.sidebar, { 'attr': { 'class': 'admin_sidebar_select' }}) }}
-
-            <div class="clear"></div>
-
-            <div class="form-group">
-                {{ form_label(form.template, 'Template') }}
-
-                <fieldset class="templates-container">
-                    {% for template in form.template %}
-                        <label style="text-align:center;">
-                            {{ form_widget(template) }}
-                            {%- set templateFileName = template.vars.value %}
-                            {%- if '/' in templateFileName %}
-                                {%- set templateFileName = template.vars.value|split('/')|slice(1)|join('/') %}
-                            {%- endif %}
-                            <img src="{{ asset('images/template/sidebar/' ~ templateFileName ~ '.svg') }}" width="80" height="80"><br />
-                            <span style="font-size:9px;">{{ template.vars.label }}</span>
-                        </label>
-                    {% endfor %}
-                </fieldset>
-            </div>
-
-            <hr />
         </li>
     {% endspaceless %}
 {% endblock admin_page_sidebar_row %}
