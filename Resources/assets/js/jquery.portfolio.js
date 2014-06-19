@@ -39,6 +39,7 @@
         }
 
         base.openPortfolio = function(e) {
+
             base.preventDefault(e);
 
             var popinOpenButton = $(this);
@@ -57,7 +58,7 @@
                     })
 
                     // add data attribute field id on modal
-                    $data.attr('data-field-id', popinOpenButton.parent('.field-media').children('input').attr('id'));
+                    $data.attr('data-field-id', popinOpenButton.parent('.field-media').find('input').attr('id'));
 
                     // set class on the image to update
                     $('.media-to-update').removeClass('media-to-update');
