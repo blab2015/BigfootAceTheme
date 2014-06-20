@@ -200,3 +200,5 @@ div.table-header div.action-buttons {
     width: 83%;
     float: right;
 }
+
+.modal-body .form-horizontal .form-group { margin-left: 0;margin-right: 0; }
