@@ -279,6 +279,8 @@ function addCollectionItem(id, name) {
             });
         }
     }
+
+    $('.chosen-select').chosen();
 }
 
 //Chargement des departements en fonction des regions
