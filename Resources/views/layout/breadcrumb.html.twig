@@ -12,7 +12,7 @@
                             <i class="icon-home home-icon"></i>
                         {% endif %}
 
-                        {{ item.label }}
+                        {{ item.label | trans() }}
                     {% endif %}
 
                     {% if not loop.last %}
