@@ -174,6 +174,9 @@
         {% endif %}
         <div class="bigfoot-checkbox">
             <label>
+                {% if form.parent.vars.expanded is defined and form.parent.vars.expanded and label %}
+                    <span class="txt">{{ label }}</span>
+                {% endif %}
                 <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
                 <span class="lbl"></span>
             </label>
@@ -341,12 +344,10 @@
 {% endblock %}
 
 {% block datetime_widget %}
-    {% set widgetClass = 'col-xs-10 col-sm-2 ' %}
     {% spaceless %}
         {% if widget == 'single_text' %}
             {{ block('form_widget_simple') }}
         {% else %}
-            {% set attr = attr|merge({ 'class': widgetClass }) %}
             <div {{ block('widget_container_attributes') }}>
                 {{ form_widget(form.date, { inDateTime: true }) }}
                 {{ form_widget(form.time, { inDateTime: true }) }}
@@ -360,22 +361,15 @@
 {% block date_widget %}
     {% spaceless %}
         {% if widget == 'single_text' %}
-            {% if not inDateTime is defined or inDateTime == false %}
-                {% set widgetClass = 'col-xs-10 col-sm-2 ' %}
-                {% if widgetClass is defined %}
-                    {% set attr = attr|merge({ 'class': widgetClass }) %}
-                {% endif %}
+            {% if inDateTime is defined and inDateTime %}
                 <div {{ block('widget_container_attributes') }}>
             {% endif %}
             {% set attr = {'class': 'date-picker'} %}
             {{ block('form_widget_date_picker') }}
-            {% if not inDateTime is defined or inDateTime == false %}
+            {% if inDateTime is defined and inDateTime %}
                 </div>
             {% endif %}
         {% else %}
-            {% if widgetClass is defined %}
-                {% set attr = attr|merge({ 'class': widgetClass }) %}
-            {% endif %}
             <div {{ block('widget_container_attributes') }}>
                 {% set attr = attr|merge({ 'style': 'width: auto' }) %}
                 {{ date_pattern|replace({
