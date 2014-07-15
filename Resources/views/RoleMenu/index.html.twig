@@ -1,0 +1,41 @@
+{% extends bigfoot_theme_bundle~'::layout.html.twig' %}
+
+{% block content %}
+    <form action="{{ path('admin_role_menu') }}" method="POST">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Role Menu
+                <input type="submit" class="btn btn-minier btn-danger pull-right" value="{{ 'bigfoot_user.role_menu.global.save' | trans }}">
+                <div class="clear"></div>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for roleMenu in form.roleMenus %}
+                        <tr>
+                            <td>
+                                {% if roleMenu.level.vars.value != 0 %}
+                                    <span class="text-muted">{% for i in 1..roleMenu.level.vars.value %}&nbsp;&nbsp;&nbsp;&nbsp;{% endfor %}</span>
+                                {% endif %}
+                                {{ roleMenu.label.vars.value|trans }}
+                                <span class="text-muted"><i>({{ roleMenu.slug.vars.value }})</i></span>
+                            </td>
+                            <td>
+                                {{ form_errors(roleMenu.roles) }}
+                                {{ form_widget(roleMenu.roles) }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="hidden">
+                {{ form_rest(form) }}
+            </div>
+        </div>
+    </form>
+{% endblock %}
