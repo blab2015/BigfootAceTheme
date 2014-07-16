@@ -17,8 +17,9 @@
                     <div class="widget-body">
                         <div class="widget-main">
                             {% block form %}
-                                {%- set groups = form.vars.groups.config|default([]) -%}
-                                {%- set groupsAttr = form.vars.groups.attr|default([]) -%}
+                                {%- set groups = form.vars.groups|default([]) -%}
+                                {%- set groupsConfig = groups.config|default([]) -%}
+                                {%- set groupsAttr = groups.attr|default([]) -%}
                                 {%- if groups -%}
                                     {%- set groupsType = groupsAttr.type|default('tabs') -%}
                                     {%- if groupsType == 'accordion' -%}
@@ -26,14 +27,14 @@
                                     {%- else -%}
                                         <div class="tabbable {{ groupsAttr.style|default('') }}">
                                             <ul id="crudGroup" class="nav nav-tabs">
-                                                {%- for group in groups -%}
+                                                {%- for group in groupsConfig -%}
                                                     <li{% if loop.first %} class="active"{% endif %}><a data-toggle="tab" href="#{{ group.title|replace({'.': ''})}}">{{ group.title|trans }}</a></li>
                                                 {%- endfor -%}
                                             </ul>
                                             <div id="crudGroupContent" class="tab-content">
                                     {%- endif -%}
                                     {{ form_errors(form) }}
-                                    {% for group in groups %}
+                                    {% for group in groupsConfig %}
                                         {%- set columns = groupsAttr.columns|default(1) -%}
                                         {%- if groupsType == 'accordion' -%}
                                              <div class="panel panel-default">

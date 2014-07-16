@@ -1,7 +1,7 @@
 {% use 'form_div_layout.html.twig' %}
 
 {% block form_start %}
-    {% if form.vars.groups %}
+    {% if form.vars.groups is defined and form.vars.groups %}
     {% set widgetClass = 'form-tabbed ' %}
     {% else %}
     {% set widgetClass = 'form-block ' %}
