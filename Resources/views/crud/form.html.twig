@@ -17,7 +17,66 @@
                     <div class="widget-body">
                         <div class="widget-main">
                             {% block form %}
-                                {{ form_rest(form) }}
+                                {%- set groups = form.vars.groups.config|default([]) -%}
+                                {%- set groupsAttr = form.vars.groups.attr|default([]) -%}
+                                {%- if groups -%}
+                                    {%- set groupsType = groupsAttr.type|default('tabs') -%}
+                                    {%- if groupsType == 'accordion' -%}
+                                        <div id="formAccordion" class="accordion-{{ groupsAttr.style|default('style1') }} panel-group">
+                                    {%- else -%}
+                                        <div class="tabbable {{ groupsAttr.style|default('') }}">
+                                            <ul id="crudGroup" class="nav nav-tabs">
+                                                {%- for group in groups -%}
+                                                    <li{% if loop.first %} class="active"{% endif %}><a data-toggle="tab" href="#{{ group.title|replace({'.': ''})}}">{{ group.title|trans }}</a></li>
+                                                {%- endfor -%}
+                                            </ul>
+                                            <div id="crudGroupContent" class="tab-content">
+                                    {%- endif -%}
+                                    {{ form_errors(form) }}
+                                    {% for group in groups %}
+                                        {%- set columns = groupsAttr.columns|default(1) -%}
+                                        {%- if groupsType == 'accordion' -%}
+                                             <div class="panel panel-default">
+                                                 <div class="panel-heading">
+                                                     <h4 class="panel-title">
+                                                         <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#formAccordion" href="#{{ group.title|replace({'.': ''})}}">
+                                                             <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                             &nbsp;{{ group.title|trans }}
+                                                         </a>
+                                                     </h4>
+                                                 </div>
+                                             </div>
+                                             <div class="panel-collapse collapse" id="{{ group.title|replace({'.': ''})}}">
+                                                 <div class="panel-body">
+                                        {%- else -%}
+                                        <div class="tab-pane{% if loop.first %} active{% endif %}" id="{{ group.title | replace({'.': ''})}}">
+                                        {%- endif -%}
+                                            {%- if group.content is defined -%}
+                                                {%- if group.description is defined -%}
+                                                    <blockquote>{{ group.description }}</blockquote>
+                                                {%- endif %}
+                                                {%- for row in group.content -%}
+                                                    <div class="span{{ 12 / columns }}">
+                                                        {{ form_row(form[row]) }}
+                                                    </div>
+                                                {%- endfor -%}
+                                            {%- endif -%}
+                                        {%- if groupsType == 'accordion' -%}
+                                                </div>
+                                             </div>
+                                        {%- else -%}
+                                            </div>
+                                        {%- endif -%}
+                                    {% endfor %}
+                                            </div>
+                                        </div>
+
+                                    <div style="display: none">
+                                        {{ form_rest(form) }}
+                                    </div>
+                                {% else %}
+                                    {{ form_rest(form) }}
+                                {% endif %}
                             {% endblock %}
 
                             {% block form_actions %}
