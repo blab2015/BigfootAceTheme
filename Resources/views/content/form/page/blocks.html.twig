@@ -48,7 +48,7 @@
 
                         <fieldset class="templates-container">
                             {% for template in form.template %}
-                                <label style="text-align:center;">
+                                <label class="template-row" style="text-align:center;">
                                     {{ form_widget(template) }}
                                     {%- set templateFileName = template.vars.value %}
                                     {%- if '/' in templateFileName %}
@@ -56,6 +56,7 @@
                                     {%- endif %}
                                     <img src="{{ asset('images/template/block/' ~ templateFileName ~ '.svg') }}" width="80" height="80"><br />
                                     <span style="font-size:9px;">{{ template.vars.label }}</span>
+                                    <i class="icon-ok bigger-110 bigger-160 green"{% if not template.vars.checked %} style="display: none"{% endif %}></i>
                                 </label>
                             {% endfor %}
                         </fieldset>
