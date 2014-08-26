@@ -16,7 +16,7 @@
 
                     <div class="widget-body">
                         <div class="widget-main">
-                            {%- set formErrors = app.session.get('bigfoot_core.crud.form.'~form_name~'.errors') -%}
+                            {%- set formErrors = app.session.get('bigfoot_core.crud.form.'~form_name|default('')~'.errors') -%}
                             {%- if formErrors -%}
                                 <ul>
                                 {%- for errorsField in formErrors -%}
@@ -25,7 +25,7 @@
                                     {%- endfor -%}
                                 {%- endfor -%}
                                 </ul>
-                                {% set formErrors = app.session.remove('bigfoot_core.crud.form.'~form_name~'.errors') %}
+                                {% set formErrors = app.session.remove('bigfoot_core.crud.form.'~form_name|default('')~'.errors') %}
                             {%- endif -%}
                             {% block form %}
                                 {%- set groups = form.vars.groups|default([]) -%}
