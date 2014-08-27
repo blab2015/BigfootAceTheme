@@ -5403,6 +5403,7 @@ a.list-group-item:focus {
 
 .panel-group .panel {
   margin-bottom: 0;
+  overflow:hidden;
   border-radius: 4px;
 }
 
