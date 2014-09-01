@@ -224,3 +224,120 @@ input[type="checkbox"].ace + .lbl {
  .panel-group .panel {
      overflow:visible;
  }
+
+.widget-main.stats {
+    padding: 25px 75px;
+}
+
+.stats .stats-highlights {
+    float: left;
+    width: 22%;
+    vertical-align: top;
+    height: 250px;
+    padding-top: 20px;
+    margin: 0 0 20px 0;
+}
+
+.stats .stats-highlights .stats-highlighted {
+    display: table;
+    padding: 5px;
+    height: 50%;
+}
+
+.stats .stats-highlights .stats-highlighted .stats-data {
+    display: table-cell;
+    text-align: right;
+    width: 25%;
+    min-width: 10em;
+}
+
+.stats .stats-highlights .stats-highlighted .stats-data strong {
+    font-size: 4em;
+    line-height: 1em;
+}
+
+.stats .stats-highlights .stats-highlighted .stats-data em {
+    font-size: 0.9em;
+}
+
+.stats .stats-highlights .stats-highlighted .stats-label {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 5px;
+    font-size: 1.3em;
+    text-align: left;
+    min-width: 10em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.stats .stats-highlights .stats-highlighted .stats-trend {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 15px;
+    margin-left: 10px;
+    width: 10%;
+    min-width: 3em;
+    text-align: left;
+}
+
+ .stats .stats-highlights .stats-highlighted .stats-trend i {
+     font-size: 4em;
+     line-height: 1em;
+ }
+
+.stats .stats-highlights .stats-highlighted .stats-trend .stats-trend-value {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.stats table.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    clear: both;
+}
+
+.stats table.stats-table td, .stats table.stats-table th {
+    padding: 15px;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.stats table.stats-table th {
+    text-transform: uppercase;
+}
+
+.stats table.stats-table td {
+
+}
+
+.stats table.stats-table td span {
+    font-size: 2.5em;
+    line-height: 1em;
+}
+
+.stats table.stats-table td em {
+    font-size: 0.9em;
+}
+
+.stats .stats-graph {
+    float: right;
+    width: 70%;
+    margin: 0 -15px 20px 20px;
+    text-align: right;
+}
+
+.stats #stats-graph {
+
+}
+
+.url-management label {
+    margin-bottom: 10px;
+}
+
+.url-management label span {
+    background-color: #f9f9f9;
+    border: 1px solid #c3c3c3;
+    padding: 2px 5px;
+}
