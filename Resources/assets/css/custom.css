@@ -158,7 +158,7 @@ div.table-header div.action-buttons {
  * Form render
  */
 .form-tabbed input[type="text"], .form-tabbed input[type="date"], .form-tabbed input[type="password"], .form-tabbed input[type="number"], .form-tabbed select, .form-tabbed .input-group, .form-tabbed .chosen-container, .form-tabbed .item-template, .form-tabbed .width-100 { width: 99% !important; }
-.form-block input[type="text"], .form-block input[type="date"], .form-block input[type="password"], .form-block input[type="number"], .form-block select, .form-block .input-group, .form-block .chosen-container, .form-block .item-template, .form-block .width-100 { width: 100% !important; }
+.form-block input[type="text"], .form-block input[type="date"], .form-block input[type="password"], .form-block input[type="number"], .form-block select, .form-block .input-group, .form-block .chosen-container, .form-block .width-100 { width: 100% !important; }
 .input-group-addon.no-style { border: none; padding: 0 10px; background: none; }
 .select-popover .chosen-container { width: calc(100% - 50px) !important; }
 .form-horizontal .width-100 { width: calc(100% - 50px) !important; }
