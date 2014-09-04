@@ -8,55 +8,6 @@
             <div class="col-sm-12">
                 <div class="widget-box">
                     <div class="widget-header">
-                        <h4>Statistiques de la page</h4>
-                    </div>
-
-                    <div class="widget-body">
-                        <div class="widget-main stats">
-                            <div class="stats-highlights">
-                                <div class="stats-highlighted"><div class="stats-label">Consultations<br />uniques&nbsp;:</div><div class="stats-data"><strong class="green">9001</strong><br /><em>(8254 le mois dernier)</em></div><div class="stats-trend"><i class="icon-thumbs-up green"></i><br /><span class="stats-trend-value green"><strong>+5%</strong></span></div></div>
-                                <div class="stats-highlighted"><div class="stats-label">Taux<br />de rebond&nbsp;:</div><div class="stats-data"><strong class="red">21%</strong><br /><em>(17% le mois dernier)</em></div><div class="stats-trend"><i class="icon-thumbs-down red"></i><br /><span class="stats-trend-value red"><strong>-10%</strong></span></div></div>
-                            </div>
-                            <div class="stats-graph"><div id="stats-graph"></div></div>
-                            <table class="stats-table">
-                                <tbody>
-                                    <tr><th>Pages vues</th><th>Entrées</th><th>Temps moyen passé sur la page</th><th>Sorties (en %)</th><th>Valeur de la page</th></tr>
-                                    <tr><td><span class="green">19330</span><br /><em>(15156 le mois dernier)</em></td><td><span class="green">3943</span><br /><em>(3214 le mois dernier)</em></td><td><span class="green">00:00:52</span><br /><em>(00:00:50 le mois dernier)</em></td><td><span class="green">24,4%</span><br /><em>(23,5% le mois dernier)</em></td><td><span class="green">1232,58€</span><br /><em>(1150,12€ le mois dernier)</em></td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row url-management">
-            <div class="col-sm-12">
-                <div class="widget-box">
-                    <div class="widget-header">
-                        <h4>Gestion de l'URL</h4>
-                        <span class="widget-toolbar">
-                            <div class="locales-container"></div>
-                        </span>
-                    </div>
-
-                    <div class="widget-body">
-                        <div class="widget-main">
-                            <label for="">URL (format : <span>/{hotel.region}/{hotel.ville}/{hotel}</span>)</label>
-                            <div class="input-group no-padding-right no-padding-left">
-                                <input type="text" value="/aquitaine/bordeaux/bordeaux-aeroport" readonly />
-                                <span class="input-group-addon"><img src="/bundles/bigfootcore/img/flags/fr.gif"></span>
-                            </div>
-                            <br />
-                            <a href="#">Modifier l'URL (elle ne sera plus mise à jour automatiquement)</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="widget-box">
-                    <div class="widget-header">
                         <h4>{{ form_title|trans() }}</h4>
                         <span class="widget-toolbar">
                             <div class="locales-container"></div>
@@ -163,53 +114,4 @@
             </div>
         </div>
     </form>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="/admin/js/flot/jquery.flot.min.js"></script>
-    <script src="/admin/js/flot/jquery.flot.pie.min.js"></script>
-    <script src="/admin/js/flot/jquery.flot.resize.min.js"></script>
-    <script src="/admin/js/flot/jquery.flot.time.js"></script>
-
-    <script type="text/javascript">
-        function getRandomInt (min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        var times = [1406543258000, 1406629658000, 1406716058000, 1406802458000, 1406888858000, 1406975258000, 1407061658000, 1407148058000, 1407234458000, 1407320858000, 1407407258000, 1407493658000, 1407580058000, 1407666458000, 1407752858000, 1407839258000, 1407925658000, 1408012058000, 1408098458000, 1408184858000, 1408271258000, 1408357658000, 1408444058000, 1408530458000, 1408616858000, 1408703258000, 1408789658000, 1408876058000, 1408962458000, 1409048858000, 1409135258000];
-        var d1 = [[1406543258000, 1400], [1406629658000, 1365], [1406716058000, 1025], [1406802458000, 1230], [1406888858000, 1053], [1406975258000, 1075], [1407061658000, 1080], [1407148058000, 1112], [1407234458000, 1100], [1407320858000, 1059], [1407407258000, 950], [1407493658000, 750], [1407580058000, 760], [1407666458000, 800], [1407752858000, 900], [1407839258000, 690], [1407925658000, 500], [1408012058000, 300], [1408098458000, 275], [1408184858000, 270], [1408271258000, 280], [1408357658000, 260], [1408444058000, 240], [1408530458000, 230], [1408616858000, 260], [1408703258000, 300], [1408789658000, 290], [1408876058000, 200], [1408962458000, 250], [1409048858000, 240], [1409135258000, 245]];
-
-        var d2 = [];
-        for (var i = 0; i < times.length; i++) {
-            d2.push([times[i], (d1[i][1]) * getRandomInt(80, 120) / 100]);
-        }
-
-        var stats_graph = $('#stats-graph').css({'height':'250px'});
-        $.plot("#stats-graph", [
-            { label: "Pages vues ce mois ci", data: d1, color: '#0080ff', lines: { show: true, fill: true, fillColor: '#f5f5f5' }, points: { show: true } },
-            { label: "Pages vues le mois dernier", data: d2, color: '#ffcc00', lines: { show: true }, points: { show: true } }
-        ], {
-            axisLabels: {
-                show: false
-            },
-            hoverable: true,
-            shadowSize: 0,
-            xaxis: {
-                mode: 'time',
-                monthNames: ["jan", "fév", "mar", "avr", "mai", "juin", "juil", "aout", "sept", "oct", "nov", "dec"],
-                dayNames: ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"],
-                timeformat: "%d %b",
-                axisLabel: 'Pages vues'
-            },
-            yaxis: {
-                min: 5
-            },
-            grid: {
-                backgroundColor: { colors: [ "#fff", "#fff" ] },
-                borderWidth: 1,
-                borderColor:'#555'
-            }
-        });
-    </script>
 {% endblock %}
