@@ -1,5 +1,5 @@
 {% if app.session.flashbag.has('error') %}
-    <div class="alert alert-block alert-error fade in">
+    <div class="alert alert-block alert-danger fade in">
         <a class="close" href="#" data-dismiss="alert"><i class="icon-remove"></i></a>
         {% for flash in app.session.flashbag.get('error') %}
             <div>{{ flash|trans()|raw }}</div>
