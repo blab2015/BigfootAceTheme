@@ -1,0 +1,7 @@
+bigfoot:
+    crud:
+        index:
+            filter:
+                global:
+                    submit: 'Filtrer'
+                    clear: 'Réinitialiser les filtres'
