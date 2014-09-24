@@ -44,9 +44,13 @@
             <tbody>
                 {% for item in list_items %}
                     <tr class="entity-edit">
-                        {% for attr, field in list_fields %}
-                            <td>{{ attribute(item, attr)|nl2br }}</td>
-                        {% endfor %}
+                        {%- for attr, field in list_fields -%}
+                            {%- set value = attribute(item, attr) -%}
+                            {%- if field.formatters|default(false) -%}
+                                {%- set value = value|bigfoot_crud_formatter(field.formatters) -%}
+                            {%- endif -%}
+                            <td>{{ value|striptags|nl2br }}</td>
+                        {%- endfor -%}
 
                         {% block table_actions %}
                             <td>
