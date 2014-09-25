@@ -354,7 +354,8 @@
                 {% endif %}
                 <div {{ block('widget_container_attributes') }}>
             {% endif %}
-            {% set attr = {'class': 'date-picker'} %}
+            {% set attrClass = attr['class'] is defined ? attr['class'] : '' %}
+            {% set attr = attr|merge({'class': attrClass ~ ' date-picker'}) %}
             {{ block('form_widget_date_picker') }}
             {% if not inDateTime is defined or inDateTime == false %}
                 </div>
