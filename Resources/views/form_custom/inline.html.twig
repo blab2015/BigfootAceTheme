@@ -55,7 +55,7 @@
     {% endif %}
     {% set type = type|default('text') %}
     <div class="input-group">
-        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}data-date-weekStart=1 data-date-language='{{ app.request.locale }}'/>
         <span class="input-group-addon">
             <i class="icon-calendar bigger-110"></i>
         </span>
@@ -353,9 +353,9 @@
             {{ block('form_widget_simple') }}
         {% else %}
             <div {{ block('widget_container_attributes') }}>
-                {{ form_widget(form.date, { inDateTime: true }) }}
+                {{ form_widget(form.date, { inDateTime: true, attr: attr }) }}
                 {{ form_widget(form.time, { inDateTime: true }) }}
-                {{ form_errors(form.date, { inDateTime: true }) }}
+                {{ form_errors(form.date, { inDateTime: true, attr: attr }) }}
                 {{ form_errors(form.time, { inDateTime: true }) }}
             </div>
         {% endif %}
@@ -369,6 +369,9 @@
                 <div {{ block('widget_container_attributes') }}>
             {% endif %}
             {% set attr = {'class': 'date-picker'} %}
+            {% if dateFormat is defined %}
+                {% set attr = attr|merge({ 'data-date-format': dateFormat}) %}
+            {% endif %}
             {{ block('form_widget_date_picker') }}
             {% if inDateTime is defined and inDateTime %}
                 </div>
