@@ -368,7 +368,7 @@
             {% if inDateTime is defined and inDateTime %}
                 <div {{ block('widget_container_attributes') }}>
             {% endif %}
-            {% set attr = {'class': 'date-picker'} %}
+            {% set attr = attr|merge({'class': (attr.class|default('')) ~ ' date-picker'}) %}
             {% if dateFormat is defined %}
                 {% set attr = attr|merge({ 'data-date-format': dateFormat}) %}
             {% endif %}
