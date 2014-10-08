@@ -326,6 +326,7 @@ input[type="checkbox"].ace + .lbl {
     width: 70%;
     margin: 0 -15px 20px 20px;
     text-align: right;
+    height: 235px;
 }
 
 .stats #stats-graph {
@@ -340,4 +341,17 @@ input[type="checkbox"].ace + .lbl {
     background-color: #f9f9f9;
     border: 1px solid #c3c3c3;
     padding: 2px 5px;
+}
+
+.widget-toolbar .collapse {
+    margin-top: 7px;
+    margin-left: 10px;
+}
+
+.tags {
+    width: 100%;
+}
+
+.tags input[type="text"] {
+    margin-top: 5px;
 }
