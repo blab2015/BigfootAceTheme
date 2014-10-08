@@ -14,14 +14,36 @@
 {% endblock %}
 
 {% block form_label %}
+{% spaceless %}
     {% set widgetClass = 'control-label ' %}
     {% if label_attr.class is defined %}
         {% set widgetClass = widgetClass ~ label_attr.class %}
     {% endif %}
     {% set label_attr = (label_attr | merge({class: widgetClass})) %}
     <div class="clearfix">
-        {{ parent() }}
+        {% if label is not sameas(false) %}
+            {% if not compound %}
+                {% set label_attr = label_attr|merge({'for': id}) %}
+            {% endif %}
+            {% if required %}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+            {% endif %}
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+                {{ label|trans({}, translation_domain) }}
+                {% if attr['data-popover']|default(false) %}
+                    {% set dataContent = attr['data-content'] %}
+                    {% set dataTitle = attr['data-title'] %}
+                    {% set dataTrigger = attr['data-trigger'] %}
+                    {% set dataPlacement = attr['data-placement'] %}
+                    <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+                {% endif %}
+            </label>
+        {% endif %}
     </div>
+{% endspaceless %}
 {% endblock %}
 
 {% block form_widget_simple %}
@@ -30,29 +52,12 @@
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        {% set dataContent = attr['data-content'] %}
-        {% set dataTitle = attr['data-title'] %}
-        {% set dataTrigger = attr['data-trigger'] %}
-        {% set dataPlacement = attr['data-placement'] %}
-    {% endif %}
     <div class="input-group">
         {{ parent() }}
-        {% if attr['data-popover'] is defined and attr['data-popover'] %}
-            <span class="input-group-addon no-style">
-                <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
-            </span>
-        {% endif %}
     </div>
 {% endblock %}
 
 {% block form_widget_date_picker %}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        {% set dataContent = attr['data-content'] %}
-        {% set dataTitle = attr['data-title'] %}
-        {% set dataTrigger = attr['data-trigger'] %}
-        {% set dataPlacement = attr['data-placement'] %}
-    {% endif %}
     {% set type = type|default('text') %}
     <div class="input-group">
         <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}data-date-weekStart=1 data-date-language='{{ app.request.locale }}'/>
@@ -60,11 +65,6 @@
             <i class="icon-calendar bigger-110"></i>
         </span>
     </div>
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        <span class="input-group-addon no-style">
-            <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
-        </span>
-    {% endif %}
 {% endblock %}
 
 {% block form_widget_time_picker %}
@@ -76,13 +76,6 @@
     {% if attr.class is defined %}
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
-    {#{% set attr = (attr | merge({class: widgetClass})) %}#}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        {% set dataContent = attr['data-content'] %}
-        {% set dataTitle = attr['data-title'] %}
-        {% set dataTrigger = attr['data-trigger'] %}
-        {% set dataPlacement = attr['data-placement'] %}
-    {% endif %}
     {% set type = type|default('text') %}
     <div class="input-group bootstrap-timepicker {{ widgetClass }}">
         <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
@@ -90,11 +83,6 @@
             <i class="icon-time bigger-110"></i>
         </span>
     </div>
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        <span class="input-group-addon no-style">
-            <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
-        </span>
-    {% endif %}
 {% endblock %}
 
 {% block textarea_widget %}
@@ -103,18 +91,7 @@
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        {% set dataContent = attr['data-content'] %}
-        {% set dataTitle = attr['data-title'] %}
-        {% set dataTrigger = attr['data-trigger'] %}
-        {% set dataPlacement = attr['data-placement'] %}
-    {% endif %}
     {{ parent() }}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        <span class="input-group-addon no-style">
-            <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
-        </span>
-    {% endif %}
 {% endblock %}
 
 {% block choice_widget_expanded %}
@@ -141,26 +118,11 @@
     {% if multiple %}
         {% set widgetClass = widgetClass ~ 'tag-input-style ' %}
     {% endif %}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        <div class="select-popover">
-    {% endif %}
     {% if attr.class is defined %}
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        {% set dataContent = attr['data-content'] %}
-        {% set dataTitle = attr['data-title'] %}
-        {% set dataTrigger = attr['data-trigger'] %}
-        {% set dataPlacement = attr['data-placement'] %}
-    {% endif %}
     {{ parent() }}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-            <span class="popover-addon no-style">
-                <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
-            </span>
-        </div>
-    {% endif %}
 {% endblock choice_widget_collapsed %}
 
 {% block checkbox_widget %}
@@ -170,12 +132,6 @@
             {% set widgetClass = widgetClass ~ attr.class %}
         {% endif %}
         {% set attr = (attr | merge({class: widgetClass})) %}
-        {% if attr['data-popover'] is defined and attr['data-popover'] %}
-            {% set dataContent = attr['data-content'] %}
-            {% set dataTitle = attr['data-title'] %}
-            {% set dataTrigger = attr['data-trigger'] %}
-            {% set dataPlacement = attr['data-placement'] %}
-        {% endif %}
         <div class="bigfoot-checkbox">
             <label>
                 {% if form.parent.vars.expanded is defined and form.parent.vars.expanded and label %}
@@ -186,11 +142,6 @@
             </label>
         </div>
     {% endspaceless %}
-    {% if attr['data-popover'] is defined and attr['data-popover'] %}
-        <span class="input-group-addon no-style">
-            <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
-        </span>
-    {% endif %}
 {% endblock checkbox_widget %}
 
 {% block radio_widget %}
