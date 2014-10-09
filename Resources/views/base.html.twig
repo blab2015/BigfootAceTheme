@@ -12,7 +12,7 @@
             '@admin_css'
             output='css/admin.css'
         %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
+            <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
         <!--[if IE 7]>
@@ -66,6 +66,13 @@
     <!--[if lte IE 8]>
     <script src="{{ asset('admin/js/excanvas.min.js') }}"></script>
     <![endif]-->
+
+    {% javascripts
+        "@admin_jquery"
+        output='js/jquery.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 
     {% javascripts
         "@admin_js"
