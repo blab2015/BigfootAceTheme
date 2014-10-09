@@ -1,0 +1,19 @@
+{
+  "name": "AceThemeBundle",
+  "version": "2.2.0",
+  "description": "B is for Badass, for we live in strass I is for Imagine, for possibilities are supreme G is for Great, for there is no regret F is for Friends, for we share it over the lands O is for Out, for everywhere we sprout O is for Over, for we answer your prayer T is for Treasure, for we provide you pleasure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.c2is.fr:bigfoot/bigfootacetheme.git"
+  },
+  "author": "g.manen@c2is.fr",
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "grunt": "^0.4.5"
+  }
+}

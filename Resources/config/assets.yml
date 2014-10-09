@@ -34,6 +34,7 @@ assetic:
                - 'bundles/bigfootacetheme/js/jqGrid/custom.js'
                - 'bundles/bigfootacetheme/js/jquery.carouFredSel.js'
                - 'bundles/bigfootacetheme/vendor/ckeditor/ckeditor.js'
+               - 'bundles/bigfootacetheme/vendor/jquery/dist/jquery.min.js'
                - '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
         admin_css:
             inputs:

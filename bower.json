@@ -1,0 +1,21 @@
+{
+  "name": "AceThemeBundle",
+  "version": "2.1.0",
+  "authors": [
+    "Guillaume Manen <g.manen@c2is.fr>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/Resources/public/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ckeditor": "~4.4.5",
+    "jquery": "~2.1.1"
+  }
+}
