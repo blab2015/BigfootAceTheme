@@ -38,6 +38,8 @@ assetic:
                 - 'bundles/bigfootacetheme/js/jquery.carouFredSel.js'
                 - 'bundles/bigfootacetheme/vendor/ckeditor/ckeditor.js'
                 - '%kernel.root_dir%/../vendor/jms/twig-js/twig.js'
+            vars:
+                - 'locale'
         admin_css:
             inputs:
                - 'bundles/bigfootacetheme/css/bootstrap.min.css'
@@ -58,6 +60,8 @@ assetic:
                - 'bundles/bigfootacetheme/css/jquery.gritter.css'
                - 'bundles/bigfootacetheme/css/colorbox.css'
                - 'bundles/bigfootacetheme/css/custom.css'
+            vars:
+                - 'locale'
             filters:
                 - 'cssrewrite'
         admin_twig_js:

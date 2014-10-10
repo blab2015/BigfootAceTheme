@@ -68,14 +68,8 @@
     <![endif]-->
 
     {% javascripts
-        "@admin_jquery"
-        output='js/jquery.js'
-    %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
-    {% javascripts
-        "@admin_js"
+        '@admin_jquery'
+        '@admin_js'
         output='js/scripts.js'
     %}
         <script src="{{ asset_url }}"></script>
