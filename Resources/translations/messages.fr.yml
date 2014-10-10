@@ -5,3 +5,7 @@ bigfoot:
                 global:
                     submit: 'Filtrer'
                     clear: 'Réinitialiser les filtres'
+    ace_theme:
+        assistance:
+            link:
+                label: 'Contactez le support'

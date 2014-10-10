@@ -4,9 +4,11 @@
     <div id="login-box" class="login-box visible widget-box no-border">
         <div class="widget-body">
             <div class="widget-main">
+                {%- if bigfoot_theme.login_logo|default(false) %}
                 <h4 class="header blue lighter bigger">
-                    <img src="{{ asset("images/marques/seh/logo.png") }}" alt="{{ bigfoot_theme.title }}">
+                    <img src="{{ asset(bigfoot_theme.login_logo) }}" alt="{{ bigfoot_theme.title|default('') }}">
                 </h4>
+                {%- endif %}
 
                 <div class="space-6"></div>
 

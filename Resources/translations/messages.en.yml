@@ -5,3 +5,9 @@ bigfoot:
                 global:
                     submit: 'Filter'
                     clear: 'Clear Filters'
+    ace_theme:
+        assistance:
+            link:
+                label: 'Contact our assistance team'
+        home:
+            title: 'Bienvenue sur votre interface d''administration'

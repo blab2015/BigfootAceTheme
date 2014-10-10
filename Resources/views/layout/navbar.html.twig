@@ -35,12 +35,14 @@
                     </li>
                     <li class="infos">
                         <ul class="nav ace-nav info-nav">
+                            {% if bigfoot_theme.assistance_link|default(false) %}
                             <li class="support">
-                                <a href="http://support.c2is.fr/projects/seh-hotels/issues" target="_blank" class="align-right">
-                                    <span class="align-left">Contactez le support</span>
+                                <a href="{{ bigfoot_theme.assistance_link }}" target="_blank" class="align-right">
+                                    <span class="align-left">{{ 'bigfoot.ace_theme.assistance.link.label'|trans }}</span>
                                     <i class="icon-sitemap align-center bigger-125 icon-on-right"></i>
                                 </a>
                             </li>
+                            {% endif %}
                             <li class="account">
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle align-right">
                                     <i class="icon-user"></i>

@@ -20,6 +20,15 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('bigfoot_ace_theme');
 
+        $rootNode
+            ->children()
+                ->scalarNode('login_logo')->defaultNull()->end()
+                ->scalarNode('assistance_link')->defaultNull()->end()
+                ->scalarNode('title')->defaultValue('Administration Interface')->end()
+                ->scalarNode('company_name')->defaultValue('Bigfoot')->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }
