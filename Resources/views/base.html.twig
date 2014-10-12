@@ -60,10 +60,14 @@
 
     {% javascripts
         '@admin_jquery'
+        'bundles/bigfootacetheme/js/date-time/bootstrap-datepicker.min.js'
+        'bundles/bigfootacetheme/js/date-time/bootstrap-timepicker.min.js'
+        'bundles/bigfootacetheme/js/date-time/locales/bootstrap-datepicker.{locale}.js'
         '@admin_js'
-        output='js/bigfoot.js'
+        output='js/bigfoot.{locale}.js'
         debug=false
         combine=true
+        vars=['locale']
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
@@ -78,7 +82,6 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    <script src="{{ asset('bundles/bigfootacetheme/js/date-time/locales/bootstrap-datepicker.' ~ app.request.locale ~ '.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 {% endblock %}
 </body>

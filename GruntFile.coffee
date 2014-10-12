@@ -17,8 +17,6 @@ module.exports = (grunt) ->
           'Resources/assets/js/jquery.ui.touch-punch.min.js'
           'Resources/assets/js/chosen.jquery.min.js'
           'Resources/assets/js/fuelux/fuelux.spinner.min.js'
-          'Resources/assets/js/date-time/bootstrap-datepicker.min.js'
-          'Resources/assets/js/date-time/bootstrap-timepicker.min.js'
           'Resources/assets/js/date-time/moment.min.js'
           'Resources/assets/js/date-time/daterangepicker.min.js'
           'Resources/assets/js/bootstrap-colorpicker.min.js'
