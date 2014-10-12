@@ -68,14 +68,16 @@
             <li class="c3">
                 <ul>
                     <li class="copyright">
-                        <small>BigFoot v. 1.X ©C2iS</small>
+                        <small>BigFoot v. 2.2 ©C2iS</small>
                     </li>
-                    <li class="support">
-                        <a href="http://support.c2is.fr/projects/seh-hotels/issues" target="_blank" class="align-right">
-                            <span class="align-left">Contactez le support</span>
-                            <i class="icon-sitemap align-center bigger-125 icon-on-right"></i>
-                        </a>
-                    </li>
+                    {% if bigfoot_theme.assistance_link|default(false) %}
+                        <li class="support">
+                            <a href="{{ bigfoot_theme.assistance_link }}" target="_blank" class="align-right">
+                                <span class="align-left">{{ 'bigfoot.ace_theme.assistance.link.label'|trans }}</span>
+                                <i class="icon-sitemap align-center bigger-125 icon-on-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </li>
         </ul>

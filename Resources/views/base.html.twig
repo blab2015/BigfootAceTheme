@@ -8,7 +8,13 @@
     <meta name="author" content="{{ bigfoot_theme.provided_by|default('provided by C2iS - Agence digitale')|trans }}">
 
     {% block stylesheets %}
-        {% stylesheets '@admin_css' output='css/admin.css' %}
+        {% stylesheets
+            '@admin_css'
+            output='css/bigfoot.css'
+            filter='cssrewrite'
+            debug=false
+            combine=true
+        %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
@@ -52,18 +58,27 @@
     <script src="{{ asset('admin/js/excanvas.min.js') }}"></script>
     <![endif]-->
 
-    {% javascripts '@admin_jquery' '@admin_js' output='js/scripts.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
     {% javascripts
-        "@admin_twig_js"
-        output='js/twigs.js'
+        '@admin_jquery'
+        '@admin_js'
+        output='js/bigfoot.js'
+        debug=false
+        combine=true
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    <script src="{{ asset('admin/js/date-time/locales/bootstrap-datepicker.' ~ app.request.locale ~ '.js') }}"></script>
+    {% javascripts
+        '@admin_twig_js'
+        output='js/bigfoot_twigs.js'
+        filter='twig_js'
+        debug=false
+        combine=true
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script src="{{ asset('bundles/bigfootacetheme/js/date-time/locales/bootstrap-datepicker.' ~ app.request.locale ~ '.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 {% endblock %}
 </body>
