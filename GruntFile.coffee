@@ -70,6 +70,9 @@ module.exports = (grunt) ->
           'Resources/public/css/styles.min.css': ['Resources/public/css/styles.css']
     uglify:
       main:
+        options:
+          compress:
+            drop_console: true
         files:
           'Resources/public/js/scripts.min.js': 'Resources/public/js/scripts.js'
     coffee:
