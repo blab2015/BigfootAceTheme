@@ -36,7 +36,6 @@ module.exports = (grunt) ->
           'Resources/assets/js/jqGrid/jquery.jqGrid.min.js'
           'Resources/assets/js/jqGrid/custom.js'
           'Resources/assets/js/jquery.carouFredSel.js'
-          'Resources/public/vendor/ckeditor/ckeditor.js'
           'Resources/assets/coffee/*.js'
         ]
         dest: 'Resources/public/js/scripts.js'
