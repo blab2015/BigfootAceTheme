@@ -77,18 +77,18 @@
                 type: 'post',
                 data: $('#admin_forgot_password_email')
             }).done(function (data) {
-                        var message = data.message;
+                var message = data.message;
 
-                        if (data.status === true) {
-                            message = '<font color="green">' + message + '</font>';
-                        } else {
-                            message = '<font color="red">' + message + '</font>';
-                        }
+                if (data.status === true) {
+                    message = '<font color="green">' + message + '</font>';
+                } else {
+                    message = '<font color="red">' + message + '</font>';
+                }
 
-                        $('.f-p-message')
-                                .html('')
-                                .append(message);
-                    });
+                $('.f-p-message')
+                        .html('')
+                        .append(message);
+            });
         });
     </script>
 {% endblock javascripts %}

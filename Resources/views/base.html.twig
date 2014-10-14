@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale }}" class="{% block htmlClass %}{% endblock %}">
+<html lang="{{ app.request.locale }}" class="{% block htmlClass %}{% endblock htmlClass %}">
 <head>
     <meta charset="utf-8">
     <title>{{ bigfoot_theme.title|default('Bigfoot')|trans }}</title>
@@ -17,25 +17,12 @@
         %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
-
-        <!--[if IE 7]>
-        <link rel="stylesheet" href="{{ 'admin/css/font-awesome-ie7.min.css' }}" />
-        <![endif]-->
-
-        <!--[if lte IE 8]>
-        <link rel="stylesheet" href="{{ 'admin/css/ace-ie.min.css' }}" />
-        <![endif]-->
-
-        <!--[if lt IE 9]>
-        <script src="{{ 'admin/js/html5shiv.js' }}"></script>
-        <script src="{{ 'admin/js/respond.min.js' }}"></script>
-        <![endif]-->
-    {% endblock %}
+    {% endblock stylesheets %}
 </head>
 
 <body class="{% block bodyClass %}{% endblock bodyClass %} skin-bigfoot">
 {% block body %}
-{% endblock %}
+{% endblock body %}
 
 {% block modals %}
 <div id="ajax-modal" class="modal container fade" tabindex="-1" style="display: none;"></div>
@@ -49,14 +36,8 @@
             basePath              = "{{ app.request.basePath }}",
             tagsPath              = "{{ path('admin_tag_get') }}",
             defaultLocale         = currentLocale,
-            locales               = ["{{ localeFlags() | join('","') | raw }}"];
-
-        if("ontouchend" in document) document.write("<script src='{{ asset('admin/js/jquery.mobile.custom.min.js') }}'>" + "<" + "/script>");
+            locales               = ["{{ localeFlags()|join('","')|raw }}"];
     </script>
-
-    <!--[if lte IE 8]>
-    <script src="{{ asset('admin/js/excanvas.min.js') }}"></script>
-    <![endif]-->
 
     {% javascripts
         '@admin_jquery'
@@ -83,6 +64,6 @@
     {% endjavascripts %}
 
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
-{% endblock %}
+{% endblock javascripts %}
 </body>
 </html>

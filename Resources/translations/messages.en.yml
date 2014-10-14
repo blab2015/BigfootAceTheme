@@ -10,4 +10,5 @@ bigfoot:
             link:
                 label: 'Contact our assistance team'
         home:
-            title: 'Bienvenue sur votre interface d''administration'
+            title: 'Welcome on your administration interface'
+        version: 'Bigfoot v%version% ©C2iS'
