@@ -538,9 +538,9 @@ function setupColorboxScripts()
 function setTranslatableFields()
 {
     var $translatableFields = $('.translatable-fields');
-
-    if ($translatableFields.length) {
-        setupTranslatableFields($translatableFields);
+    var $translatableLabelContainers = $('.translatable-label-container');
+    if ($translatableFields.length || $translatableLabelContainers.length) {
+        setupTranslatableFields($translatableFields, $translatableLabelContainers);
 
         $('.locales-container').html(Twig.render(localeTabs, {locales: locales, currentLocale: currentLocale, basePath: basePath}));
 
@@ -550,8 +550,14 @@ function setTranslatableFields()
 
             if (!$(this).hasClass('active')) {
                 var newLocale = $(this).data('locale');
-                $('input[data-locale="'+newLocale+'"], textarea[data-locale="'+newLocale+'"]').closest('div.input-group').show();
-                $('input[data-locale="'+currentLocale+'"], textarea[data-locale="'+currentLocale+'"]').closest('div.input-group').hide();
+                var $translatableLabelContainer = $('.translatable-label-container');
+                if ($translatableLabelContainer.length) {
+                    $('.translatable-label-container[data-locale="'+newLocale+'"]').closest('.form-group').show();
+                    $('.translatable-label-container[data-locale="'+currentLocale+'"]').closest('.form-group').hide();
+                } else {
+                    $('input[data-locale="'+newLocale+'"], textarea[data-locale="'+newLocale+'"]').closest('div.input-group').show();
+                    $('input[data-locale="'+currentLocale+'"], textarea[data-locale="'+currentLocale+'"]').closest('div.input-group').hide();
+                }
 
                 $('a', $localeTab).removeClass('active');
                 $(this).addClass('active');
@@ -627,43 +633,56 @@ function strpos (haystack, needle, offset) {
     return i === -1 ? false : i;
 }
 
-function setupTranslatableFields($translatableFields) {
-    $translatableFields.parent().hide();
-    // Getting all translated fields to set their parent's data attributes (default locale fields aren't initialized by the translationsubscriber)
-    $('input[type="text"], textarea', $translatableFields).each(function() {
-        var elementId = $(this).attr('id');
-        var parentElementId = elementId.substr(0, elementId.lastIndexOf('-')).replace('_translation', '');
+function setupTranslatableFields($translatableFields, $translatableLabelContainers) {
+    if ($translatableFields.length) {
+        $translatableFields.parent().hide();
+        // Getting all translated fields to set their parent's data attributes (default locale fields aren't initialized by the translationsubscriber)
+        $('input[type="text"], textarea', $translatableFields).each(function() {
+            var elementId = $(this).attr('id');
+            var parentElementId = elementId.substr(0, elementId.lastIndexOf('-')).replace('_translation', '');
 
-        var $parentElement = $('#'+parentElementId);
+            var $parentElement = $('#'+parentElementId);
 
-        $parentElement
-            .data('locale', defaultLocale)
-            .attr('data-locale', defaultLocale);
+            $parentElement
+                .data('locale', defaultLocale)
+                .attr('data-locale', defaultLocale);
 
-        $(this).appendTo($parentElement.parent());
-    });
+            $(this).appendTo($parentElement.parent());
+        });
 
-    var $wrapper = $('<div class="input-group"></div>');
-    var $toWrap = $('input[data-locale], textarea[data-locale]');
+        var $wrapper = $('<div class="input-group"></div>');
+        var $toWrap = $('input[data-locale], textarea[data-locale]');
 
-    $toWrap.each(function() {
-        if (!$(this).data('flag')) {
-            $(this).wrap($wrapper);
-            $(this).parent().addClass($(this).attr('class') + ' no-padding-right no-padding-left');
-            $(this).removeClass().addClass('form-control');
+        $toWrap.each(function() {
+            if (!$(this).data('flag')) {
+                $(this).wrap($wrapper);
+                $(this).parent().addClass($(this).attr('class') + ' no-padding-right no-padding-left');
+                $(this).removeClass().addClass('form-control');
 
-            if ($(this).parent().hasClass('ckeditor')) {
-                $(this).parent().removeClass('ckeditor');
-                $(this).addClass('ckeditor');
+                if ($(this).parent().hasClass('ckeditor')) {
+                    $(this).parent().removeClass('ckeditor');
+                    $(this).addClass('ckeditor');
+                }
+
+                $(this).after($('<span class="input-group-addon"><img src="' + basePath + '/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
+                if ($(this).data('locale') != currentLocale) {
+                    $(this).closest('div.input-group').hide();
+                }
+                $(this).data('flag', true);
             }
+        });
+    }
 
-            $(this).after($('<span class="input-group-addon"><img src="' + basePath + '/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
+    if ($translatableLabelContainers.length) {
+        $translatableLabelContainers.each(function() {
+            $('textarea[data-locale],input[type="text"][data-locale]', $(this)).after($('<span class="input-group-addon"><img src="/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
+        });
+        $translatableLabelContainers.each(function() {
             if ($(this).data('locale') != currentLocale) {
-                $(this).closest('div.input-group').hide();
+                $(this).closest('div.form-group').hide();
             }
-            $(this).data('flag', true);
-        }
-    });
+        });
+    }
 }
 
 function setupSortableCollectionItem() {

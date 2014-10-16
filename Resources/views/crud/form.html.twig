@@ -1,14 +1,14 @@
 {% extends bigfoot_theme_bundle ~ '::layout' ~ app.request.get('layout') ~ '.html.twig' %}
 
 {% block content %}
-    {% form_theme form bigfoot_theme_bundle ~ ':form_custom:inline.html.twig' %}
+    {% block form_theme %}{% form_theme form bigfoot_theme_bundle ~ ':form_custom:inline.html.twig' %}{% endblock form_theme %}
 
     {{ form_start(form, {'action': form_action, 'method': form_method|default('POST')}) }}
         <div class="row">
             <div class="col-sm-12">
                 <div class="widget-box">
                     <div class="widget-header">
-                        <h4>{{ form_title|trans() }}</h4>
+                        <h4>{% block form_title %}{{ form_title|trans() }}{% endblock form_title %}</h4>
                         <span class="widget-toolbar">
                             <div class="locales-container"></div>
                         </span>

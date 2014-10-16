@@ -20,29 +20,27 @@
         {% set widgetClass = widgetClass ~ label_attr.class %}
     {% endif %}
     {% set label_attr = (label_attr | merge({class: widgetClass})) %}
-    <div class="clearfix">
-        {% if label is not sameas(false) %}
-            {% if not compound %}
-                {% set label_attr = label_attr|merge({'for': id}) %}
-            {% endif %}
-            {% if required %}
-                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-            {% endif %}
-            {% if label is empty %}
-                {% set label = name|humanize %}
-            {% endif %}
-            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-                {{ label|trans({}, translation_domain) }}
-                {% if attr['data-popover']|default(false) %}
-                    {% set dataContent = attr['data-content'] %}
-                    {% set dataTitle = attr['data-title'] %}
-                    {% set dataTrigger = attr['data-trigger'] %}
-                    {% set dataPlacement = attr['data-placement'] %}
-                    <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
-                {% endif %}
-            </label>
+    {% if label is not sameas(false) %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
         {% endif %}
-    </div>
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required clearfix')|trim}) %}
+        {% endif %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+            {{ label|trans({}, translation_domain) }}
+            {% if attr['data-popover']|default(false) %}
+                {% set dataContent = attr['data-content'] %}
+                {% set dataTitle = attr['data-title'] %}
+                {% set dataTrigger = attr['data-trigger'] %}
+                {% set dataPlacement = attr['data-placement'] %}
+                <span class="help-button" data-rel="popover" data-trigger="{{ dataTrigger }}" data-placement="{{ dataPlacement }}" data-content="{{ dataContent | trans }}" data-original-title="{{ dataTitle | trans }}">?</span>
+            {% endif %}
+        </label>
+    {% endif %}
 {% endspaceless %}
 {% endblock %}
 
@@ -217,8 +215,7 @@
 
 {% block form_row %}
     {% spaceless %}
-    <div class="clearfix">
-        <div class="form-group">
+        <div class="form-group clearfix">
             {% if form_errors(form)|length %}
                 <div class="form-errors">
                     <div class="col-sm-3 "></div>
@@ -228,7 +225,6 @@
             {{ form_label(form) }}
             {{ form_widget(form) }}
         </div>
-    </div>
     {% endspaceless %}
 {% endblock form_row %}
 

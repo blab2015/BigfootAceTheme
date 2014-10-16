@@ -1,0 +1,25 @@
+{% extends bigfoot_theme_bundle~':crud:form.html.twig' %}
+
+{% block form_theme %}{% form_theme form bigfoot_theme_bundle ~ ':form_custom:inline.html.twig' %}{% endblock form_theme %}
+
+{% block form_title %}
+    {{ parent() }} {{ form.vars.value.name }}
+{% endblock form_title %}
+
+{% block form %}
+    <div class="translatable-label-category">
+        <strong>{{ 'bigfoot_core.translatable_label.category.title'|trans }}</strong>
+        <span>{{ form.vars.value.category|trans }}</span>
+    </div>
+    {%- if form.vars.value.description %}
+    <div class="translatable-label-description">
+        <p>{{ form.vars.value.description }}</p>
+    </div>
+    {%- endif %}
+    {{ form_row(form.translations) }}
+    <div class="form-group clearfix">
+        <div class="translatable-label-container" data-locale="{{ form.vars.locale }}">
+            {{ form_rest(form) }}
+        </div>
+    </div>
+{% endblock form %}
