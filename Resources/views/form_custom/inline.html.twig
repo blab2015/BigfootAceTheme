@@ -89,7 +89,9 @@
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
+<div class="input-group">
     {{ parent() }}
+    </div>
 {% endblock %}
 
 {% block choice_widget_expanded %}

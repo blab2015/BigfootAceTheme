@@ -224,3 +224,7 @@ input[type="checkbox"].ace + .lbl {
  .panel-group .panel {
      overflow:visible;
  }
+
+ .input-group textarea {
+     width: 100%;
+ }
