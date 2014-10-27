@@ -6,6 +6,25 @@ $(document).ready(function () {
         event.preventDefault();
         $(this).closest('.form-group').remove();
     });
+
+    var $ckEditor = $('.ckeditor');console.log($ckEditor.length);
+    if (CKEDITOR && $ckEditor.length) {
+        $ckEditor.each(function() {
+            var editorId = $(this).attr('id');
+            if (editorId) {
+                var
+                    userConfig = $(this).data('config'),
+                    richTextConfigs = window.richTextConfigs || {},
+                    config = richTextConfigs['default'] || {}
+                ;
+                if (userConfig != undefined && userConfig in richTextConfigs) {
+                    config = richTextConfigs[userConfig];
+                }
+                config['filebrowserImageUploadUrl'] = Routing.generate('bigfoot_media_upload');
+                CKEDITOR.replace(editorId, config);
+            }
+        });
+    }
 });
 
 /* Setup */
