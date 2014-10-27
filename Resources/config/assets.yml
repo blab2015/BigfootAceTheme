@@ -1,6 +1,8 @@
 assetic:
     bundles:
         - 'BigfootAceThemeBundle'
+    variables:
+        locale: ['fr', 'en']
     assets:
         admin_jquery:
             inputs:
