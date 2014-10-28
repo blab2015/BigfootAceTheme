@@ -7,7 +7,7 @@ $(document).ready(function () {
         $(this).closest('.form-group').remove();
     });
 
-    var $ckEditor = $('.ckeditor');console.log($ckEditor.length);
+    var $ckEditor = $('.ckeditor');
     if (CKEDITOR && $ckEditor.length) {
         $ckEditor.each(function() {
             var editorId = $(this).attr('id');
@@ -34,7 +34,9 @@ jQuery(function($) {
 
     $(".chosen-select-no-search").chosen({disable_search: true});
     $(".chosen-select").chosen();
-    $('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+    $('.date-picker').datepicker({
+        autoclose:true
+    }).next().on(ace.click_event, function(){
         $(this).prev().focus();
     });
     $('.timepicker').timepicker({
@@ -66,7 +68,7 @@ jQuery(function($) {
             });
 
             var $modal = $(modal);
-            $modal.on('shown', function () {console.log($('.chosen-select', $modal).length);
+            $modal.on('shown', function () {
                 $('.chosen-select', $modal).chosen();
             });
             $modal.modal('show');

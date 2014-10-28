@@ -58,7 +58,7 @@
 {% block form_widget_date_picker %}
     {% set type = type|default('text') %}
     <div class="input-group">
-        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}data-date-weekStart=1 data-date-language='{{ app.request.locale }}'/>
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}data-date-language='{{ app.request.locale }}'/>
         <span class="input-group-addon">
             <i class="icon-calendar bigger-110"></i>
         </span>
