@@ -453,6 +453,7 @@ $(document).ready(function () {
                     config = richTextConfigs[userConfig];
                 }
                 config['filebrowserImageUploadUrl'] = Routing.generate('bigfoot_media_upload');
+                config.allowedContent = true;
                 CKEDITOR.replace(editorId, config);
             }
         });
