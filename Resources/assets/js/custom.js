@@ -36,7 +36,8 @@ jQuery(function($) {
     $(".chosen-select-no-search").chosen({disable_search: true});
     $(".chosen-select").chosen();
     $('.date-picker').datepicker({
-        autoclose:true
+        'autoclose': true,
+        'language': currentLocale
     }).next().on(ace.click_event, function(){
         $(this).prev().focus();
     });
