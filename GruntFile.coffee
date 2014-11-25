@@ -13,7 +13,7 @@ module.exports = (grunt) ->
           'Resources/assets/js/bootbox.min.js'
           'Resources/assets/js/dropzone.min.js'
           'Resources/assets/js/typeahead-bs2.min.js'
-          'Resources/assets/js/jquery-ui-1.10.3.full.min.js'
+          'Resources/assets/js/jquery-ui-1.10.4.custom.min.js'
           'Resources/assets/js/jquery.ui.touch-punch.min.js'
           'Resources/assets/js/chosen.jquery.min.js'
           'Resources/assets/js/fuelux/fuelux.spinner.min.js'
@@ -43,8 +43,7 @@ module.exports = (grunt) ->
         src: [
           'Resources/assets/css/bootstrap.min.css'
           'Resources/assets/css/font-awesome.min.css'
-          'Resources/assets/css/jquery-ui-1.10.3.full.min.css'
-          'Resources/assets/css/jquery-ui-1.10.3.custom.min.css'
+          'Resources/assets/css/jquery-ui-1.10.4.custom.min.css'
           'Resources/assets/css/chosen.css'
           'Resources/assets/css/datepicker.css'
           'Resources/assets/css/bootstrap-timepicker.css'
