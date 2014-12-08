@@ -33,7 +33,7 @@
             <thead>
                 <tr>
                     {% for attr, field in list_fields %}
-                        <th>{{ knp_pagination_sortable(list_items, field.label|trans, field.sort|default('e.' ~ attr)) }}</th>
+                        <th>{% if list_items %}{{ knp_pagination_sortable(list_items, field.label|trans, field.sort|default('e.' ~ attr)) }}{% endif %}</th>
                     {% endfor %}
 
                     <th>Actions</th>
@@ -70,6 +70,6 @@
     </table>
 
     <div class="row text-center">
-        {{ knp_pagination_render(list_items) }}
+        {% if list_items %}{{ knp_pagination_render(list_items) }}{% endif %}
     </div>
 {% endblock %}
