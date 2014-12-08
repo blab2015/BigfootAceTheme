@@ -26,6 +26,7 @@ module.exports = (grunt) ->
           'Resources/assets/js/jquery.maskedinput.min.js'
           'Resources/assets/js/bootstrap-tag.min.js'
           'Resources/assets/js/bootstrap-wysiwyg.min.js'
+          'Resources/assets/js/fuelux/fuelux.tree.min.js'
           'Resources/assets/js/ace-elements.min.js'
           'Resources/assets/js/ace.min.js'
           'Resources/assets/js/custom.js'
