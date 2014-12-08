@@ -438,25 +438,7 @@ $(document).ready(function () {
         $(this).closest('.form-group').remove();
     });
 
-    var $ckEditor = $('.ckeditor');
-    if (CKEDITOR && $ckEditor.length) {
-        $ckEditor.each(function() {
-            var editorId = $(this).attr('id');
-            if (editorId) {
-                var
-                    userConfig = $(this).data('config'),
-                    richTextConfigs = window.richTextConfigs || {},
-                    config = richTextConfigs['default'] || {}
-                ;
-                if (userConfig != undefined && userConfig in richTextConfigs) {
-                    config = richTextConfigs[userConfig];
-                }
-                config['filebrowserImageUploadUrl'] = Routing.generate('bigfoot_media_upload');
-                config.allowedContent = true;
-                CKEDITOR.replace(editorId, config);
-            }
-        });
-    }
+    initCkeditor();
 });
 
 /* Setup */
@@ -546,14 +528,8 @@ function setupColorboxScripts()
 {
     $(".chosen-select").chosen();
     setTranslatableFields();
-    if (CKEDITOR != undefined) {
-        var $textAreas = $('#colorbox').find('textarea.ckeditor');
-        if ($textAreas.length) {
-            $textAreas.each(function() {
-                CKEDITOR.replace($(this).attr('id'));
-            });
-        }
-    }
+    setTranslatableFields();
+    initCkeditor($('#colorbox'));
 }
 
 /* Translatable fields */
@@ -744,23 +720,51 @@ function addCollectionItem(id, name) {
     setupSortableCollectionItem();
     setupTranslatableFields($form.find('div.translatable-fields'));
 
+    initCkeditor($form);
+
+    $('.chosen-select').chosen();
+}
+
+function initCkeditor($container)
+{
+    $container = $container || $('body');
+
     if (CKEDITOR != undefined) {
-        var $textAreas = $form.find('textarea.ckeditor');
-        if ($textAreas.length) {
-            $textAreas.each(function() {
-                CKEDITOR.replace($(this).attr('id'));
+        var $ckEditor = $('.ckeditor', $container);
+
+        if (CKEDITOR && $ckEditor.length) {
+            $ckEditor.each(function() {
+                var editorId = $(this).attr('id');
+
+                if (editorId) {
+                    var
+                        userConfig = $(this).data('config'),
+                        richTextConfigs = window.richTextConfigs || {},
+                        config = richTextConfigs['default'] || {}
+                    ;
+
+                    if (userConfig != undefined && userConfig in richTextConfigs) {
+                        config = richTextConfigs[userConfig];
+                    }
+
+                    config['filebrowserImageUploadUrl'] = Routing.generate('bigfoot_media_upload');
+                    config.allowedContent = true;
+
+                    if (CKEDITOR.instances[editorId] !== undefined) {
+                        CKEDITOR.instances[editorId].destroy();
+                    }
+                    CKEDITOR.replace(editorId, config);
+                }
             });
         }
     }
-
-    $('.chosen-select').chosen();
 }
 
 //Chargement des departements en fonction des regions
 $(document).ready(function() {
     var $regions = $('#seh_city_region');
     var $departements = $('#seh_city_department');
-    var $path_url = $('#seh_city_region').attr('data-action');
+    var $path_url = $regions.attr('data-action');
 
     $regions.on('change', function() {
         var val = $(this).val();
