@@ -97,7 +97,6 @@ function setupColorboxScripts()
 {
     $(".chosen-select").chosen();
     setTranslatableFields();
-    setTranslatableFields();
     initCkeditor($('#colorbox'));
 }
 
