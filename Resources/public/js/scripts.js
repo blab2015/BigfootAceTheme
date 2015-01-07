@@ -529,7 +529,6 @@ function setupColorboxScripts()
 {
     $(".chosen-select").chosen();
     setTranslatableFields();
-    setTranslatableFields();
     initCkeditor($('#colorbox'));
 }
 
@@ -655,6 +654,7 @@ function setupTranslatableFields($translatableFields, $translatableLabelContaine
         $toWrap.each(function() {
             if (!$(this).data('flag')) {
                 $(this).wrap($wrapper);
+                $(this).removeClass('translatable-fields');
                 $(this).parent().addClass($(this).attr('class') + ' no-padding-right no-padding-left');
                 $(this).removeClass().addClass('form-control');
 
