@@ -236,3 +236,7 @@ input[type="checkbox"].ace + .lbl {
  input[type="date"]::-webkit-input-placeholder{
      visibility: hidden !important;
  }
+
+.bigfoot_filters label {
+    margin: 0 10px;
+}

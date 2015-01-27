@@ -24,3 +24,12 @@
     {{ form_widget(form) }}
 {% endspaceless %}
 {% endblock form_row %}
+
+{% block choice_widget_collapsed %}
+    {% set widgetClass = 'chosen-select ' %}
+    {% if attr.class is defined %}
+        {% set widgetClass = widgetClass ~ attr.class %}
+    {% endif %}
+    {% set attr = (attr | merge({class: widgetClass})) %}
+    {{ parent() }}
+{% endblock choice_widget_collapsed %}
