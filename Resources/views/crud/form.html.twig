@@ -32,7 +32,11 @@
                                 {%- set groupsConfig = groups.config|default([]) -%}
                                 {%- set groupsAttr = groups.attr|default([]) -%}
                                 {%- if groups -%}
+                                    {%- set formRest = groupsAttr.formRest|default('hidden') -%}
                                     {%- set groupsType = groupsAttr.type|default('tabs') -%}
+                                    {% if formRest = 'top' %}
+                                        {{ form_rest(form) }}
+                                    {% endif %}
                                     {%- if groupsType == 'accordion' -%}
                                         <div id="formAccordion" class="accordion-{{ groupsAttr.style|default('style1') }} panel-group">
                                     {%- else -%}
@@ -67,9 +71,11 @@
                                                     <blockquote>{{ group.description }}</blockquote>
                                                 {%- endif %}
                                                 {%- for row in group.content -%}
+                                                    {%- if form[row] is defined -%}
                                                     <div class="span{{ 12 / columns }}">
                                                         {{ form_row(form[row]) }}
                                                     </div>
+                                                    {%- endif -%}
                                                 {%- endfor -%}
                                             {%- endif -%}
                                         {%- if groupsType == 'accordion' -%}
@@ -83,9 +89,16 @@
                                             </div>
                                         </div>
 
-                                    <div style="display: none">
-                                        {{ form_rest(form) }}
-                                    </div>
+
+                                    {% if formRest in [ 'bottom', 'hidden' ] %}
+                                        {% if formRest in [ 'hidden' ] %}
+                                        <div style="display: none">
+                                        {% endif %}
+                                            {{ form_rest(form) }}
+                                        {% if formRest in [ 'hidden' ] %}
+                                        </div>
+                                        {% endif %}
+                                    {% endif %}
                                 {% else %}
                                     {{ form_rest(form) }}
                                 {% endif %}
