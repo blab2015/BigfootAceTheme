@@ -34,7 +34,7 @@
                                 {%- if groups -%}
                                     {%- set formRest = groupsAttr.formRest|default('hidden') -%}
                                     {%- set groupsType = groupsAttr.type|default('tabs') -%}
-                                    {% if formRest = 'top' %}
+                                    {% if formRest in [ 'top' ] %}
                                         {{ form_rest(form) }}
                                     {% endif %}
                                     {%- if groupsType == 'accordion' -%}
