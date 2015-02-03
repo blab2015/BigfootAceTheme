@@ -239,10 +239,11 @@ function setupTranslatableFields($translatableFields, $translatableLabelContaine
         });
     }
 
-    if ($translatableLabelContainers.length) {
+    if (typeof $translatableLabelContainers !== "undefined" && $translatableLabelContainers !== null && $translatableLabelContainers.length) {
         $translatableLabelContainers.each(function() {
             $('textarea[data-locale],input[type="text"][data-locale]', $(this)).after($('<span class="input-group-addon"><img src="/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
         });
+
         $translatableLabelContainers.each(function() {
             if ($(this).data('locale') != currentLocale) {
                 $(this).closest('div.form-group').hide();
