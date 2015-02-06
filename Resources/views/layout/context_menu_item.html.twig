@@ -1,6 +1,6 @@
-{%- if is_granted('ROLE_ADMIN') or is_granted('brand.'~contextSlug, 'context') %}
+{%- if is_granted('ROLE_ADMIN') or is_granted(bigfoot_theme.menu_context~'.'~contextSlug, 'context') %}
     <li class="brand {{ contextSlug }}{% if current_context is defined and current_context == contextSlug %} active{% endif %}">
-        <a class="nav-link" href="{{ path('bigfoot_context_switch', { 'context': 'brand', 'values': contextSlug }) }}">
+        <a class="nav-link" href="{{ path('bigfoot_context_switch', { 'context': bigfoot_theme.menu_context, 'values': contextSlug }) }}">
             <span class="">{{ contextLabel }}</span>
         </a>
     </li>
