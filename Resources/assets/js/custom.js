@@ -8,6 +8,35 @@ $(document).ready(function () {
     });
 
     initCkeditor();
+
+    $('.bigfoot_file').ace_file_input({
+        no_file:'No File ...',
+        btn_choose:'Choose',
+        btn_change:'Change',
+        droppable:false,
+        onchange:null,
+        thumbnail:false
+    });
+
+    $('body').on('click', 'a.confirm-delete-file', function(event) {
+        event.preventDefault();
+        var link = $(this).attr('href');
+        var that = this;
+        bootbox.confirm($(this).data('confirm-message'), function(result) {
+            if (result) {
+                $.ajax({
+                    method:'post',
+                    url: link,
+                    success: function(){
+                        $(that).parents('.bigfoot_file_name').fadeOut(300, function(){
+                            $(this).remove();
+                        });
+                    }
+                })
+            }
+        });
+    });
+
 });
 
 /* Setup */
@@ -292,6 +321,16 @@ function addCollectionItem(id, name) {
     initCkeditor($form);
 
     $('.chosen-select').chosen();
+
+    $('.bigfoot_file').ace_file_input({
+        no_file:'No File ...',
+        btn_choose:'Choose',
+        btn_change:'Change',
+        droppable:false,
+        onchange:null,
+        thumbnail:false
+    });
+
 }
 
 function initCkeditor($container)

@@ -21207,3 +21207,10 @@ input[type="checkbox"].ace + .lbl {
 .bigfoot_filters label {
     margin: 0 10px;
 }
+
+.bigfoot_file_name .remove{
+    position: static;
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+}
