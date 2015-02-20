@@ -182,7 +182,7 @@
 
 {% block bigfoot_file_widget %}
     {% if form.parent.vars.value %}
-        {% set file = attribute(form.parent.vars.value, relatedProperty) %}
+        {% set file = attribute(form.parent.vars.value, filePathProperty) %}
         {% if file %}
             {% set file = file|split('_') %}
             {% set file = file|slice(1, (file|length) - 1) %}
@@ -194,7 +194,7 @@
             {% if file is defined and file is not null and file is not empty %}
                 <div class="bigfoot_file_name ace-file-input">
                     {{'File'|trans}} : <b>{{ file }}</b>
-                    {% if deleteRoute is defined and deleteRoute is not empty %}<a href="{{path(deleteRoute, {'property' : relatedProperty, 'id' : form.parent.vars.value.id })}}" class="remove confirm-delete-file" title="{{ 'bigfoot_core.crud.actions.delete_file.label'|trans }}" data-confirm-message="{{ 'bigfoot_core.crud.actions.delete_file.confirm'|trans({'%file%' : file}) }}"><i class="icon-remove"></i></a>{% endif %}
+                    {% if deleteRoute is defined and deleteRoute is not empty %}<a href="{{path(deleteRoute, {'property' : filePathProperty, 'id' : form.parent.vars.value.id })}}" class="remove confirm-delete-file" title="{{ 'bigfoot_core.crud.actions.delete_file.label'|trans }}" data-confirm-message="{{ 'bigfoot_core.crud.actions.delete_file.confirm'|trans({'%file%' : file}) }}"><i class="icon-remove"></i></a>{% endif %}
                 </div>
             {% endif %}
             <input type="file" {{ block('widget_attributes') }} class="bigfoot_file">
