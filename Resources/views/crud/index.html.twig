@@ -49,7 +49,7 @@
                             {%- if field.formatters|default(false) -%}
                                 {%- set value = value|bigfoot_crud_formatter(field.formatters) -%}
                             {%- endif -%}
-                            <td>{{ value|striptags|nl2br }}</td>
+                            <td>{{ field.format|default(false) == 'html' ?  value|raw : value|striptags|nl2br }}</td>
                         {%- endfor -%}
 
                         {% block table_actions %}
