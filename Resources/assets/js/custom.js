@@ -393,3 +393,45 @@ $(document).ready(function() {
         }
     });
 });
+
+/* Process management */
+$(document).ready(function() {
+    var $processList = $('ul.process-list');
+
+    if ($processList.length > 0) {
+        setInterval(function() {
+            var processes = [];
+
+            $.get(Routing.generate('bigfoot_process_list'), function(data) {
+                var tokens = data;
+                if (tokens.length > 0) {
+                    $('.process-dropdown').show();
+                    $('.process-count').html(tokens.length)
+                } else {
+                    $('.process-dropdown').hide();
+                }
+
+                $.each(tokens, function(index, value) {
+                    var $processContainer = $('li[data-process-token="' + value + '"]', $processList);
+
+                    if ($processContainer.length == 0) {
+                        $processContainer = $('<li data-process-token="' + value + '"></li>');
+                        $processList.append($processContainer);
+                    }
+
+                    var url = Routing.generate('bigfoot_process_progress', { 'token': value });
+
+                    $.get(url, function(data) {
+                        $processContainer.html(Twig.render(bigfootProcessItem, { 'process': data }));
+                    });
+                });
+
+                $('li[data-process-token]', $processList).each(function() {
+                    if ($.inArray($(this).data('process-token'), tokens) < 0) {
+                        $(this).remove();
+                    }
+                });
+            });
+        }, 2000);
+    }
+});

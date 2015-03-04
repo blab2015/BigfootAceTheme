@@ -1,0 +1,26 @@
+<li class="blue process-dropdown"{%- if count == 0 -%} style="display: none;"{% endif %}>
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+        <i class="icon-tasks"></i>
+        <span class="badge badge-grey process-count">{{ count }}</span>
+    </a>
+
+    <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+        <li class="dropdown-header">
+            <i class="icon-check"></i>
+            <span class="process-count">{{ count }}</span> {{ 'bigfoot_process.todo'|transchoice(count) }}
+        </li>
+
+        <li class="dropdown-content ace-scroll" style="position: relative;">
+            <div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div>
+            <div class="scroll-content">
+                <ul class="dropdown-menu dropdown-navbar process-list">
+                    {%- for process in processes %}
+                    <li data-process-token="{{ process.token }}">
+                        {% include bigfoot_theme_bundle~':process:item.html.twig' %}
+                    </li>
+                    {%- endfor %}
+                </ul>
+            </div>
+        </li>
+    </ul>
+</li>

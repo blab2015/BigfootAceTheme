@@ -14,7 +14,7 @@
                 </a>
             </div>
 
-            <div class="navbar-header pull-right" role="navigation">
+            <div class="navbar-header pull-right navbar-buttons" role="navigation">
                 <ul class="nav ace-nav">
                     <li class="brands grey">
                         <a href="#" id="brand-nav-toggler" class="btn btn-app no-radius dropdown-toggle brand-nav-toggler">
@@ -22,6 +22,12 @@
                             <i class="icon-folder-open"></i>
                             <span class="align-left">Marques</span>
                         </a>
+
+                        <div class="navbar-buttons navbar-header pull-right ace-nav" role="navigation">
+                            <ul class="navbar-header nav ace-nav">
+                                {{ render_esi(controller('BigfootCoreBundle:Process:widget')) }}
+                            </ul>
+                        </div>
 
                         <ul class="nav ace-nav brand-nav">
                             {{ render(controller('BigfootCoreBundle:QuickLink:quickLinkWidget')) }}

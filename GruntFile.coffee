@@ -52,12 +52,10 @@ module.exports = (grunt) ->
           'Resources/assets/css/colorpicker.css'
           'Resources/assets/css/ace-fonts.css'
           'Resources/assets/css/ui.jqgrid.css'
-          'Resources/assets/css/ace-fonts.css'
-          'Resources/assets/css/ace.min.css'
-          'Resources/assets/css/ace-rtl.min.css'
           'Resources/assets/css/ace-skins.min.css'
           'Resources/assets/css/jquery.gritter.css'
           'Resources/assets/css/colorbox.css'
+          'Resources/assets/css/ace.min.css'
           'Resources/assets/css/custom.css'
         ]
         dest: 'Resources/public/css/styles.css'
