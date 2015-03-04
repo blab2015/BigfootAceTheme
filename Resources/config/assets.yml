@@ -18,3 +18,4 @@ assetic:
             inputs:
                 - '@BigfootAceThemeBundle/Resources/views/modal/confirm.html.twig'
                 - '@BigfootAceThemeBundle/Resources/views/modal/base.html.twig'
+                - '@BigfootAceThemeBundle/Resources/views/process/item.html.twig'

@@ -1,0 +1,11 @@
+{% twig_js name="bigfootProcessItem" %}
+<a href="#">
+    <div class="clearfix process-description">
+        <span class="pull-left">{{ process.name }} - <em>{{ process.currentTask }}</em></span>
+        <span class="pull-right"><span class="process-progress">{{ process.completionPercentage }}</span>%</span>
+    </div>
+
+    <div class="progress progress-mini">
+        <div style="width: {{ process.completionPercentage }}%" class="progress-bar{% if process.status == 3 %} progress-bar-danger{% endif %}"></div>
+    </div>
+</a>
