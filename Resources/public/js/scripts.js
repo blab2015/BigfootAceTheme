@@ -828,46 +828,64 @@ $(document).ready(function() {
 
 /* Process management */
 $(document).ready(function() {
-    var $processList = $('ul.process-list');
+    window.processInterval = null;
+    window.$processList = $('ul.process-list');
 
-    if ($processList.length > 0) {
-        setInterval(function() {
-            var processes = [];
-
-            $.get(Routing.generate('bigfoot_process_list'), function(data) {
-                var tokens = data;
-                if (tokens.length > 0) {
-                    $('.process-dropdown').show();
-                    $('.process-count').html(tokens.length)
-                } else {
-                    $('.process-dropdown').hide();
-                }
-
-                $.each(tokens, function(index, value) {
-                    var $processContainer = $('li[data-process-token="' + value + '"]', $processList);
-
-                    if ($processContainer.length == 0) {
-                        $processContainer = $('<li data-process-token="' + value + '"></li>');
-                        $processList.append($processContainer);
-                    }
-
-                    var url = Routing.generate('bigfoot_process_progress', { 'token': value });
-
-                    $.get(url, function(data) {
-                        $processContainer.html(Twig.render(bigfootProcessItem, { 'process': data }));
-                    });
-                });
-
-                $('li[data-process-token]', $processList).each(function() {
-                    if ($.inArray($(this).data('process-token'), tokens) < 0) {
-                        $(this).remove();
-                    }
-                });
-            });
-        }, 2000);
+    if ($('li[data-process-token]', window.$processList).length > 0) {
+        setProcessInterval();
     }
 });
 
+function setProcessInterval() {
+    window.processInterval = setInterval(function() {
+        $.get(Routing.generate('bigfoot_process_list'), function(data) {
+            var
+                tokens = data,
+                nbOngoing = 0,
+                nbDone = 0
+            ;
+
+            if (Object.keys(tokens).length > 0) {
+                $('.process-dropdown').show();
+            } else {
+                $('.process-dropdown').hide();
+            }
+
+
+            $.each(tokens, function(index, value) {
+                var $processContainer = $('li[data-process-token="' + index + '"]', window.$processList);
+
+                if ($processContainer.length == 0) {
+                    $processContainer = $('<li data-process-token="' + index + '"></li>');
+                    window.$processList.append($processContainer);
+                }
+
+                var url = Routing.generate('bigfoot_process_progress', { 'token': index });
+
+                $.get(url, function(data) {
+                    $processContainer.html(Twig.render(bigfootProcessItem, { 'process': data }));
+                });
+
+                if (value == 1) {
+                    nbOngoing++;
+                } else {
+                    nbDone++;
+                }
+            });
+
+            if (nbOngoing == 0) {
+                clearInterval(window.processInterval);
+            }
+
+            $('.process-count').html(nbOngoing);
+            $('li[data-process-token]', window.$processList).each(function() {
+                if (! $(this).data('process-token') in tokens) {
+                    $(this).remove();
+                }
+            });
+        });
+    }, 2000);
+}
 (function($) {
     if (!$.bigfoot) {
         $.bigfoot = new Object();
