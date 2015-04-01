@@ -260,7 +260,7 @@ function setupTranslatableFields($translatableFields, $translatableLabelContaine
                     $(this).addClass('ckeditor');
                 }
 
-                $(this).after($('<span class="input-group-addon"><img src="' + basePath + '/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
+                $(this).after($('<span class="input-group-addon"><img src="' + basePath + locales[$(this).data('locale')].flag + '" width="16" height="11" /></span>'));
                 if ($(this).data('locale') != currentLocale) {
                     $(this).closest('div.input-group').hide();
                 }
@@ -271,7 +271,7 @@ function setupTranslatableFields($translatableFields, $translatableLabelContaine
 
     if (typeof $translatableLabelContainers !== "undefined" && $translatableLabelContainers !== null && $translatableLabelContainers.length) {
         $translatableLabelContainers.each(function() {
-            $('textarea[data-locale],input[type="text"][data-locale]', $(this)).after($('<span class="input-group-addon"><img src="/bundles/bigfootcore/img/flags/'+$(this).data('locale')+'.gif" /></span>'));
+            $('textarea[data-locale],input[type="text"][data-locale]', $(this)).after($('<span class="input-group-addon"><img src="' + basePath + locales[$(this).data('locale')].flag + '" width="16" height="11" /></span>'));
         });
 
         $translatableLabelContainers.each(function() {
