@@ -33,11 +33,11 @@
     <script type="text/javascript">
         var
             defaultPortfolioRoute = "{{ path('portfolio_dashboard') }}",
-            currentLocale         = "{{ app.request.locale }}",
+            currentLocale         = "{{ bigfoot_default_front_locale() }}",
             basePath              = "{{ app.request.basePath }}",
             tagsPath              = "{{ path('admin_tag_get') }}",
             defaultLocale         = currentLocale,
-            locales               = ["{{ localeFlags()|join('","')|raw }}"];
+            locales               = {{ bigfoot_locale_flags() }};
     </script>
 
     {% javascripts
