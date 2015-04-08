@@ -32,11 +32,11 @@
 {% block javascripts %}
     <script type="text/javascript">
         var
-            defaultPortfolioRoute = "{{ path('portfolio_dashboard') }}",
-            currentLocale         = "{{ bigfoot_default_front_locale() }}",
-            basePath              = "{{ app.request.basePath }}",
-            tagsPath              = "{{ path('admin_tag_get') }}",
-            defaultLocale         = currentLocale,
+            defaultPortfolioRoute = "{{ path('portfolio_dashboard')|e('js') }}",
+            currentLocale         = "{{ bigfoot_default_front_locale()|e('js') }}",
+            basePath              = "{{ app.request.basePath|e('js') }}",
+            tagsPath              = "{{ path('admin_tag_get')|e('js') }}",
+            defaultLocale         = "{{ defaultLocale|e('js') }}",
             locales               = {{ bigfoot_locale_flags() }};
     </script>
 
