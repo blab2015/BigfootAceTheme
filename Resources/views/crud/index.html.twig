@@ -43,20 +43,52 @@
         {% block table_body %}
             <tbody>
                 {% for item in list_items %}
+                    {% set tdAction = null %}
+                    {% for action in actions %}
+                        {% if action.icon == 'edit' %}
+                            {% set tdAction = path(action.route, { 'id': item.id }) %}
+                        {% endif %}
+                    {% endfor %}
                     <tr class="entity-edit">
                         {%- for attr, field in list_fields -%}
                             {%- set value = attribute(item, attr) -%}
                             {%- if field.formatters|default(false) -%}
                                 {%- set value = value|bigfoot_crud_formatter(field.formatters) -%}
                             {%- endif -%}
-                            <td>{{ value|striptags|nl2br }}</td>
+                            <td
+                                {% if field.width|default(false) %} style="width: {{ field.width }}"{% endif %}
+                                {% if tdAction is not null %}
+                                    class="entity-clickable"
+                                    onclick="document.location='{{ tdAction }}'"
+                                {% endif %}
+                            >
+                                {% if field.raw|default(false) %}
+                                    {{ value|raw }}
+                                {% else %}
+                                    {{ value|striptags|nl2br }}
+                                {% endif %}
+                            </td>
                         {%- endfor -%}
 
                         {% block table_actions %}
-                            <td>
+                            <td style="width: {{ actions|length * 30 }}px">
                                 <div class="action-buttons">
                                     {% for action in actions %}
-                                        <a href="{{ path(action.route, { 'id': item.id }) }}" class="{{ action.color }} {{ action.icon }}{% if action.class is defined %} {{ action.class }}{% endif %}"{% if action.attributes is defined %}{% for key, value in action.attributes %} {{ key }}="{{ value }}"{% endfor %}{% endif %}>
+                                        {% if action.route is defined %}
+                                            {% set url = path(action.route, { 'id': item.id }) %}
+                                        {% else %}
+                                            {% set url = action.url %}
+                                        {% endif %}
+                                        <a
+                                            href="{{ url }}"
+                                            class="{{ action.color }} {{ action.icon }}{% if action.class is defined %} {{ action.class }}{% endif %}"
+                                            {% if action.attributes is defined %}
+                                                {% for key, value in action.attributes %}
+                                                    {{ key }}="{{ value }}"
+                                                {% endfor %}
+                                            {% endif %}
+                                            {% if action.target is defined %} target="{{ action.target }}"{% endif %}
+                                        >
                                             <i class="icon-{{ action.icon }} bigger-130"></i>
                                         </a>
                                     {% endfor %}
