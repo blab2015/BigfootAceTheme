@@ -1992,6 +1992,7 @@ body {
     font-size: 13px;
     color: #393939;
     line-height: 1.5;
+    cursor: default;
 }
 body.navbar-fixed {
     padding-top: 81px;
@@ -3094,6 +3095,9 @@ blockquote.pull-right {
     -ms-transform: scale(1.2);
     transform: scale(1.2);
     opacity: 1;
+}
+.entity-clickable {
+    cursor: pointer;
 }
 .navbar {
     margin-bottom: 0;
