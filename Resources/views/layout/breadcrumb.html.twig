@@ -11,7 +11,7 @@
                         {% endif %}
                         <a href="{{ item.uri }}">{{ item.label | trans }}</a>
                     {% else %}
-                        {% if item.item.linkAttributes.icon is defined and item.item.linkAttributes.icon is not null %}
+                        {% if item.item.linkAttributes.icon|default %}
                             <i class="icon-{{ item.item.linkAttributes.icon }}"></i>
                         {% endif %}
                         {{ item.label | trans() }}
