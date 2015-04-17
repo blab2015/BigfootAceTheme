@@ -2030,7 +2030,7 @@ body.breadcrumbs-fixed {
     left: auto;
 }
 .main-content {
-    margin-left: 190px;
+    margin-left: 230px;
     margin-right: 0;
     margin-top: 0;
     min-height: 100%;
@@ -4063,7 +4063,7 @@ blockquote.pull-right {
 .breadcrumbs.breadcrumbs-fixed {
     position: fixed;
     right: 0;
-    left: 190px;
+    left: 230px;
     top: 81px;
     z-index: 1028;
 }
@@ -4348,7 +4348,7 @@ blockquote.pull-right {
     }
 }
 .sidebar {
-    width: 190px;
+    width: 230px;
     float: left;
     position: relative;
     border: 1px solid #cccccc;
@@ -4359,7 +4359,7 @@ blockquote.pull-right {
     /* the grey background of sidebar */
     content: "";
     display: block;
-    width: 190px;
+    width: 230px;
     position: fixed;
     bottom: 0;
     top: 0;
