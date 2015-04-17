@@ -2,7 +2,7 @@
 <html lang="{{ app.request.locale }}" class="{% block htmlClass %}{% endblock htmlClass %}">
 <head>
     <meta charset="utf-8">
-    <title>{{ bigfoot_theme.title|default('Bigfoot')|trans }}</title>
+    <title>{{ bigfoot_theme.html_title|default(bigfoot_theme.title|default('Bigfoot'))|trans }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="robots" content="noindex,nofollow">
