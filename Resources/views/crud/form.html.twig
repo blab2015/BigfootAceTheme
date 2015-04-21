@@ -39,7 +39,7 @@
                                         <div class="tabbable {{ groupsAttr.style|default('') }}">
                                             <ul id="crudGroup" class="nav nav-tabs">
                                                 {%- for group in groupsConfig -%}
-                                                    <li{% if loop.first %} class="active"{% endif %}><a data-toggle="tab" href="#{{ group.title|replace({'.': ''})}}">{{ group.title|trans }}</a></li>
+                                                    <li{% if loop.first %} class="active"{% endif %}><a data-toggle="tab" href="#{{ group.title|replace({'.': ''})|replace({' ': '-'})}}">{{ group.title|trans }}</a></li>
                                                 {%- endfor -%}
                                             </ul>
                                             <div id="crudGroupContent" class="tab-content">
@@ -51,16 +51,16 @@
                                              <div class="panel panel-default">
                                                  <div class="panel-heading">
                                                      <h4 class="panel-title">
-                                                         <a class="accordion-toggle{% if not loop.first %} collapsed{% endif %}" data-toggle="collapse" data-parent="#formAccordion" href="#{{ group.title|replace({'.': ''})}}">
+                                                         <a class="accordion-toggle{% if not loop.first %} collapsed{% endif %}" data-toggle="collapse" data-parent="#formAccordion" href="#{{ group.title|replace({'.': ''})|replace({' ': '-'})}}">
                                                              <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
                                                              &nbsp;{{ group.title|trans }}
                                                          </a>
                                                      </h4>
                                                  </div>
-                                                 <div class="panel-collapse collapse{% if loop.first %} in{% endif %}" id="{{ group.title|replace({'.': ''})}}">
+                                                 <div class="panel-collapse collapse{% if loop.first %} in{% endif %}" id="{{ group.title|replace({'.': ''})|replace({' ': '-'})}}">
                                                      <div class="panel-body">
                                         {%- else -%}
-                                        <div class="tab-pane{% if loop.first %} active{% endif %}" id="{{ group.title | replace({'.': ''})}}">
+                                        <div class="tab-pane{% if loop.first %} active{% endif %}" id="{{ group.title | replace({'.': ''})|replace({' ': '-'})}}">
                                         {%- endif -%}
                                             {%- if group.content is defined -%}
                                                 {%- if group.description is defined -%}
