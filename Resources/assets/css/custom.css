@@ -127,6 +127,7 @@ img.crud-column-media {
 
 div.table-header div.action-buttons {
     margin-right: 10px;
+    float: left;
 }
 .dd-handle .action-buttons,
 .dd2-content .action-buttons {
