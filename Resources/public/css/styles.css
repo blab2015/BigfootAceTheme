@@ -1992,7 +1992,6 @@ body {
     font-size: 13px;
     color: #393939;
     line-height: 1.5;
-    cursor: default;
 }
 body.navbar-fixed {
     padding-top: 81px;
@@ -3096,21 +3095,6 @@ blockquote.pull-right {
     transform: scale(1.2);
     opacity: 1;
 }
-.entity-clickable {
-    cursor: pointer;
-}
-
-table.table-bordered tr.entity-edit td.action {
-    width: 1px;
-    padding: 8px 2px;
-    border-left: none !important;
-    border-right: none !important;
-}
-
-table.table-bordered tr.entity-edit td.action:last-child {
-    border-right: 1px solid #ddd !important;
-}
-
 .navbar {
     margin-bottom: 0;
 }
@@ -19312,8 +19296,4 @@ input[type="checkbox"].ace + .lbl {
 }
 .dropdown-navbar.navbar-pink .nav-tabs > li > a {
     border-bottom-color: #CEBBCD !important;
-}
-
-.page-no-header {
-    height: 10px;
 }
