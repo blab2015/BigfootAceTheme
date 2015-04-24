@@ -236,12 +236,13 @@ function setupTranslatableFields($translatableFields, $translatableLabelContaine
         $('input[type="text"], textarea', $translatableFields).each(function() {
             var elementId = $(this).attr('id');
             var parentElementId = elementId.substr(0, elementId.lastIndexOf('-')).replace('_translation', '');
-
             var $parentElement = $('#'+parentElementId);
+            var $entityLocale = $('input.entity-locale', $(this).closest('.translatable-fields'));
+            var locale = $entityLocale.length ? $entityLocale.val() : defaultLocale;
 
             $parentElement
-                .data('locale', defaultLocale)
-                .attr('data-locale', defaultLocale);
+                .data('locale', locale)
+                .attr('data-locale', locale);
 
             $(this).appendTo($parentElement.parent());
         });
