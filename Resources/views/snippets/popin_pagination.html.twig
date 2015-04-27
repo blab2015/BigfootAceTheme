@@ -1,0 +1,24 @@
+{% set pages = (total/perPage)|round(0, 'ceil') %}
+
+{% set page  = 1 %}
+{% set start = 1 %}
+{% set end   = pages < 3 ? pages : 3 %}
+{% set last  = pages > 3 ? true : false %}
+
+{% if pages > 1 %}
+    <ul class="pagination" data-total="{{ total }}" data-per-page="{{ perPage }}" data-container="paginate" data-selected="{{ mediaIds | join(';') }}" data-href="{{ path('portfolio_popin_paginate') }}">
+        {% for i in start..end %}
+            <li {% if page == i %}class="active"{% endif %}>
+                <a href="#_" data-action="paginate" data-page="{{ i }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+
+        {% if last %}
+            <li>
+                <a href="#_" data-action="paginate" data-page="{{ pages }}">
+                    >>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
