@@ -1,11 +1,11 @@
-<table id="list" class="table table-striped portfolio-list">
+<table id="list" class="table table-striped portfolio-list" data-container="list">
     <tbody>
     {% for line in allMedias %}
     {% set used = false %}
     {% if line.id in mediaIds %}
     {% set used = true %}
     {% endif %}
-    {% include 'BigfootAceThemeBundle:snippets:table_line.html.twig' with {'line': line, 'used': used} %}
+    {% include template_line with {'line': line, 'used': used} %}
     {% else  %}
         <tr>
             <td>{{ "No media found" | trans }}</td>
@@ -13,3 +13,7 @@
     {% endfor %}
     </tbody>
 </table>
+
+{% if pagination|default(false) %}
+    {% include 'BigfootAceThemeBundle:snippets:popin_pagination.html.twig' %}
+{% endif %}
