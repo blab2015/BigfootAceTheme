@@ -1,0 +1,51 @@
+{%- block form_rows -%}
+    {% for child in form %}
+        {% if child.vars.attr.class|default() == 'metadatas' %}
+            {{- form_widget(child) -}}
+        {% else %}
+            {{- form_row(child) -}}
+        {% endif %}
+    {% endfor %}
+{%- endblock form_rows -%}
+
+{%- block form_row -%}
+    <div class="form-group clearfix">
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{%- block form_label -%}
+    {% if label is not sameas(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif %}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif %}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+
+        {% set label_attr = label_attr|merge({'class': label_attr.class|default('') ~ ' control-label col-sm-3'}) %}
+
+        {% if label|trim != '' %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+        {% endif %}
+    {%- endif -%}
+{%- endblock form_label -%}
+
+{%- block form_widget_simple -%}
+    {%- set type = type|default('text') -%}
+    <div class="col-sm-5">
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{%- endblock form_widget_simple -%}

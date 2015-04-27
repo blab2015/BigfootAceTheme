@@ -7,48 +7,59 @@
         <ul class="nav nav-tabs nav-justified">
             <li{% if selectedMedias %} class="active"{% endif %}><a href="#media" data-toggle="tab"><i class="icon-camera"></i> {{ 'Associated medias' | trans }}</a></li>
             <li{% if not selectedMedias %} class="active"{% endif %}><a href="#portfolio" data-toggle="tab"><i class="icon-picture"></i> {{ 'Portfolio' | trans }}</a></li>
-            <li><a href="#upload" data-toggle="tab"><i class="icon-cloud-upload"></i> {{ 'Download new medias' | trans }}</a></li>
+
+            {% if configuration.upload|default(false) %}
+                <li><a href="#upload" data-toggle="tab"><i class="icon-cloud-upload"></i> {{ 'Download new medias' | trans }}</a></li>
+            {% endif %}
         </ul>
         <div class="tab-content">
             <div class="tab-pane {% if selectedMedias %} active{% endif %}" id="media">
                 <table id="list" class="table table-striped ">
                     <tbody>
                         {% for media in selectedMedias %}
-                        {% include 'BigfootAceThemeBundle:snippets:table_line.html.twig' with {'line': media, 'used': true} %}
+                            {% include template_line with {'line': media, 'used': true} %}
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
             <div class="tab-pane{% if not selectedMedias %} active{% endif %}" id="portfolio">
-                <div class="well">
-                    <form class="form-search portfolio-search-form" action="{{ path('portfolio_search') }}" method="post">
-                        <div class="row">
-                            <div class="input-group">
-                                {{ form_widget(form.search, {'attr': {'placeholder': 'Search term' | trans}}) }}
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn">
-                                        {{ "Filter" | trans }}
-                                        <i class="icon-search icon-on-right bigger-110"></i>
-                                    </button>
-                                </span>
+                {% if configuration.upload|default(false) %}
+                    <div class="well">
+                        <form class="form-search portfolio-search-form" action="{{ path('portfolio_search') }}" method="post">
+                            <div class="row">
+                                <div class="input-group">
+                                    {{ form_widget(form.search, {'attr': {'placeholder': 'Search term' | trans}}) }}
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn">
+                                            {{ "Filter" | trans }}
+                                            <i class="icon-search icon-on-right bigger-110"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div style="display: none">
-                            {{ form_rest(form) }}
-                        </div>
-                    </form>
+                            <div style="display: none">
+                                {{ form_rest(form) }}
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+
+                <div data-portfolio-container="results-list">
+                    {% include 'BigfootAceThemeBundle:snippets:table.html.twig' with {'allMedias': allMedias, 'mediaIds': mediaIds} %}
+                    {% include 'BigfootAceThemeBundle:snippets:popin_pagination.html.twig' %}
                 </div>
-                {% include 'BigfootAceThemeBundle:snippets:table.html.twig' with {'allMedias': allMedias, 'mediaIds': mediaIds} %}
             </div>
-            <div class="tab-pane" id="upload">
-                <div class="ace-file-input ace-file-multiple">
-                    <input multiple="" type="file" id="dragContainer">
+            {% if configuration.upload|default(false) %}
+                <div class="tab-pane" id="upload">
+                    <div class="ace-file-input ace-file-multiple">
+                        <input multiple="" type="file" id="dragContainer">
+                    </div>
+                    <table id="droppedFiles" class="table table-striped">
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
-                <table id="droppedFiles" class="table table-striped">
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
+            {% endif %}
         </div>
     </div>
     <div class="modal-footer">
