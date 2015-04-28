@@ -18780,7 +18780,29 @@ th[aria-selected=true] .ui-jqgrid-sortable {
         top: 65px;
     }
 }
- /* Allows large popins */
+body {
+    cursor: default;
+}
+
+.entity-clickable {
+    cursor: pointer;
+}
+
+table.table-bordered tr.entity-edit td.action {
+    width: 1px;
+    padding: 8px 2px;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+table.table-bordered tr.entity-edit td.action:last-child {
+    border-right: 1px solid #ddd !important;
+}
+.page-no-header {
+    height: 10px;
+}
+
+/* Allows large popins */
 .large { width: 1000px }
 
 /* Fixes help buttons question mark displaying too low */
