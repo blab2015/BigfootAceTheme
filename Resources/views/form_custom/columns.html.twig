@@ -89,6 +89,9 @@
 
 {% block textarea_widget %}
     {% set widgetClass = 'col-xs-10 col-sm-10 ' %}
+    {% if 'bigfoot_richtext' in form.vars.block_prefixes %}
+        {% set widgetClass = widgetClass|merge(' ckeditor') %}
+    {% endif %}
     {% if attr.class is defined %}
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
@@ -509,6 +512,7 @@
 {% endblock sidebars_widget %}
 
 {% block bigfoot_richtext_widget %}
+    {% set attr = attr|merge({'class': attr.class|default() ? attr.class ~ ' ckeditor' : 'ckeditor' }) %}
     <div class="col-xs-10 col-sm-10">
         {{ form_widget(form) }}
     </div>
