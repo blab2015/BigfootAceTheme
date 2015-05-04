@@ -85,12 +85,16 @@
 
 {% block textarea_widget %}
     {% set widgetClass = ' ' %}
+    {% if 'bigfoot_richtext' in form.vars.block_prefixes %}
+        {% set widgetClass = ' ckeditor ' %}
+    {% endif %}
     {% if attr.class is defined %}
         {% set widgetClass = widgetClass ~ attr.class %}
     {% endif %}
     {% set attr = (attr | merge({class: widgetClass})) %}
-<div class="input-group">
-    {{ parent() }}
+
+    <div class="input-group">
+        {{ parent() }}
     </div>
 {% endblock %}
 
@@ -496,6 +500,7 @@
 {% endblock sidebars_widget %}
 
 {% block bigfoot_richtext_widget %}
+    {% set attr = attr|merge({'class': attr.class|default() ? attr.class ~ ' ckeditor' : 'ckeditor' }) %}
     <div class="width-100">
         {{ form_widget(form) }}
     </div>
