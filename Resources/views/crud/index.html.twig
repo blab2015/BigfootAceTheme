@@ -33,7 +33,11 @@
             <thead>
                 <tr>
                     {% for attr, field in list_fields %}
-                        <th{% if field.width|default(false) %} style="width: {{ field.width }}"{% endif %}>{% if list_items %}{{ knp_pagination_sortable(list_items, field.label|trans, field.sort|default('e.' ~ attr)) }}{% endif %}</th>
+                        <th{% if field.width|default(false) %} style="width: {{ field.width }}"{% endif %}>
+                            {% if list_items %}
+                                {{ knp_pagination_sortable(list_items, field.label|trans, field.sort|default('e.' ~ attr), { }, { }, 'BigfootAceThemeBundle:pagination:sortable_link.html.twig') }}
+                            {% endif %}
+                        </th>
                     {% endfor %}
                     
                     <th colspan="{{ actions|length }}"></th>
@@ -78,18 +82,20 @@
                                         {% else %}
                                             {% set url = actions_urls[actionId][item.id|default]|default(action.url|default) %}
                                         {% endif %}
-                                        <a
-                                            href="{{ url }}"
-                                            class="{{ action.color }} {{ action.icon }}{% if action.class is defined %} {{ action.class }}{% endif %}"
-                                            {% if action.attributes is defined %}
-                                                {% for key, value in action.attributes %}
-                                                    {{ key }}="{{ value }}"
-                                                {% endfor %}
-                                            {% endif %}
-                                            {% if action.target is defined %} target="{{ action.target }}"{% endif %}
-                                        >
-                                            <i class="icon-{{ action.icon }} bigger-130"></i>
-                                        </a>
+                                        {% if url != false %}
+                                            <a
+                                                href="{{ url }}"
+                                                class="{{ action.color }} {{ action.icon }}{% if action.class is defined %} {{ action.class }}{% endif %}"
+                                                {% if action.attributes is defined %}
+                                                    {% for key, value in action.attributes %}
+                                                        {{ key }}="{{ value }}"
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% if action.target is defined %} target="{{ action.target }}"{% endif %}
+                                            >
+                                                <i class="icon-{{ action.icon }} bigger-130"></i>
+                                            </a>
+                                        {% endif %}
                                     </div>
                                 </td>
                             {% endfor %}
