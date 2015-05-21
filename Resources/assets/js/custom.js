@@ -45,7 +45,7 @@ jQuery(function($) {
     $('[data-rel=popover]').popover({container:'body'});
 
     $(".chosen-select-no-search").chosen({disable_search: true});
-    $(".chosen-select").chosen();
+    $(".chosen-select").chosen({allow_single_deselect: true});
     $('.date-picker').datepicker({
         'autoclose': true,
         'language': currentLocale
