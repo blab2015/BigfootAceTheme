@@ -23,7 +23,7 @@
                 </table>
             </div>
             <div class="tab-pane{% if not selectedMedias %} active{% endif %}" id="portfolio">
-                {% if configuration.upload|default(false) %}
+                {% if configuration.search|default(false) %}
                     <div class="well">
                         <form class="form-search portfolio-search-form" action="{{ path('portfolio_search') }}" method="post">
                             <div class="row">
