@@ -29,6 +29,7 @@
                             <div class="row">
                                 <div class="input-group">
                                     {{ form_widget(form.search, {'attr': {'placeholder': 'Search term' | trans}}) }}
+                                    {{ form_rest(form) }}
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn">
                                             {{ "Filter" | trans }}
@@ -37,16 +38,12 @@
                                     </span>
                                 </div>
                             </div>
-                            <div style="display: none">
-                                {{ form_rest(form) }}
-                            </div>
                         </form>
                     </div>
                 {% endif %}
 
                 <div data-portfolio-container="results-list">
-                    {% include 'BigfootAceThemeBundle:snippets:table.html.twig' with {'allMedias': allMedias, 'mediaIds': mediaIds} %}
-                    {% include 'BigfootAceThemeBundle:snippets:popin_pagination.html.twig' %}
+                    {% include 'BigfootAceThemeBundle:snippets:table.html.twig' with {'allMedias': allMedias, 'mediaIds': mediaIds, pagination: true} %}
                 </div>
             </div>
             {% if configuration.upload|default(false) %}

@@ -19319,3 +19319,6 @@ input[type="checkbox"].ace + .lbl {
 .dropdown-navbar.navbar-pink .nav-tabs > li > a {
     border-bottom-color: #CEBBCD !important;
 }
+form.portfolio-search-form .input-group, form.portfolio-search-form .input-group-btn {
+    display: inline-block;
+}
