@@ -1087,7 +1087,7 @@ function setProcessInterval() {
                 var jsonObject     = json;
                 var portfolioList   = $(base.options['portfolioListClass']);
 
-                portfolioList.replaceWith(jsonObject.html);
+                portfolioList.replaceWith(jsonObject.content);
             });
 
             return false;
