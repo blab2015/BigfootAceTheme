@@ -1084,7 +1084,7 @@ function setProcessInterval() {
             var sMediaIds = $(base.options['portfolioPopinClass']).data('selected');
 
             $.post(searchForm.attr('action') + '?ids=' + sMediaIds, searchForm.serialize(), function (json) {
-                var jsonObject     = JSON.parse(json);
+                var jsonObject     = json;
                 var portfolioList   = $(base.options['portfolioListClass']);
 
                 portfolioList.replaceWith(jsonObject.html);
