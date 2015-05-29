@@ -35,7 +35,7 @@
                     {% for attr, field in list_fields %}
                         <th{% if field.width|default(false) %} style="width: {{ field.width }}"{% endif %}>
                             {% if list_items %}
-                                {{ knp_pagination_sortable(list_items, field.label|trans, field.sort|default('e.' ~ attr), { }, { }, 'BigfootAceThemeBundle:pagination:sortable_link.html.twig') }}
+                                {{ knp_pagination_sortable(list_items, field.label|trans, field.sort|default('e.' ~ attr), { }, paginator_params, 'BigfootAceThemeBundle:pagination:sortable_link.html.twig') }}
                             {% endif %}
                         </th>
                     {% endfor %}
