@@ -33,9 +33,21 @@
             <thead>
                 <tr>
                     {% for attr, field in list_fields %}
-                        <th{% if field.width|default(false) %} style="width: {{ field.width }}"{% endif %}>
-                            {% if list_items %}
+                        {% set sortable = (field.sortable is not defined or (field.sortable is defined and field.sortable)) %}
+                        {% set class = null %}
+                        {% set onTHClick = null %}
+                        {% if sortable %}
+                            {% set class = class ~ ' clickable' %}
+                            {% set onTHClick = ' onclick=document.location=$(this).find("a").attr("href")' %}
+                        {% endif %}
+                        {% if list_items.params.sort|default == 'e.' ~ attr or paginator_params.sort|default == 'e.' ~ attr %}
+                            {% set class = class ~ ' sorted' %}
+                        {% endif %}
+                        <th {% if class is not null %} class="{{ class }}"{% endif %} {% if field.width|default %} style="width: {{ field.width }}"{% endif %}{{ onTHClick|raw }}>
+                            {% if list_items and sortable %}
                                 {{ knp_pagination_sortable(list_items, field.label|trans, field.sort|default('e.' ~ attr), { }, paginator_params, 'BigfootAceThemeBundle:pagination:sortable_link.html.twig') }}
+                            {% else %}
+                                {{ field.label|trans }}
                             {% endif %}
                         </th>
                     {% endfor %}
