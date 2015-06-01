@@ -19322,3 +19322,9 @@ input[type="checkbox"].ace + .lbl {
 form.portfolio-search-form .input-group, form.portfolio-search-form .input-group-btn {
     display: inline-block;
 }
+
+.required::after {
+    content: ' *';
+    display: inline;
+    color: #990000;
+}
