@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     $('body').on('click', 'a.deleteCollectionItem', function (event) {
         event.preventDefault();
-        $(this).closest('.form-group').remove();
+        $(this).closest('[data-container=collection-item]').remove();
     });
 
     initCkeditor();
