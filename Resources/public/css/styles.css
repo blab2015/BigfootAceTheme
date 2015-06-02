@@ -10926,20 +10926,6 @@ td,
 .table.table-bordered thead tr th:first-child {
     border-left-color: #DDD;
 }
-.table thead tr th.sorted {
-    background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ECECEC), to(#DFDFDF));
-    background-image: -webkit-linear-gradient(top, #ECECEC, 0%, #DFDFDF, 100%);
-    background-image: -moz-linear-gradient(top, #ECECEC 0%, #DFDFDF 100%);
-    background-image: linear-gradient(to bottom, #ECECEC 0%, #DFDFDF 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffececec', endColorstr='#ffdfdfdf', GradientType=0);
-}
-.table thead tr th {
-    color:#428bca !important
-}
-.table thead tr th a:hover {
-    text-decoration:none !important;
-    color:#428bca
-}
 th.center,
 td.center {
     text-align: center;
@@ -19335,14 +19321,4 @@ input[type="checkbox"].ace + .lbl {
 }
 form.portfolio-search-form .input-group, form.portfolio-search-form .input-group-btn {
     display: inline-block;
-}
-
-.required::after {
-    content: ' *';
-    display: inline;
-    color: #990000;
-}
-
-.clickable {
-    cursor:pointer;
 }

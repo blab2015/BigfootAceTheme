@@ -224,20 +224,33 @@
 
 {% block collection_widget %}
     {% if prototype is defined %}
-    <div class=" ">
-        <a href="#" class="addCollectionItem btn btn-link" data-collection-id="#{{ id }}" data-prototype-name="{{ prototype_name | default('__name__') }}">{{ 'Add' | trans }}</a>
-    </div>
+        <div class=" ">
+            <a href="#" class="addCollectionItem btn btn-link" data-collection-id="#{{ id }}" data-prototype-name="{{ prototype_name | default('__name__') }}">{{ 'Add' | trans }}</a>
+        </div>
     {% endif %}
-</div>
-<div class="form-group">
-     {% if prototype is defined %}
+    {% if prototype is defined %}
         {% set attr = attr|merge({'data-prototype': form_widget(prototype) }) %}
     {% endif %}
-    {{ block('form_widget') }}
+
+    <div {{ block('widget_container_attributes') }}>
+        {%- if form.parent is empty -%}
+            {{ form_errors(form) }}
+        {%- endif -%}
+        {% for child in form %}
+            {{- form_widget(child) -}}
+        {% endfor %}
+        {{- form_rest(form) -}}
+    </div>
+
+    {% if prototype is defined %}
+        <div class=" ">
+            <a href="#" class="addCollectionItem btn btn-link" data-collection-id="#{{ id }}" data-prototype-name="{{ prototype_name | default('__name__') }}">{{ 'Add' | trans }}</a>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block bigfoot_collection_item_widget %}
-    <div id="accordion-container-{{ id }}" class="sortable-collection-item accordion-style1 panel-group  ">
+    <div id="accordion-container-{{ id }}" data-container="collection-item" class="sortable-collection-item accordion-style1 panel-group  ">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
