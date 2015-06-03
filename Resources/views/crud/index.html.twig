@@ -61,7 +61,7 @@
                 {% for item in list_items %}
                     {% set tdAction = null %}
                     {% for action in actions %}
-                        {% if action.icon == 'edit' %}
+                        {% if action.icon|default == 'edit' %}
                             {% set tdAction = path(action.route, { 'id': item.id }) %}
                         {% endif %}
                     {% endfor %}
