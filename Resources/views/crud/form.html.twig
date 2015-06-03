@@ -1,47 +1,69 @@
 {% extends bigfoot_theme_bundle ~ '::layout' ~ app.request.get('layout') ~ '.html.twig' %}
 
 {% block content %}
+    {%- set groups = form.vars.groups|default([]) -%}
+    {%- set groupsConfig = groups.config|default([]) -%}
+
     {% block form_theme %}{% form_theme form bigfoot_theme_bundle ~ ':form_custom:inline.html.twig' %}{% endblock form_theme %}
     {{ form_start(form, {'action': form_action, 'method': form_method|default('POST'), 'class': 'test'}) }}
         <div class="row">
             <div class="col-sm-12">
                 <div class="widget-box">
-                    <div class="widget-header">
-                        <h4>{% block form_title %}{{ form_title|trans() }}{% endblock form_title %}</h4>
-                        <span class="widget-toolbar">
-                            <div class="locales-container"></div>
-                        </span>
+                    <div class="table-header">
+                        <div class="pull-left">{% block form_title %}{{ form_title|trans() }}{% endblock form_title %}</div>
+
+                        <div class="pull-right">
+                            <div class="action-buttons">
+                                <div class="locales-container"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
+
+                    {% if groupsConfig|length > 0 %}
+                        <div class="dataTables_wrapper bigfoot_filters">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="tabbable {{ groupsAttr.style|default('') }}">
+                                        <ul id="crudGroup" class="nav nav-tabs nav-tabs-detached">
+                                            {%- for group in groupsConfig -%}
+                                                <li{% if loop.first %} class="active"{% endif %}>
+                                                    <a data-toggle="tab" href="#{{ group.title|replace({'.': ''})|replace({' ': '-'})}}">
+                                                        {% if group.icon|default %}
+                                                            <i class="{{ group.icon }}"></i>
+                                                        {% endif %}
+                                                        {{ group.title|trans }}
+                                                    </a>
+                                                </li>
+                                            {%- endfor -%}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
 
                     <div class="widget-body">
                         <div class="widget-main">
                             {%- set formErrors = app.session.get('bigfoot_core.crud.form.'~form_name|default('')~'.errors') -%}
                             {%- if formErrors -%}
                                 <ul>
-                                {%- for errorsField in formErrors -%}
-                                    {%- for error in errorsField -%}
-                                        <li>{{ error.field|default('Field') }} : {{ error.message }}</li>
+                                    {%- for errorsField in formErrors -%}
+                                        {%- for error in errorsField -%}
+                                            <li>{{ error.field|default('Field') }} : {{ error.message }}</li>
+                                        {%- endfor -%}
                                     {%- endfor -%}
-                                {%- endfor -%}
                                 </ul>
                                 {% set formErrors = app.session.remove('bigfoot_core.crud.form.'~form_name|default('')~'.errors') %}
                             {%- endif -%}
                             {% block form %}
-                                {%- set groups = form.vars.groups|default([]) -%}
-                                {%- set groupsConfig = groups.config|default([]) -%}
                                 {%- set groupsAttr = groups.attr|default([]) -%}
                                 {%- if groups -%}
                                     {%- set groupsType = groupsAttr.type|default('tabs') -%}
                                     {%- if groupsType == 'accordion' -%}
                                         <div id="formAccordion" class="accordion-{{ groupsAttr.style|default('style1') }} panel-group">
                                     {%- else -%}
-                                        <div class="tabbable {{ groupsAttr.style|default('') }}">
-                                            <ul id="crudGroup" class="nav nav-tabs">
-                                                {%- for group in groupsConfig -%}
-                                                    <li{% if loop.first %} class="active"{% endif %}><a data-toggle="tab" href="#{{ group.title|replace({'.': ''})|replace({' ': '-'})}}">{{ group.title|trans }}</a></li>
-                                                {%- endfor -%}
-                                            </ul>
-                                            <div id="crudGroupContent" class="tab-content">
+                                        <div id="crudGroupContent" class="tab-content tab-content-detached">
                                     {%- endif -%}
                                     {{ form_errors(form) }}
                                     {% for group in groupsConfig %}
@@ -59,7 +81,7 @@
                                                  <div class="panel-collapse collapse{% if loop.first %} in{% endif %}" id="{{ group.title|replace({'.': ''})|replace({' ': '-'})}}">
                                                      <div class="panel-body">
                                         {%- else -%}
-                                        <div class="tab-pane{% if loop.first %} active{% endif %}" id="{{ group.title | replace({'.': ''})|replace({' ': '-'})}}">
+                                            <div class="tab-pane{% if loop.first %} active{% endif %}" id="{{ group.title | replace({'.': ''})|replace({' ': '-'})}}">
                                         {%- endif -%}
                                             {%- if group.content is defined -%}
                                                 {%- if group.description is defined -%}
@@ -79,7 +101,6 @@
                                             </div>
                                         {%- endif -%}
                                     {% endfor %}
-                                            </div>
                                         </div>
 
                                     <div style="display: none">
@@ -89,15 +110,18 @@
                                     {{ form_rest(form) }}
                                 {% endif %}
                             {% endblock %}
-
-                            {% block form_actions %}
-                                <div class="clearfix form-actions">
+                        </div>
+                    </div>
+                    {% block form_actions %}
+                        <div class="dataTables_wrapper bigfoot_filters">
+                            <div class="row">
                                     <div class="col-md-7">
                                         {% if form_cancel is defined %}
                                             <a href="{{ path(form_cancel) }}" class="btn btn-info">
                                                 <i class="icon-remove bigger-110"></i>
                                                 {{ 'Cancel'|trans }}
                                             </a>
+                                            &nbsp;&nbsp;
                                         {% endif %}
 
                                         <button class="btn btn-success" type="submit">
@@ -106,12 +130,11 @@
                                         </button>
                                     </div>
                                     <div class="col-md-5 align-right">
-                                        Champs requis <label class="required"></label>
+                                        Champs requis<label class="required"></label>
                                     </div>
-                                </div>
-                            {% endblock %}
+                            </div>
                         </div>
-                    </div>
+                    {% endblock %}
                 </div>
             </div>
         </div>
