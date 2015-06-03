@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     $('body').on('click', 'a.deleteCollectionItem', function (event) {
         event.preventDefault();
-        $(this).closest('.form-group').remove();
+        $(this).closest('[data-container=collection-item]').remove();
     });
 
     initCkeditor();
@@ -148,8 +148,8 @@ function setTranslatableFields()
                 var newLocale = $(this).data('locale');
                 var $translatableLabelContainer = $('.translatable-label-container');
                 if ($translatableLabelContainer.length) {
-                    $('.translatable-label-container[data-locale="'+newLocale+'"]').closest('.form-group').show();
-                    $('.translatable-label-container[data-locale="'+currentLocale+'"]').closest('.form-group').hide();
+                    $('.translatable-label-container[data-locale="'+newLocale+'"]').closest('.translatable-label-container').show();
+                    $('.translatable-label-container[data-locale="'+currentLocale+'"]').closest('.translatable-label-container').hide();
                 } else {
                     $('input[data-locale="'+newLocale+'"], textarea[data-locale="'+newLocale+'"]').closest('div.input-group').show();
                     $('input[data-locale="'+currentLocale+'"], textarea[data-locale="'+currentLocale+'"]').closest('div.input-group').hide();
@@ -277,7 +277,7 @@ function setupTranslatableFields($translatableFields, $translatableLabelContaine
 
         $translatableLabelContainers.each(function() {
             if ($(this).data('locale') != currentLocale) {
-                $(this).closest('div.form-group').hide();
+                $(this).closest('.translatable-label-container').hide();
             }
         });
     }
