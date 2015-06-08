@@ -436,7 +436,11 @@ $(document).ready(function () {
 
     $('body').on('click', 'a.deleteCollectionItem', function (event) {
         event.preventDefault();
-        $(this).closest('[data-container=collection-item]').remove();
+
+        var container = $(this).closest('[data-container=collection-item]');
+
+        container.remove();
+        destroyCkeditor(container);
     });
 
     initCkeditor();
@@ -764,7 +768,25 @@ function addCollectionItem(id, name) {
         onchange:null,
         thumbnail:false
     });
+}
 
+function destroyCkeditor($container)
+{
+    if (CKEDITOR != undefined) {
+        var $ckEditor = $('.ckeditor', $container);
+
+        if (CKEDITOR && $ckEditor.length) {
+            $ckEditor.each(function() {
+                var editorId = $(this).attr('id');
+
+                if (editorId) {
+                    if (CKEDITOR.instances[editorId] !== undefined) {
+                            delete CKEDITOR.instances[editorId];
+                    }
+                }
+            });
+        }
+    }
 }
 
 function initCkeditor($container)
