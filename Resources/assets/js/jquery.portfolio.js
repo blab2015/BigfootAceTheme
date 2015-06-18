@@ -54,7 +54,7 @@
                     var $data = $(data);
 
                     $data.on('shown', function () {
-                        $('.chosen-select', $data).chosen();
+                        $('.chosen-select', $data).chosen({width: '100%'});
                     })
 
                     // add data attribute field id on modal
